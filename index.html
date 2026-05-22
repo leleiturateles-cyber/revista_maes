@@ -5,6 +5,8 @@ header{padding:32px 24px 70px;background:linear-gradient(135deg,var(--deep),var(
 header h1{margin:0;font-size:32px;font-weight:900}header p{margin:8px 0 0;color:#ffd080;font-size:15px}
 main{max-width:1360px;margin:0 auto;padding:24px}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:-58px}
+.grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:-58px}
+.muted{color:var(--muted) !important}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 28px rgba(0,31,107,.10)}
 .label{font-size:13px;color:var(--muted);margin-bottom:6px}.value{font-size:24px;font-weight:900}.sub{font-size:13px;margin-top:6px;color:var(--muted)}
 .pos{color:var(--pos);font-weight:900}.neg{color:var(--neg);font-weight:900}
@@ -36,19 +38,45 @@ code{display:inline-block;background:#e8eeff;border:1px solid var(--line);border
 .alert{background:#fff3cd;border:1px solid #ffe08a;border-radius:14px;padding:14px;margin-bottom:14px;color:#6b4a00}
 .footer{font-size:12px;color:var(--muted);text-align:center;margin:28px 0}
 .kpi-rep{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
-@media(max-width:960px){.grid,.kpi-rep{grid-template-columns:1fr 1fr}.pizzas{grid-template-columns:1fr}}
-@media(max-width:600px){.grid,.kpi-rep{grid-template-columns:1fr}header h1{font-size:22px}.section-title{flex-direction:column;align-items:flex-start}}
+@media(max-width:960px){.grid,.grid6,.kpi-rep{grid-template-columns:1fr 1fr}.pizzas{grid-template-columns:1fr}}
+@media(max-width:600px){.grid,.grid6,.kpi-rep{grid-template-columns:1fr}header h1{font-size:22px}.section-title{flex-direction:column;align-items:flex-start}}
 </style></head><body>
 <header>
   <h1>BI Revista Mães · Livraria Leitura</h1>
   <p style="color:#ffd080">Livraria Leitura · Revista Mães × grade geral de vendas da rede</p>
 </header>
 <main>
-<div class="grid">
-  <div class="card"><div class="label">Venda revista · atual</div><div class="value">R$ 4.383.655,38</div><div class="sub">69.203 unidades</div></div>
-  <div class="card"><div class="label">Venda revista · anterior</div><div class="value">R$ 5.707.391,26</div><div class="sub">107.508 unidades</div></div>
-  <div class="card"><div class="label">Comparativo revista</div><div class="value neg">-R$ 1.323.735,88</div><div class="sub"><span class="neg">-23,19%</span> vs anterior</div></div>
-  <div class="card"><div class="label">Revista no faturamento geral</div><div class="value">76,81%</div><div class="sub">Rede atual: R$ 5.707.391,11</div></div>
+<div class="grid6">
+  <div class="card">
+    <div class="label">📗 Venda revista · atual</div>
+    <div class="value">R$ 4.383.655,38</div>
+    <div class="sub">69.203 unidades</div>
+  </div>
+  <div class="card">
+    <div class="label">📘 Venda revista · anterior</div>
+    <div class="value muted">R$ 5.707.391,26</div>
+    <div class="sub">107.508 unidades</div>
+  </div>
+  <div class="card">
+    <div class="label">↕ Comparativo revista</div>
+    <div class="value neg">-R$ 1.323.735,88</div>
+    <div class="sub"><span class="neg">-23,19%</span> vs anterior</div>
+  </div>
+  <div class="card">
+    <div class="label">% Revista no faturamento</div>
+    <div class="value">0,00%</div>
+    <div class="sub">Anterior: 0,00% · <span class="pos">0,00%</span> p.p.</div>
+  </div>
+  <div class="card">
+    <div class="label">🏪 Faturamento rede · atual</div>
+    <div class="value">R$ 0,00</div>
+    <div class="sub"><span class="pos">0,00%</span> vs anterior</div>
+  </div>
+  <div class="card">
+    <div class="label">🏪 Faturamento rede · anterior</div>
+    <div class="value muted">R$ 0,00</div>
+    <div class="sub">Dif: <span class="pos">R$ 0,00</span></div>
+  </div>
 </div>
 
 
@@ -71,10 +99,10 @@ code{display:inline-block;background:#e8eeff;border:1px solid var(--line);border
 <section id="representatividade" class="panel active">
   <div class="section-title"><h2>Representatividade da revista na rede</h2><span class="hint">Base: grade geral de vendas</span></div>
   <div class="kpi-rep">
-    <div class="card"><div class="label">Faturamento geral atual</div><div class="value">R$ 5.707.391,11</div><div class="sub">108.550 itens</div></div>
-    <div class="card"><div class="label">Revista atual</div><div class="value">R$ 4.383.655,38</div><div class="sub"><span class="bar"><span style="width:76.81%"></span></span>76,81%</div></div>
-    <div class="card"><div class="label">Não revista atual</div><div class="value">R$ 1.323.735,73</div><div class="sub">23,19% do faturamento</div></div>
-    <div class="card"><div class="label">Variação participação</div><div class="value neg">-49,24%</div><div class="sub">p.p. vs anterior</div></div>
+    <div class="card"><div class="label">Faturamento geral atual</div><div class="value">R$ 0,00</div><div class="sub">0 itens</div></div>
+    <div class="card"><div class="label">Revista atual</div><div class="value">R$ 4.383.655,38</div><div class="sub"><span class="bar"><span style="width:0%"></span></span>0,00%</div></div>
+    <div class="card"><div class="label">Não revista atual</div><div class="value">R$ 0,00</div><div class="sub">100,00% do faturamento</div></div>
+    <div class="card"><div class="label">Variação participação</div><div class="value pos">0,00%</div><div class="sub">p.p. vs anterior</div></div>
   </div>
 </section>
 
@@ -96,26 +124,26 @@ code{display:inline-block;background:#e8eeff;border:1px solid var(--line);border
 
 <section id="grade-editoras" class="panel">
   <div class="section-title"><h2>Grade geral · editoras</h2><span class="hint">Aba Editoras da grade</span></div>
-  <div class="table-wrap"><table><thead><tr><th>#</th><th>Editora</th><th>Valor atual</th><th>Valor anterior</th><th>Dif. R$</th><th>%</th></tr></thead><tbody></tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>#</th><th>Editora</th><th>Valor atual</th><th>Valor anterior</th><th>Dif. R$</th><th>%</th></tr></thead><tbody><tr><td>1</td><td>GRUPO INTRINSECA</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>2</td><td>GRUPO ARQUEIRO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>3</td><td>GRUPO SEXTANTE</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>4</td><td>GRUPO RECORD</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>5</td><td>GRUPO ROCCO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>6</td><td>GRUPO HARPER COLLINS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>7</td><td>GRUPO PLANETA DE LIVROS BRASIL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>8</td><td>GRUPO GLOBO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>9</td><td>GRUPO EDIOURO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>10</td><td>GRUPO ALTA BOOKS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>11</td><td>GRUPO A</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>12</td><td>GRUPO ONLINE</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>13</td><td>GRUPO COMPANHIA DAS LETRAS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>14</td><td>GRUPO FARO EDITORIAL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>15</td><td>GRUPO GENTE</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>16</td><td>GRUPO SENAC</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>17</td><td>GRUPO CIRANDA CULTURAL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>18</td><td>GRUPO ALEPH</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>19</td><td>GRUPO VIDA</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>20</td><td>GRUPO AUTENTICA</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>21</td><td>GRUPO ASTRAL CULTURAL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>22</td><td>GRUPO PENSAMENTO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>23</td><td>GRUPO CITADEL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>24</td><td>GRUPO MUNDO CRISTAO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>25</td><td>GRUPO VALE DAS LETRAS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>26</td><td>GRUPO TODOLIVRO</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>27</td><td>GRUPO HAGNOS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>28</td><td>GRUPO BOOK ONE</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>29</td><td>GRUPO LIVROS IMPORTADOS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>30</td><td>GRUPO GIRASSOL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>31</td><td>GRUPO PAULUS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>32</td><td>GRUPO LPM</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>33</td><td>GRUPO UNIVERSO DOS LIVROS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>34</td><td>GRUPO MAQUINARIA</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>35</td><td>GRUPO CPAD</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>36</td><td>GRUPO VR</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>37</td><td>GRUPO DARKSIDE</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>38</td><td>GRUPO TODAVIA LIVROS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr></tbody></table></div>
 </section>
 
 <section id="grade-categorias" class="panel">
   <div class="section-title"><h2>Grade geral · categorias</h2><span class="hint">Aba Categorias da grade</span></div>
-  <div class="table-wrap"><table><thead><tr><th>#</th><th>Categoria</th><th>Valor atual</th><th>Valor anterior</th><th>Dif. R$</th><th>%</th></tr></thead><tbody></tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>#</th><th>Categoria</th><th>Valor atual</th><th>Valor anterior</th><th>Dif. R$</th><th>%</th></tr></thead><tbody><tr><td>1</td><td>L.LITERATURA/INTERESSE GERAL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>2</td><td>L.JUVENIL</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>3</td><td>L.TECNICOS/CIENTIFICOS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr><tr><td>4</td><td>LIVROS QUADRINHOS / REVISTAS</td><td>R$ 0,00</td><td>R$ 0,00</td><td class="pos">R$ 0,00</td><td><span class="pos">0,00%</span></td></tr></tbody></table></div>
 </section>
 
 <section id="diagnostico" class="panel">
   <div class="section-title"><h2>Diagnóstico dos dados</h2></div>
   <div class="table-wrap"><table><tbody>
-    <tr><th>Items mesclados</th><td>1.895</td></tr>
+    <tr><th>Items mesclados</th><td>2.101</td></tr>
     <tr><th>Revista atual</th><td>816 linhas · R$ 4.383.655,38</td></tr>
     <tr><th>Revista anterior</th><td>816 linhas · R$ 5.707.391,26</td></tr>
-    <tr><th>Grade Editoras</th><td>0 linhas · R$ 0,00</td></tr>
-    <tr><th>Grade Categorias</th><td>0 linhas · R$ 0,00</td></tr>
+    <tr><th>Grade Editoras</th><td>38 linhas · R$ 0,00</td></tr>
+    <tr><th>Grade Categorias</th><td>4 linhas · R$ 0,00</td></tr>
     <tr><th>Grade Estados</th><td>0 linhas</td></tr>
     <tr><th>Grade Online</th><td>0 linhas</td></tr>
     <tr><th>Colunas revista atual</th><td><code>Código</code> <code>Descrição</code> <code>Estoque</code> <code>Saldo Consignado</code> <code>Estoque Próprio</code> <code>Preço Venda Médio</code> <code>Preço Custo Médio</code> <code>Qtd. Vendida</code> <code>Valor Venda</code> <code>Qtd. Vendida Online</code> <code>Valor Venda Online</code> <code>Editora</code> <code>Marca</code> <code>Grupo</code> <code>Subgrupo</code> <code>Família</code> <code>Cod. Fornecedor</code> <code>Qtd. Lojas</code> <code>Qtd. Loja P</code> <code>Qtd. Loja M</code> <code>Qtd. Loja G</code> <code>tipo_base</code> <code>periodo_origem</code> <code>linha_origem</code></td></tr>
-    <tr><th>Colunas grade</th><td><code>tipo_base</code> <code>aba_grade</code> <code>linha_origem</code></td></tr>
+    <tr><th>Colunas grade</th><td><code>row_number</code> <code>Empresa</code> <code>20/04/2026 a 20/05/2026</code> <code>Share (%)</code> <code>20/03/2026 a 19/04/2026</code> <code>%</code> <code>tipo_base</code> <code>aba_grade</code> <code>linha_origem</code></td></tr>
   </tbody></table></div>
 </section>
 
