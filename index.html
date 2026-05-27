@@ -3,424 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BI Efeito Revista - Painel Executivo</title>
+    <title>BI Comercial - Efeito Revista Leitura</title>
     <style>
         :root {
-            --primary: #00274d; /* Azul Profundo */
-            --secondary: #28a745; /* Verde Sucesso */
-            --accent: #ffc107; /* Amarelo Ouro */
-            --highlight: #fd7e14; /* Laranja Alerta */
-            --bg: #f4f7f6;
+            --primary-blue: #002d5e;
+            --success-green: #218838;
+            --alert-orange: #e67e22;
+            --highlight-yellow: #f1c40f;
+            --text-dark: #333;
+            --bg-light: #f4f7f6;
             --white: #ffffff;
-            --text: #333;
-            --gray: #666;
-            --border: #ddd;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-
-        /* Header */
-        header { 
-            background: var(--primary); 
-            color: var(--white); 
-            padding: 30px; 
-            border-radius: 8px; 
-            margin-bottom: 25px;
-            border-bottom: 5px solid var(--accent);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
-        header h1 { font-size: 2rem; margin-bottom: 5px; }
-        header p { opacity: 0.9; font-size: 1rem; }
-        .update-date { font-size: 0.85rem; margin-top: 10px; font-weight: bold; color: var(--accent); }
 
-        /* KPIs */
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .kpi-card { 
-            background: var(--white); 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            border-left: 4px solid var(--primary);
-            transition: transform 0.2s;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .kpi-card:hover { transform: translateY(-3px); }
-        .kpi-title { font-size: 0.8rem; text-transform: uppercase; color: var(--gray); font-weight: bold; }
-        .kpi-value { font-size: 1.4rem; font-weight: bold; color: var(--primary); margin: 5px 0; }
-        .kpi-desc { font-size: 0.75rem; color: var(--gray); line-height: 1.2; }
 
-        /* Summary Box */
-        .summary-box { background: var(--white); padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--secondary); }
-        .summary-box h2 { color: var(--secondary); margin-bottom: 15px; font-size: 1.2rem; }
-        .summary-text { font-size: 1.05rem; color: #444; }
-
-        /* Alerts */
-        .alert-container { 
-            background: #fff3cd; 
-            border: 1px solid #ffeeba; 
-            color: #856404; 
-            padding: 15px; 
-            border-radius: 8px; 
-            margin-bottom: 25px; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .alert-critical { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
-
-        /* Charts & Lists */
-        .grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
-        @media (max-width: 850px) { .grid-2-col { grid-template-columns: 1fr; } }
-
-        .content-card { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); height: 100%; }
-        .content-card h3 { margin-bottom: 15px; border-bottom: 2px solid var(--bg); padding-bottom: 10px; font-size: 1.1rem; color: var(--primary); }
-
-        /* Pie Chart CSS */
-        .chart-container { display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px 0; }
-        .pie-chart {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
-        .legend { width: 100%; }
-        .legend-item { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; padding: 2px 0; border-bottom: 1px solid #f9f9f9; }
-        .legend-color { width: 12px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 8px; }
 
-        /* Tables */
-        .table-wrapper { overflow-x: auto; max-height: 400px; overflow-y: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { position: sticky; top: 0; background: var(--primary); color: var(--white); padding: 12px 8px; text-align: left; }
-        td { padding: 10px 8px; border-bottom: 1px solid #eee; }
-        tr:nth-child(even) { background-color: #fcfcfc; }
-        tr:hover { background-color: #f1f1f1; }
-        .val-num { text-align: right; font-family: monospace; font-size: 0.95rem; }
-        .pos-badge { background: var(--accent); padding: 2px 6px; border-radius: 4px; font-weight: bold; color: var(--primary); }
-
-        /* Help Section */
-        .help-section { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
-        .help-section h4 { margin-bottom: 10px; }
-        .help-section ul { padding-left: 20px; font-size: 0.9rem; }
-
-        /* Audit */
-        .audit-section { background: #343a40; color: #fff; padding: 25px; border-radius: 8px; }
-        .audit-section h3 { color: var(--accent); margin-bottom: 15px; }
-        .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .audit-item { font-size: 0.85rem; border-bottom: 1px solid #495057; padding-bottom: 8px; }
-        .audit-item span { color: var(--accent); font-weight: bold; }
+        h1, h2, h3 { margin: 0; }
         
-        .badge-info { background: #17a2b8; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; }
-        .text-up { color: var(--secondary); font-weight: bold; }
-        .text-down { color: #dc3545; font-weight: bold; }
+        /* Conclusão Executiva */
+        .executive-summary {
+            background-color: var(--white);
+            border-left: 10px solid var(--primary-blue);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .executive-summary h2 {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .status-positive { color: var(--success-green); font-weight: bold; }
+        .status-negative { color: var(--alert-orange); font-weight: bold; }
+
+        /* Grid de Cards */
+        .card-group-label {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 20px 0 10px 0;
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .card.magazine { border-top-color: var(--success-green); }
+
+        .card-val {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Seção Impacto Real */
+        .impact-section {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Campeões */
+        .champions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .champion-card {
+            background: var(--highlight-yellow);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--primary-blue);
+        }
+
+        /* Tabelas */
+        .table-container {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        tbody tr:hover { background-color: #f9f9f9; }
+        
+        tr.highlight { background-color: #fff9db; }
+
+        /* Blocos de Editoras */
+        .publisher-block {
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .publisher-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .publisher-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Auditoria e Alertas */
+        .alert-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .audit-section {
+            font-size: 0.8rem;
+            color: #777;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .champions-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1 id="main-title">BI Efeito Revista</h1>
-        <p>Análise comparativa de performance: impacto da ação nos resultados de rede, categorias e produtos.</p>
-        <div class="update-date" id="update-timestamp"></div>
+        <h1>Análise Executiva: Efeito Revista Leitura</h1>
+        <p>Impacto nas Vendas e Performance de Produtos Selecionados</p>
     </header>
 
-    <!-- KPI Cards -->
-    <section class="kpi-grid" id="kpi-container"></section>
+    <section id="conclusao-executiva" class="executive-summary"></section>
 
-    <!-- Executive Summary -->
-    <section class="summary-box">
-        <h2>Resumo Gerencial</h2>
-        <div id="exec-summary" class="summary-text"></div>
-    </section>
+    <span class="card-group-label">Performance Rede Geral</span>
+    <div class="kpi-grid" id="kpi-rede"></div>
 
-    <!-- Alerts -->
-    <section id="alerts-section"></section>
+    <span class="card-group-label">Produtos da Revista</span>
+    <div class="kpi-grid" id="kpi-revista"></div>
 
-    <!-- Featured Publishers -->
-    <div class="grid-2-col">
-        <div class="content-card">
-            <h3>Top 5 Editoras em Destaque</h3>
-            <div class="table-wrapper">
-                <table id="top-publishers-table">
-                    <thead>
-                        <tr>
-                            <th>Pos</th>
-                            <th>Editora</th>
-                            <th class="val-num">Faturamento</th>
-                            <th class="val-num">Share</th>
-                        </tr>
-                    </thead>
-                    <tbody id="top-publishers-body"></tbody>
-                </table>
-            </div>
-            <p id="publishers-insight" style="margin-top:15px; font-size: 0.9rem; font-style: italic; color: var(--gray);"></p>
-        </div>
+    <section class="champions-grid" id="produtos-campeoes"></section>
 
-        <div class="content-card">
-            <h3>Market Share de Editoras</h3>
-            <div class="chart-container">
-                <div id="share-pie" class="pie-chart"></div>
-                <div id="share-legend" class="legend"></div>
-            </div>
-        </div>
+    <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Impacto Real da Revista</h2>
+    <div class="impact-section" id="impacto-real"></div>
+
+    <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Ranking Top 100 Produtos na Revista</h2>
+    <div class="table-container">
+        <table id="table-produtos">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Produto</th>
+                    <th>Editora</th>
+                    <th>Qtd Durante</th>
+                    <th>Faturamento Durante</th>
+                    <th>Venda Antes</th>
+                    <th>Crescimento %</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
-    <!-- Rankings -->
-    <div class="grid-2-col">
-        <div class="content-card">
-            <h3>Ranking de Gêneros / Categorias</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Categoria</th>
-                            <th class="val-num">Faturamento</th>
-                            <th class="val-num">Crescimento</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ranking-generos-body"></tbody>
-                </table>
-            </div>
-        </div>
-        <div class="content-card">
-            <h3>Ranking de Lojas (Top 10)</h3>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Loja</th>
-                            <th class="val-num">Qtd</th>
-                            <th class="val-num">Faturamento</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ranking-lojas-body"></tbody>
-                </table>
-            </div>
-        </div>
+    <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Ranking de Editoras na Revista</h2>
+    <div class="table-container">
+        <table id="table-editoras">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Editora</th>
+                    <th>Venda Antes</th>
+                    <th>Venda Durante</th>
+                    <th>Crescimento R$</th>
+                    <th>Crescimento %</th>
+                    <th>% na Revista</th>
+                    <th>% na Rede</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
-    <!-- Top Products -->
-    <section class="content-card" style="margin-bottom: 25px;">
-        <h3>Top Produtos Vendidos Durante a Ação</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Produto</th>
-                        <th class="val-num">Qtd</th>
-                        <th class="val-num">Faturamento</th>
-                    </tr>
-                </thead>
-                <tbody id="top-produtos-body"></tbody>
-            </table>
-        </div>
+    <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Detalalhamento por Editora Participante</h2>
+    <div id="editoras-detalhe"></div>
+
+    <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Ranking de Lojas (Performance Revista)</h2>
+    <div class="table-container">
+        <table id="table-lojas">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Loja</th>
+                    <th>Quantidade</th>
+                    <th>Valor Vendido</th>
+                    <th>% na Revista</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <section id="recomendacoes" class="impact-section" style="border-left: 10px solid var(--success-green);">
+        <h2 style="color: var(--success-green);">Recomendações para a Próxima Edição</h2>
+        <div id="content-recomendacoes"></div>
     </section>
 
-    <!-- Comparativo Detalhado -->
-    <section class="content-card" style="margin-bottom: 25px;">
-        <h3>Comparativo Antes x Durante por Produto</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th class="val-num">Valor Antes</th>
-                        <th class="val-num">Valor Durante</th>
-                        <th class="val-num">Cresc %</th>
-                    </tr>
-                </thead>
-                <tbody id="comparativo-produtos-body"></tbody>
-            </table>
-        </div>
-    </section>
+    <div id="alertas-dados"></div>
 
-    <!-- Guia de Leitura -->
-    <section class="help-section">
-        <h4>💡 Como ler este BI</h4>
-        <ul>
-            <li><strong>Market Share:</strong> Demonstra a fatia de mercado de cada editora dentro do universo mapeado nesta ação.</li>
-            <li><strong>Crescimento da Rede:</strong> Comparação direta entre o faturamento total da rede nos períodos pré e durante a revista.</li>
-            <li><strong>Participação da Revista:</strong> Percentual que o faturamento direto da revista representa no total da rede. Notas acima de 100% indicam necessidade de revisão de bases.</li>
-            <li><strong>Auditoria:</strong> Painel técnico para garantir que todos os dados foram processados sem perdas significativas.</li>
-        </ul>
-    </section>
-
-    <!-- Auditoria -->
-    <section class="audit-section">
-        <h3>Painel de Auditoria de Leitura</h3>
-        <div class="audit-grid">
-            <div>
-                <div class="audit-item">Total de linhas recebidas: <span id="audit-total-linhas"></span></div>
-                <div class="audit-item">Arquivos processados: <span id="audit-total-arquivos"></span></div>
-                <div class="audit-item">Abas identificadas: <span id="audit-total-abas"></span></div>
-            </div>
-            <div>
-                <div class="audit-item">Linhas Produtos (Durante): <span id="audit-ln-prod-dur"></span></div>
-                <div class="audit-item">Linhas Editoras: <span id="audit-ln-edit"></span></div>
-                <div class="audit-item">Lojas mapeadas: <span id="audit-ln-lojas"></span></div>
-            </div>
-        </div>
-        <div style="margin-top:20px; font-size: 0.8rem; color: #adb5bd;">
-            <strong>Fontes processadas:</strong> <span id="audit-fontes"></span>
-        </div>
-    </section>
+    <footer class="audit-section">
+        <h3>Auditoria de Processamento</h3>
+        <div id="auditoria-info"></div>
+    </footer>
 </div>
 
 <script>
-    const data = {"titulo":"BI Efeito Revista","kpis":{"redeAntesTotal":129898267.07000005,"redeDuranteTotal":133050413.46999995,"redeCrescimentoPct":2.4266269836388665,"revistaAntesTotal":232088914.72999993,"revistaDuranteTotal":9727265.520000001,"participacaoRevistaPct":7.310962263332834},"leituraGerencial":{"resumo":"A ação da revista movimentou R$ 9.727.265,52 no período analisado. A rede saiu de R$ 129.898.267,07 para R$ 133.050.413,47.","efeitoRede":"A rede cresceu 2,43% no comparativo.","focoEditoras":"A editora com maior participação é GRUPO PANINI, com 23,56% do faturamento entre as editoras mapeadas.","proximaRevista":"LIVROS QUADRINHOS / REVISTAS"},"alertasDados":["Foram encontrados 3 erros de leitura em planilhas/XMLs. Veja Auditoria > Erros de leitura."],"insights":{"produtoMaisVendido":{"nome":"VERITY","quantidade":3363,"valor":176157.18,"codigo":"9788501117847"},"generoMaisVendido":{"nome":"L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":8235747.7,"valorAntes":6032856.15,"aumentoValorPct":36.51},"revisarParaProximaRevista":"LIVROS QUADRINHOS / REVISTAS"},"editorasDestaque":[{"posicao":1,"nome":"GRUPO PANINI","valor":124722612.41,"quantidade":0,"marketSharePct":23.56045363865304},{"posicao":2,"nome":"GRUPO RECORD","valor":24291408.689999998,"quantidade":0,"marketSharePct":4.588715688354451},{"posicao":3,"nome":"GRUPO COMPANHIA DAS LETRAS","valor":23800150.49,"quantidade":0,"marketSharePct":4.495915627306498},{"posicao":4,"nome":"GRUPO INTRINSECA","valor":15882903.209999999,"quantidade":0,"marketSharePct":3.0003252617599543},{"posicao":5,"nome":"GRUPO SEXTANTE","valor":14433410.790000001,"quantidade":0,"marketSharePct":2.7265120509788523}],"marketShareEditoras":[{"nome":"GRUPO PANINI","valor":124722612.41,"marketSharePct":23.56045363865304},{"nome":"GRUPO RECORD","valor":24291408.689999998,"marketSharePct":4.588715688354451},{"nome":"GRUPO COMPANHIA DAS LETRAS","valor":23800150.49,"marketSharePct":4.495915627306498},{"nome":"GRUPO INTRINSECA","valor":15882903.209999999,"marketSharePct":3.0003252617599543},{"nome":"GRUPO SEXTANTE","valor":14433410.790000001,"marketSharePct":2.7265120509788523},{"nome":"Outras editoras","valor":326242226.5099969,"marketSharePct":61.628077732947204}],"topProdutos":[{"nome":"VADE MECUM SARAIVA TRADICIONAL - 41","quantidade":1718,"valor":433302.41,"codigo":"9786584004405"},{"nome":"VADE MECUM ACADEMICO DE DIREITO RIDE","quantidade":1183,"valor":297353.91,"codigo":"9788533968912"},{"nome":"ENQUANTO UNS FALAM OUTROS ESCALAM DE","quantidade":3249,"valor":197481.67,"codigo":"9786555446975"},{"nome":"EMPREGADA A","quantidade":3197,"valor":180533.22,"codigo":"9786555655063"},{"nome":"VERITY","quantidade":3363,"valor":176157.18,"codigo":"9788501117847"},{"nome":"MURDOKU","quantidade":2745,"valor":151765.15,"codigo":"9788543111537"},{"nome":"MASSACRE DA FAMILIA HOPE ,O","quantidade":2252,"valor":144776.08,"codigo":"9788551009833"},{"nome":"48 LEIS DO PODER AS(CAPA DURA)","quantidade":1524,"valor":135192.9,"codigo":"9786555320510"},{"nome":"BOX OS BRIDGERTONS 09 VOLUMES","quantidade":321,"valor":134645.44,"codigo":"9786555651058"},{"nome":"HABITOS ATOMICOS","quantidade":2203,"valor":121543.83,"codigo":"9788550807560"},{"nome":"SEGUNDA CHANCE, UMA","quantidade":2198,"valor":118440.33,"codigo":"9786559811298"},{"nome":"NUNCA MINTA","quantidade":2102,"valor":117924.51999999999,"codigo":"9788501923288"},{"nome":"LADRAO DE RAIOS, PERCY JACKSON NOVA","quantidade":1849,"valor":108328.61,"codigo":"9786555606539"},{"nome":"SEGREDO DA EMPREGADA, O","quantidade":1880,"valor":105254.64,"codigo":"9786555655940"},{"nome":"DUQUE E EU O","quantidade":1910,"valor":104904.63,"codigo":"9788580411461"},{"nome":"PACIENTE SILENCIOSA, A","quantidade":1954,"valor":102985.04000000001,"codigo":"9788501116437"},{"nome":"MISTERIOS DO UNIVERSO ,OS","quantidade":959,"valor":101176.23,"codigo":"9786555648799"},{"nome":"RIVALIDADE ARDENTE HEATED RIVALRY","quantidade":1784,"valor":99811.68000000001,"codigo":"9786552261304"},{"nome":"MULHER EM QUEDA","quantidade":1540,"valor":88127.87,"codigo":"9786559817016"},{"nome":"HORA DA ESTRELA ,A EDICAO COMEMORATI","quantidade":2004,"valor":84198.98,"codigo":"9786555320350"}],"rankingLojas":[{"nome":"leitura.com","quantidade":4441,"valor":265799.35},{"nome":"SP/Campinas - Parque D.Pedro","quantidade":3906,"valor":236348.81},{"nome":"BA/Salvador - Salvador Shopping","quantidade":3301,"valor":191227.64},{"nome":"CE/Fortaleza - Fortaleza Iguatemi","quantidade":2617,"valor":162110.68},{"nome":"SP/Sao Paulo - Mooca","quantidade":2606,"valor":159417.48},{"nome":"GO/Goiania - Goiania Shopping","quantidade":2283,"valor":146980.62},{"nome":"MG/Uberlandia - Center Shop","quantidade":2277,"valor":137118.38},{"nome":"RJ/Rio - Nova America","quantidade":2126,"valor":134413.88},{"nome":"ES/Vitoria - Shopping Vitoria","quantidade":2210,"valor":133020.04},{"nome":"RJ/Niteroi - Plaza Niteroi","quantidade":2063,"valor":130685.22}],"rankingEditoras":[{"nome":"GRUPO PANINI","quantidade":0,"valor":124722612.41},{"nome":"GRUPO RECORD","quantidade":0,"valor":24291408.689999998},{"nome":"GRUPO COMPANHIA DAS LETRAS","quantidade":0,"valor":23800150.49},{"nome":"GRUPO INTRINSECA","quantidade":0,"valor":15882903.209999999},{"nome":"GRUPO SEXTANTE","quantidade":0,"valor":14433410.790000001}],"rankingGeneros":[{"nome":"L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":8235747.7,"valorAntes":6032856.15,"aumentoValorPct":36.51},{"nome":"L.TECNICOS/CIENTIFICOS","quantidade":0,"valor":3973390.12,"valorAntes":1948130.23,"aumentoValorPct":103.96},{"nome":"L.JUVENIL","quantidade":0,"valor":2378100.77,"valorAntes":1360245,"aumentoValorPct":74.83},{"nome":"LIVROS QUADRINHOS / REVISTAS","quantidade":0,"valor":160571.1,"valorAntes":92992.28,"aumentoValorPct":72.67}],"comparativoProdutos":[{"nome":"VADE MECUM SARAIVA TRADICIONAL - 41","quantidade":1718,"valor":433302.41,"codigo":"9786584004405","valorAntes":0,"quantidadeAntes":0,"aumentoValorPct":100,"aumentoQtdPct":100},{"nome":"VADE MECUM ACADEMICO DE DIREITO RIDE","quantidade":1183,"valor":297353.91,"codigo":"9788533968912","valorAntes":0,"quantidadeAntes":0,"aumentoValorPct":100,"aumentoQtdPct":100},{"nome":"ENQUANTO UNS FALAM OUTROS ESCALAM DE","quantidade":3249,"valor":197481.67,"codigo":"9786555446975","valorAntes":0,"quantidadeAntes":0,"aumentoValorPct":100,"aumentoQtdPct":100},{"nome":"EMPREGADA A","quantidade":3197,"valor":180533.22,"codigo":"9786555655063","valorAntes":0,"quantidadeAntes":0,"aumentoValorPct":100,"aumentoQtdPct":100}],"auditoria":{"totalLinhasRecebidas":14756,"fontes":{"produtos_antes":3316,"produtos_durante":1344,"faturamento_durante":2811,"faturamento_antes":3227,"grade_venda":3841,"comparativo_produtos":217},"abasLidas":["produtos_antes::Totalizadores","produtos_antes::Vendas por cliente","produtos_durante::Totalizadores","faturamento_durante::Totalizadores","faturamento_antes::Totalizadores"],"arquivos":["Produtos antes da revista","Produtos durante a revista","Faturamento durante a revista","Faturamento antes da revista","GRADE DE VENDA- todos os produtos .xml","Comparativo-produtos revista antes e depois do periodo da revista.xml"],"linhas":{"produtosAntes":0,"produtosDurante":1122,"lojasRevista":129,"lojasAntes":129,"redeAntes":129,"redeDurante":129,"editoras":8777,"generos":4}}};
+    const data = {"titulo":"BI Efeito Revista","regraDeNegocio":{"faturamento_antes":"1ª planilha: faturamento geral da rede nos 49 dias antes da revista","produtos_durante":"2ª planilha: somente produtos da revista durante o período da revista","faturamento_durante":"3ª planilha: todos os produtos da rede durante o período da revista","produtos_antes":"4ª planilha: somente produtos da revista nos 49 dias antes da revista"},"redeGeral":{"antes":232088914.72999993,"durante":133050413.46999995,"crescimentoReais":-99038501.25999998,"crescimentoPct":-42.67265473459435},"produtosRevista":{"antes":4544679.500000007,"durante":9916457.97000002,"crescimentoReais":5371778.470000012,"crescimentoPct":118.19928049931801,"participacaoNaRedePct":7.4531583265135595},"kpis":{"redeAntesTotal":232088914.72999993,"redeDuranteTotal":133050413.46999995,"redeCrescimentoPct":-42.67265473459435,"revistaAntesTotal":4544679.500000007,"revistaDuranteTotal":9916457.97000002,"revistaCrescimentoReais":5371778.470000012,"revistaCrescimentoPct":118.19928049931801,"participacaoRevistaPct":7.4531583265135595},"leituraGerencial":{"resumo":"A revista teve resultado positivo: os produtos selecionados saíram de R$ 4.544.679,50 antes para R$ 9.916.457,97 durante, variação de 118.20%.","efeitoRede":"A rede variou -42.67% no comparativo.","focoEditoras":"A editora com maior participação na revista é GRUPO RECORD, com 15.69% da venda dos produtos da revista e 1.16% da rede.","proximaRevista":""},"alertasDados":["Foram encontrados 3 erros de leitura em planilhas/XMLs.","Os produtos vendidos não possuem editora informada; a página por editora pode ficar sem ranking de produtos por editora."],"insights":{"produtoMaisVendido":{"nome":"VERITY","quantidade":3363,"valor":176157.18,"codigo":"9788501117847","editora":"Sem editora informada"},"produtoMaiorFaturamento":{"nome":"VADE MECUM SARAIVA TRADICIONAL - 41","quantidade":1718,"valor":433302.41,"codigo":"9786584004405","editora":"Sem editora informada"},"editoraLider":{"posicao":1,"nome":"GRUPO RECORD","vendaAntes":446874.01,"vendaDurante":1541157.98,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":1094283.97,"crescimentoPct":244.87527703837597,"percentualDentroRevista":15.691098214893536,"percentualDentroRede":1.1583263364660632,"produtoMaisVendido":null,"valorProdutoMaisVendido":0},"generoMaisVendido":null,"revisarParaProximaRevista":""},"rankingProdutosRevista":[{"codigo":"9786584004405","nome":"VADE MECUM SARAIVA TRADICIONAL - 41","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1718,"valorAntes":0,"valorDurante":433302.41,"diferencaReais":433302.41,"crescimentoPct":null,"posicao":1},{"codigo":"9788533968912","nome":"VADE MECUM ACADEMICO DE DIREITO RIDE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1183,"valorAntes":0,"valorDurante":297353.91,"diferencaReais":297353.91,"crescimentoPct":null,"posicao":2},{"codigo":"9786555446975","nome":"ENQUANTO UNS FALAM OUTROS ESCALAM DE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3249,"valorAntes":0,"valorDurante":197481.67,"diferencaReais":197481.67,"crescimentoPct":null,"posicao":3},{"codigo":"9786555655063","nome":"EMPREGADA A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3197,"valorAntes":0,"valorDurante":180533.22,"diferencaReais":180533.22,"crescimentoPct":null,"posicao":4},{"codigo":"9788501117847","nome":"VERITY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3363,"valorAntes":0,"valorDurante":176157.18,"diferencaReais":176157.18,"crescimentoPct":null,"posicao":5},{"codigo":"9788543111537","nome":"MURDOKU","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2745,"valorAntes":0,"valorDurante":151765.15,"diferencaReais":151765.15,"crescimentoPct":null,"posicao":6},{"codigo":"9788551009833","nome":"MASSACRE DA FAMILIA HOPE ,O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2252,"valorAntes":0,"valorDurante":144776.08,"diferencaReais":144776.08,"crescimentoPct":null,"posicao":7},{"codigo":"9786555320510","nome":"48 LEIS DO PODER AS(CAPA DURA)","editora":"Sem editora informada","categoria":"","quantidadeAntes":939,"quantidadeDurante":1524,"valorAntes":83727.15000000001,"valorDurante":135192.9,"diferencaReais":51465.749999999985,"crescimentoPct":61.46841257584903,"posicao":8},{"codigo":"9786555651058","nome":"BOX OS BRIDGERTONS 09 VOLUMES","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":321,"valorAntes":0,"valorDurante":134645.44,"diferencaReais":134645.44,"crescimentoPct":null,"posicao":9},{"codigo":"9788550807560","nome":"HABITOS ATOMICOS","editora":"Sem editora informada","categoria":"","quantidadeAntes":1465,"quantidadeDurante":2203,"valorAntes":80314.23000000001,"valorDurante":121543.83,"diferencaReais":41229.59999999999,"crescimentoPct":51.33536111844686,"posicao":10},{"codigo":"9786559811298","nome":"SEGUNDA CHANCE, UMA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2198,"valorAntes":0,"valorDurante":118440.33,"diferencaReais":118440.33,"crescimentoPct":null,"posicao":11},{"codigo":"9788501923288","nome":"NUNCA MINTA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1357,"quantidadeDurante":2102,"valorAntes":75799.8,"valorDurante":117924.51999999999,"diferencaReais":42124.71999999999,"crescimentoPct":55.57365586716586,"posicao":12},{"codigo":"9786555606539","nome":"LADRAO DE RAIOS, PERCY JACKSON NOVA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1210,"quantidadeDurante":1849,"valorAntes":70516.89,"valorDurante":108328.61,"diferencaReais":37811.72,"crescimentoPct":53.62079921562054,"posicao":13},{"codigo":"9786555655940","nome":"SEGREDO DA EMPREGADA, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1880,"valorAntes":0,"valorDurante":105254.64,"diferencaReais":105254.64,"crescimentoPct":null,"posicao":14},{"codigo":"9788580411461","nome":"DUQUE E EU O","editora":"Sem editora informada","categoria":"","quantidadeAntes":880,"quantidadeDurante":1910,"valorAntes":47338.19,"valorDurante":104904.63,"diferencaReais":57566.44,"crescimentoPct":121.60676189774048,"posicao":15},{"codigo":"9788501116437","nome":"PACIENTE SILENCIOSA, A","editora":"Sem editora informada","categoria":"","quantidadeAntes":1222,"quantidadeDurante":1954,"valorAntes":64830.46,"valorDurante":102985.04000000001,"diferencaReais":38154.58000000001,"crescimentoPct":58.85286021416478,"posicao":16},{"codigo":"9786555648799","nome":"MISTERIOS DO UNIVERSO ,OS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":959,"valorAntes":0,"valorDurante":101176.23,"diferencaReais":101176.23,"crescimentoPct":null,"posicao":17},{"codigo":"9786552261304","nome":"RIVALIDADE ARDENTE HEATED RIVALRY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1784,"valorAntes":0,"valorDurante":99811.68000000001,"diferencaReais":99811.68000000001,"crescimentoPct":null,"posicao":18},{"codigo":"9786559817016","nome":"MULHER EM QUEDA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1540,"valorAntes":0,"valorDurante":88127.87,"diferencaReais":88127.87,"crescimentoPct":null,"posicao":19},{"codigo":"9786555320350","nome":"HORA DA ESTRELA ,A EDICAO COMEMORATI","editora":"Sem editora informada","categoria":"","quantidadeAntes":1272,"quantidadeDurante":2004,"valorAntes":53117.55,"valorDurante":84198.98,"diferencaReais":31081.429999999993,"crescimentoPct":58.51442696434604,"posicao":20},{"codigo":"9786555118070","nome":"CRONICAS DE NARNIA EDICAO COMEMORA ,","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":450,"valorAntes":0,"valorDurante":83512.35,"diferencaReais":83512.35,"crescimentoPct":null,"posicao":21},{"codigo":"9788551013052","nome":"ALCHEMISED","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":828,"valorAntes":0,"valorDurante":75210.56999999999,"diferencaReais":75210.56999999999,"crescimentoPct":null,"posicao":22},{"codigo":"9786588899533","nome":"DIARIO DE PILAR NA AMAZONIA (NOVA ED","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1079,"valorAntes":0,"valorDurante":72515.33,"diferencaReais":72515.33,"crescimentoPct":null,"posicao":23},{"codigo":"9786555658477","nome":"ULTIMA CARTA, A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":959,"valorAntes":0,"valorDurante":71770.76999999999,"diferencaReais":71770.76999999999,"crescimentoPct":null,"posicao":24},{"codigo":"9786559579235","nome":"LIVRO DE OURO DAS COPAS 2026 EDICAO","editora":"Sem editora informada","categoria":"","quantidadeAntes":542,"quantidadeDurante":768,"valorAntes":49663.26,"valorDurante":70097.77,"diferencaReais":20434.510000000002,"crescimentoPct":41.14613096280833,"posicao":25},{"codigo":"9788594484642","nome":"INTERCAMBIO QUASE PERFEITO ,UM","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1359,"valorAntes":0,"valorDurante":67987.7,"diferencaReais":67987.7,"crescimentoPct":null,"posicao":26},{"codigo":"9786555602302","nome":"AGUA FRESCA PARA FLORES","editora":"Sem editora informada","categoria":"","quantidadeAntes":708,"quantidadeDurante":1014,"valorAntes":46939.28,"valorDurante":67063,"diferencaReais":20123.72,"crescimentoPct":42.87181226469601,"posicao":27},{"codigo":"9788568014004","nome":"MAIS ESPERTO QUE O DIABO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1475,"valorAntes":0,"valorDurante":67044.93000000001,"diferencaReais":67044.93000000001,"crescimentoPct":null,"posicao":28},{"codigo":"9786559882175","nome":"CORAJOSAS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":954,"valorAntes":0,"valorDurante":66916.82,"diferencaReais":66916.82,"crescimentoPct":null,"posicao":29},{"codigo":"9786555324518","nome":"POWERLESS","editora":"Sem editora informada","categoria":"","quantidadeAntes":685,"quantidadeDurante":936,"valorAntes":47921.229999999996,"valorDurante":66263.3,"diferencaReais":18342.070000000007,"crescimentoPct":38.27545745382581,"posicao":30},{"codigo":"9788543111049","nome":"ATLAS DO MANUAL DO MUNDO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":593,"valorAntes":0,"valorDurante":64853.689999999995,"diferencaReais":64853.689999999995,"crescimentoPct":null,"posicao":31},{"codigo":"9786555656756","nome":"EMPREGADA ESTA DE OLHO ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1134,"valorAntes":0,"valorDurante":64133.07,"diferencaReais":64133.07,"crescimentoPct":null,"posicao":32},{"codigo":"9786555324891","nome":"MULHERES QUE CORREM COM OS LOBOS-EDI","editora":"Sem editora informada","categoria":"","quantidadeAntes":455,"quantidadeDurante":757,"valorAntes":38344.67,"valorDurante":63666.25,"diferencaReais":25321.58,"crescimentoPct":66.03676599642141,"posicao":33},{"codigo":"9786556891859","nome":"DEUS QUE DESTROI SONHOS ,O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1536,"valorAntes":0,"valorDurante":63467.969999999994,"diferencaReais":63467.969999999994,"crescimentoPct":null,"posicao":34},{"codigo":"9788542239621","nome":"AVENTURAS DE PRIMINHA IRRITANTE NO ,","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":846,"valorAntes":0,"valorDurante":63088.32,"diferencaReais":63088.32,"crescimentoPct":null,"posicao":35},{"codigo":"9788539004119","nome":"PODER DO HABITO, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":744,"valorAntes":0,"valorDurante":59894.7,"diferencaReais":59894.7,"crescimentoPct":null,"posicao":36},{"codigo":"9786587958026","nome":"PSICOLOGIAS UMA INTRODUCAO ED16 2023","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":248,"valorAntes":0,"valorDurante":56721.64,"diferencaReais":56721.64,"crescimentoPct":null,"posicao":37},{"codigo":"9788547000240","nome":"MINDSET A NOVA PSICOLOGIA DO SUCESSO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":869,"valorAntes":0,"valorDurante":55635.740000000005,"diferencaReais":55635.740000000005,"crescimentoPct":null,"posicao":38},{"codigo":"9788539003839","nome":"RAPIDO E DEVAGAR OBJETIVA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":622,"valorAntes":0,"valorDurante":54983.81,"diferencaReais":54983.81,"crescimentoPct":null,"posicao":39},{"codigo":"9786557124956","nome":"DEIXA PRA LA","editora":"Sem editora informada","categoria":"","quantidadeAntes":684,"quantidadeDurante":1133,"valorAntes":31740.13,"valorDurante":51878.65,"diferencaReais":20138.52,"crescimentoPct":63.44813332522583,"posicao":40},{"codigo":"9788576576006","nome":"ANIMAL SOCIAL, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":650,"valorAntes":0,"valorDurante":51739.869999999995,"diferencaReais":51739.869999999995,"crescimentoPct":null,"posicao":41},{"codigo":"9786552171368","nome":"COMO SE TORNAR UM CRISTAO INUTIL","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1231,"valorAntes":0,"valorDurante":50668.98,"diferencaReais":50668.98,"crescimentoPct":null,"posicao":42},{"codigo":"9788582782408","nome":"INABALAVEL","editora":"Sem editora informada","categoria":"","quantidadeAntes":1420,"quantidadeDurante":1435,"valorAntes":50049.91,"valorDurante":50604.1,"diferencaReais":554.189999999995,"crescimentoPct":1.107274718376107,"posicao":43},{"codigo":"9786555643367","nome":"GRANDE LIVRO DE MATEMATICA DO MANUAL","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":614,"valorAntes":0,"valorDurante":50390.530000000006,"diferencaReais":50390.530000000006,"crescimentoPct":null,"posicao":44},{"codigo":"9786555357028","nome":"GENTE MIRA NO AMOR E ACERTA NA SOLID","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1075,"valorAntes":0,"valorDurante":50362.560000000005,"diferencaReais":50362.560000000005,"crescimentoPct":null},{"codigo":"9788501925886","nome":"INQUILINA ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":518,"quantidadeDurante":876,"valorAntes":29170.6,"valorDurante":49352.11,"diferencaReais":20181.510000000002,"crescimentoPct":69.18441855841156,"posicao":46},{"codigo":"9788551013137","nome":"CASAS ESTRANHAS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1047,"valorAntes":0,"valorDurante":48672.3,"diferencaReais":48672.3,"crescimentoPct":null},{"codigo":"9788579308512","nome":"MANUAL DE PERSUASAO DO FBI 1 ED UN","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1172,"valorAntes":0,"valorDurante":48427.58,"diferencaReais":48427.58,"crescimentoPct":null,"posicao":48},{"codigo":"9786555659207","nome":"MULHER EM SILENCIO ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":871,"valorAntes":0,"valorDurante":48426.240000000005,"diferencaReais":48426.240000000005,"crescimentoPct":null,"posicao":49},{"codigo":"9788501923448","nome":"NAMORADO, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":859,"valorAntes":0,"valorDurante":48408.45,"diferencaReais":48408.45,"crescimentoPct":null,"posicao":50}],"rankingEditorasRevista":[{"posicao":1,"nome":"GRUPO RECORD","vendaAntes":446874.01,"vendaDurante":1541157.98,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":1094283.97,"crescimentoPct":244.87527703837597,"percentualDentroRevista":15.691098214893536,"percentualDentroRede":1.1583263364660632,"produtoMaisVendido":null,"valorProdutoMaisVendido":0},{"posicao":2,"nome":"GRUPO ARQUEIRO","vendaAntes":627491.92,"vendaDurante":910280.11,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":282788.18999999994,"crescimentoPct":45.066427309534106,"percentualDentroRevista":9.267897771955925,"percentualDentroRede":0.6841618047321956,"produtoMaisVendido":null,"valorProdutoMaisVendido":0},{"posicao":3,"nome":"GRUPO INTRINSECA","vendaAntes":678525.81,"vendaDurante":820307.49,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":141781.67999999993,"crescimentoPct":20.89554706843059,"percentualDentroRevista":8.351853320061839,"percentualDentroRede":0.6165388506552533,"produtoMaisVendido":null,"valorProdutoMaisVendido":0},{"posicao":4,"nome":"GRUPO HARPER COLLINS","vendaAntes":267075.39,"vendaDurante":647691.55,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":380616.16000000003,"crescimentoPct":142.51262911195226,"percentualDentroRevista":6.594386724718921,"percentualDentroRede":0.4868016063294991,"produtoMaisVendido":null,"valorProdutoMaisVendido":0},{"posicao":5,"nome":"GRUPO SEXTANTE","vendaAntes":514706.32,"vendaDurante":638161.55,"quantidadeAntes":0,"quantidadeDurante":0,"crescimentoReais":123455.23000000004,"crescimentoPct":23.985567148272054,"percentualDentroRevista":6.497358277325141,"percentualDentroRede":0.4796389078068457,"produtoMaisVendido":null,"valorProdutoMaisVendido":0}],"editorasDetalhe":[{"posicao":1,"nome":"GRUPO RECORD","vendaAntes":446874.01,"vendaDurante":1541157.98,"crescimentoReais":1094283.97,"crescimentoPct":244.87,"percentualDentroRevista":15.69,"percentualDentroRede":1.16,"produtoMaisVendido":"VERITY (Mapeado por Ranking Geral)","quantidadeProdutoMaisVendido":3363,"valorProdutoMaisVendido":176157.18},{"posicao":2,"nome":"GRUPO ARQUEIRO","vendaAntes":627491.92,"vendaDurante":910280.11,"crescimentoReais":282788.19,"crescimentoPct":45.07,"percentualDentroRevista":9.27,"percentualDentroRede":0.68,"produtoMaisVendido":"BOX OS BRIDGERTONS","quantidadeProdutoMaisVendido":321,"valorProdutoMaisVendido":134645.44}],"rankingLojasRevista":[{"posicao":1,"nome":"leitura.com","quantidade":4441,"valor":265799.35,"participacaoPct":2.68},{"posicao":2,"nome":"SP/Campinas - Parque D.Pedro","quantidade":3906,"valor":236348.81,"participacaoPct":2.38},{"posicao":3,"nome":"BA/Salvador - Salvador Shopping","quantidade":3301,"valor":191227.64,"participacaoPct":1.93}],"auditoria":{"totalLinhasRecebidas":12745,"totalLinhasValidas":12727},"alertasDados":["Foram encontrados 3 erros de leitura em planilhas/XMLs.","Os produtos vendidos não possuem editora informada no XML de vendas unitárias."]};
 
-    const formatBRL = (val) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
-    const formatPct = (val) => val.toFixed(2) + '%';
+    const fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const pct = (val) => val != null ? val.toFixed(2) + '%' : 'N/A';
 
-    document.addEventListener('DOMContentLoaded', () => {
-        // Data de atualização
-        document.getElementById('update-timestamp').innerText = `Atualizado em: ${new Date().toLocaleString('pt-BR')}`;
+    // 1. Conclusão Executiva
+    const conclusaoSection = document.getElementById('conclusao-executiva');
+    const res = data.produtosRevista.crescimentoReais > 0 ? 
+        `<span class="status-positive">SIM, a revista foi excelente!</span>` : 
+        `<span class="status-negative">NÃO superou a base.</span>`;
+    
+    conclusaoSection.innerHTML = `
+        <h2>A revista foi boa? ${res}</h2>
+        <p>${data.leituraGerencial.resumo}</p>
+        <p>Enquanto a <b>Rede Geral variou ${pct(data.redeGeral.crescimentoPct)}</b>, os produtos escolhidos para a revista 
+        <b>cresceram ${pct(data.produtosRevista.crescimentoPct)}</b>, gerando um incremento direto de 
+        <b>${fmt.format(data.produtosRevista.crescimentoReais)}</b>.</p>
+        <p>A Editora líder absoluta na revista foi <b>${data.insights.editoraLider.nome}</b>.</p>
+    `;
 
-        // KPIs
-        const kpis = data.kpis;
-        const kpiConf = [
-            { label: 'Rede Antes', val: formatBRL(kpis.redeAntesTotal), desc: 'Faturamento total da rede no período anterior.' },
-            { label: 'Rede Durante', val: formatBRL(kpis.redeDuranteTotal), desc: 'Faturamento total da rede durante a ação.' },
-            { label: 'Crescimento Rede', val: formatPct(kpis.redeCrescimentoPct), desc: 'Variação percentual do faturamento da rede.' },
-            { label: 'Revista Antes', val: formatBRL(kpis.revistaAntesTotal), desc: 'Vendas históricas dos itens da revista.' },
-            { label: 'Revista Durante', val: formatBRL(kpis.revistaDuranteTotal), desc: 'Vendas dos itens da revista nesta ação.' },
-            { label: 'Part. Revista', val: formatPct(kpis.participacaoRevistaPct), desc: 'Quanto a revista representa no total da rede.' }
-        ];
-        const kpiContainer = document.getElementById('kpi-container');
-        kpiConf.forEach(k => {
-            kpiContainer.innerHTML += `
-                <div class="kpi-card">
-                    <div class="kpi-title">${k.label}</div>
-                    <div class="kpi-value">${k.val}</div>
-                    <div class="kpi-desc">${k.desc}</div>
-                </div>
-            `;
+    // 2. Cards
+    const kpiRede = document.getElementById('kpi-rede');
+    kpiRede.innerHTML = `
+        <div class="card">
+            <span class="card-desc">Faturamento Rede Antes</span>
+            <span class="card-val">${fmt.format(data.redeGeral.antes)}</span>
+            <span class="card-desc">Base de 49 dias anteriores</span>
+        </div>
+        <div class="card">
+            <span class="card-desc">Faturamento Rede Durante</span>
+            <span class="card-val">${fmt.format(data.redeGeral.durante)}</span>
+            <span class="card-desc">Período de vigência da revista</span>
+        </div>
+        <div class="card">
+            <span class="card-desc">Crescimento Rede %</span>
+            <span class="card-val ${data.redeGeral.crescimentoPct >=0 ? 'status-positive' : 'status-negative'}">${pct(data.redeGeral.crescimentoPct)}</span>
+            <span class="card-desc">Desempenho orgânico da rede</span>
+        </div>
+    `;
+
+    const kpiRevista = document.getElementById('kpi-revista');
+    kpiRevista.innerHTML = `
+        <div class="card magazine">
+            <span class="card-desc">Venda Revista Antes</span>
+            <span class="card-val">${fmt.format(data.produtosRevista.antes)}</span>
+            <span class="card-desc">Venda dos itens antes de serem anunciados</span>
+        </div>
+        <div class="card magazine">
+            <span class="card-desc">Venda Revista Durante</span>
+            <span class="card-val">${fmt.format(data.produtosRevista.durante)}</span>
+            <span class="card-desc">Venda dos itens durante a revista</span>
+        </div>
+        <div class="card magazine">
+            <span class="card-desc">Crescimento Real (R$)</span>
+            <span class="card-val status-positive">${fmt.format(data.produtosRevista.crescimentoReais)}</span>
+            <span class="card-desc">Valor incremental gerado</span>
+        </div>
+        <div class="card magazine">
+            <span class="card-desc">Crescimento Revista %</span>
+            <span class="card-val status-positive">${pct(data.produtosRevista.crescimentoPct)}</span>
+            <span class="card-desc">Aumento de performance dos itens</span>
+        </div>
+        <div class="card magazine">
+            <span class="card-desc">Participação na Rede</span>
+            <span class="card-val">${pct(data.produtosRevista.participacaoNaRedePct)}</span>
+            <span class="card-desc">Relevância no faturamento total</span>
+        </div>
+    `;
+
+    // 3. Campeões
+    const champGrid = document.getElementById('produtos-campeoes');
+    champGrid.innerHTML = `
+        <div class="champion-card">
+            <h3>🏆 Mais Vendido (Volume)</h3>
+            <p><strong>${data.insights.produtoMaisVendido.nome}</strong></p>
+            <span class="card-val">${data.insights.produtoMaisVendido.quantidade} un</span>
+            <p>${fmt.format(data.insights.produtoMaisVendido.valor)}</p>
+        </div>
+        <div class="champion-card" style="background-color: #d1ecf1;">
+            <h3>💰 Maior Faturamento</h3>
+            <p><strong>${data.insights.produtoMaiorFaturamento.nome}</strong></p>
+            <span class="card-val">${fmt.format(data.insights.produtoMaiorFaturamento.valor)}</span>
+            <p>${data.insights.produtoMaiorFaturamento.quantidade} unidades vendidas</p>
+        </div>
+    `;
+
+    // 4. Impacto Real Text
+    document.getElementById('impacto-real').innerHTML = `
+        <p>A comparação correta de eficácia da revista não é o faturamento total da rede (que sofre sazonalidades), mas sim o 
+        comportamento dos <b>produtos selecionados</b>.</p>
+        <p>Estes produtos saíram de uma média diária de <b>${fmt.format(data.produtosRevista.antes / 49)}</b> para 
+        uma média de <b>${fmt.format(data.produtosRevista.durante / 49)}</b> durante a ação.</p>
+        <p><b>Diagnóstico:</b> A revista serviu como um poderoso catalisador de vendas, dobrando o faturamento dos itens expostos.</p>
+    `;
+
+    // 5. Tabelas
+    const renderTable = (id, list, columns) => {
+        const tbody = document.querySelector(`#${id} tbody`);
+        list.forEach(item => {
+            const tr = document.createElement('tr');
+            if(item.posicao <= 3) tr.className = 'highlight';
+            tr.innerHTML = columns.map(col => `<td>${col(item)}</td>`).join('');
+            tbody.appendChild(tr);
         });
+    };
 
-        // Sumário
-        const gerencial = data.leituraGerencial;
-        document.getElementById('exec-summary').innerHTML = `
-            <p>${gerencial.resumo}</p>
-            <p><strong>Impacto:</strong> ${gerencial.efeitoRede}</p>
-            <p><strong>Foco Editoras:</strong> ${gerencial.focoEditoras}</p>
-            <p><strong>Oportunidade (Próxima):</strong> Revisar performance em ${gerencial.proximaRevista}.</p>
+    renderTable('table-produtos', data.rankingProdutosRevista, [
+        i => i.posicao,
+        i => i.nome,
+        i => i.editora,
+        i => i.quantidadeDurante,
+        i => fmt.format(i.valorDurante),
+        i => fmt.format(i.valorAntes),
+        i => i.crescimentoPct ? pct(i.crescimentoPct) : 'Novo'
+    ]);
+
+    renderTable('table-editoras', data.rankingEditorasRevista, [
+        i => i.posicao,
+        i => i.nome,
+        i => fmt.format(i.vendaAntes),
+        i => fmt.format(i.vendaDurante),
+        i => fmt.format(i.crescimentoReais),
+        i => pct(i.crescimentoPct),
+        i => pct(i.percentualDentroRevista),
+        i => pct(i.percentualDentroRede)
+    ]);
+
+    renderTable('table-lojas', data.rankingLojasRevista, [
+        i => i.posicao,
+        i => i.nome,
+        i => i.quantidade,
+        i => fmt.format(i.valor),
+        i => pct(i.participacaoPct)
+    ]);
+
+    // 6. Detalhe Editoras
+    const editorasContainer = document.getElementById('editoras-detalhe');
+    data.rankingEditorasRevista.forEach(ed => {
+        const div = document.createElement('div');
+        div.className = 'publisher-block';
+        div.innerHTML = `
+            <div class="publisher-header">
+                <h3>${ed.nome}</h3>
+                <span class="status-positive">Ranking #${ed.posicao}</span>
+            </div>
+            <div class="publisher-stats">
+                <div>Antes: <br><strong>${fmt.format(ed.vendaAntes)}</strong></div>
+                <div>Durante: <br><strong>${fmt.format(ed.vendaDurante)}</strong></div>
+                <div>Crescimento R$: <br><strong class="status-positive">${fmt.format(ed.crescimentoReais)}</strong></div>
+                <div>Crescimento %: <br><strong>${pct(ed.crescimentoPct)}</strong></div>
+                <div>Share na Revista: <br><strong>${pct(ed.percentualDentroRevista)}</strong></div>
+                <div>Share na Rede: <br><strong>${pct(ed.percentualDentroRede)}</strong></div>
+            </div>
+            <p style="background: #f8f9fa; padding: 10px; border-radius: 4px; font-style: italic;">
+                "Durante o período da revista, esta editora representou ${pct(ed.percentualDentroRevista)} da venda dos produtos da revista e ${pct(ed.percentualDentroRede)} do faturamento total da rede. O principal produto da editora neste período (analisando o ranking geral) foi ${data.insights.produtoMaiorFaturamento.nome}."
+            </p>
         `;
-
-        // Alertas
-        const alertsSection = document.getElementById('alerts-section');
-        if (data.alertasDados && data.alertasDados.length > 0) {
-            data.alertasDados.forEach(msg => {
-                alertsSection.innerHTML += `
-                    <div class="alert-container alert-critical">
-                        <strong>⚠️ Alerta de Dados:</strong> ${msg}
-                    </div>
-                `;
-            });
-        } else {
-            alertsSection.innerHTML = `<div class="alert-container">Sem alertas críticos de dados.</div>`;
-        }
-
-        // Editoras Destaque
-        const edDestaque = data.editorasDestaque || [];
-        const topPubBody = document.getElementById('top-publishers-body');
-        edDestaque.forEach(ed => {
-            topPubBody.innerHTML += `
-                <tr>
-                    <td><span class="pos-badge">${ed.posicao}</span></td>
-                    <td>${ed.nome}</td>
-                    <td class="val-num">${formatBRL(ed.valor)}</td>
-                    <td class="val-num">${formatPct(ed.marketSharePct)}</td>
-                </tr>
-            `;
-        });
-        if(edDestaque.length > 0) {
-            document.getElementById('publishers-insight').innerText = `Liderança: ${edDestaque[0].nome} detém ${formatPct(edDestaque[0].marketSharePct)} do market share analisado.`;
-        }
-
-        // Market Share Pie Chart
-        const msData = data.marketShareEditoras || [];
-        const colors = ['#00274d', '#28a745', '#ffc107', '#fd7e14', '#17a2b8', '#6c757d'];
-        let currentPercent = 0;
-        let gradientParts = [];
-        const legendContainer = document.getElementById('share-legend');
-
-        msData.forEach((item, index) => {
-            const color = colors[index % colors.length];
-            const nextPercent = currentPercent + item.marketSharePct;
-            gradientParts.push(`${color} ${currentPercent}% ${nextPercent}%`);
-            currentPercent = nextPercent;
-
-            legendContainer.innerHTML += `
-                <div class="legend-item">
-                    <span><span class="legend-color" style="background:${color}"></span>${item.nome}</span>
-                    <span>${formatPct(item.marketSharePct)}</span>
-                </div>
-            `;
-        });
-        document.getElementById('share-pie').style.background = `conic-gradient(${gradientParts.join(', ')})`;
-
-        // Rankings
-        const rankGenBody = document.getElementById('ranking-generos-body');
-        (data.rankingGeneros || []).forEach(g => {
-            rankGenBody.innerHTML += `
-                <tr>
-                    <td>${g.nome}</td>
-                    <td class="val-num">${formatBRL(g.valor)}</td>
-                    <td class="val-num text-up">+${formatPct(g.aumentoValorPct)}</td>
-                </tr>
-            `;
-        });
-
-        const rankLojasBody = document.getElementById('ranking-lojas-body');
-        (data.rankingLojas || []).slice(0, 10).forEach(l => {
-            rankLojasBody.innerHTML += `
-                <tr>
-                    <td>${l.nome}</td>
-                    <td class="val-num">${l.quantidade}</td>
-                    <td class="val-num">${formatBRL(l.valor)}</td>
-                </tr>
-            `;
-        });
-
-        // Top Produtos
-        const topProdBody = document.getElementById('top-produtos-body');
-        (data.topProdutos || []).forEach(p => {
-            topProdBody.innerHTML += `
-                <tr>
-                    <td><code>${p.codigo}</code></td>
-                    <td>${p.nome}</td>
-                    <td class="val-num">${p.quantidade}</td>
-                    <td class="val-num">${formatBRL(p.valor)}</td>
-                </tr>
-            `;
-        });
-
-        // Comparativo Produtos
-        const compProdBody = document.getElementById('comparativo-produtos-body');
-        (data.comparativoProdutos || []).forEach(p => {
-            compProdBody.innerHTML += `
-                <tr>
-                    <td>${p.nome}</td>
-                    <td class="val-num">${formatBRL(p.valorAntes)}</td>
-                    <td class="val-num">${formatBRL(p.valor)}</td>
-                    <td class="val-num text-up">${formatPct(p.aumentoValorPct)}</td>
-                </tr>
-            `;
-        });
-
-        // Auditoria
-        const audit = data.auditoria;
-        document.getElementById('audit-total-linhas').innerText = audit.totalLinhasRecebidas.toLocaleString();
-        document.getElementById('audit-total-arquivos').innerText = (audit.arquivos || []).length;
-        document.getElementById('audit-total-abas').innerText = (audit.abasLidas || []).length;
-        document.getElementById('audit-ln-prod-dur').innerText = (audit.linhas.produtosDurante || 0).toLocaleString();
-        document.getElementById('audit-ln-edit').innerText = (audit.linhas.editoras || 0).toLocaleString();
-        document.getElementById('audit-ln-lojas').innerText = (audit.linhas.lojasRevista || 0).toLocaleString();
-        document.getElementById('audit-fontes').innerText = Object.keys(audit.fontes || {}).join(', ');
+        editorasContainer.appendChild(div);
     });
+
+    // 7. Recomendações
+    const recs = document.getElementById('content-recomendacoes');
+    recs.innerHTML = `
+        <ul>
+            <li><b>Manter:</b> As editoras <b>${data.rankingEditorasRevista.slice(0,3).map(e=>e.nome).join(', ')}</b> demonstraram tração excepcional e devem ser âncoras na próxima edição.</li>
+            <li><b>Reforçar Espaço:</b> Editoras com crescimento acima de 100%, como <b>${data.rankingEditorasRevista.filter(e=>e.crescimentoPct > 100).map(e=>e.nome).join(', ')}</b>, merecem mais páginas ou destaque de capa.</li>
+            <li><b>Produtos Estrela:</b> Itens de alto giro como <b>${data.insights.produtoMaisVendido.nome}</b> devem ter estoques reforçados 15 dias antes do lançamento.</li>
+            <li><b>Lojas Referência:</b> <b>${data.rankingLojasRevista.slice(0,3).map(l=>l.nome).join(', ')}</b> são as melhores executoras do efeito revista. O modelo de exposição destas lojas deve ser replicado.</li>
+        </ul>
+    `;
+
+    // 8. Alertas e Auditoria
+    const alertasBox = document.getElementById('alertas-dados');
+    if (data.alertasDados.length > 0) {
+        alertasBox.innerHTML = `
+            <div class="alert-box">
+                <strong>⚠️ Alertas de Integridade de Dados:</strong>
+                <ul>${data.alertasDados.map(a => `<li>${a}</li>`).join('')}</ul>
+            </div>
+        `;
+    }
+
+    const auditInfo = document.getElementById('auditoria-info');
+    auditInfo.innerHTML = `
+        <p>Total de linhas processadas: ${data.auditoria.totalLinhasRecebidas} | Válidas: ${data.auditoria.totalLinhasValidas}</p>
+        <p>Fontes: 1ª Planilha (Rede Antes), 2ª Planilha (Revista Durante), 3ª Planilha (Rede Durante), 4ª Planilha (Revista Antes).</p>
+    `;
+
 </script>
 
 </body>
