@@ -6,119 +6,137 @@
     <title>BI Comercial - Efeito Revista Leitura</title>
     <style>
         :root {
-            --primary: #003366;
-            --secondary: #f4f4f9;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --alert: #fd7e14;
-            --text: #333;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --azul-escuro: #003366;
+            --azul-claro: #f0f5f9;
+            --verde: #28a745;
+            --verde-claro: #e9f7ef;
+            --laranja: #fd7e14;
+            --laranja-claro: #fff5eb;
+            --amarelo: #ffc107;
+            --cinza-texto: #333;
+            --cinza-borda: #dee2e6;
+            --branco: #ffffff;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--secondary);
-            color: var(--text);
+            background-color: #f4f7f6;
+            color: var(--cinza-texto);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
         }
 
-        header {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 1.5rem 2rem;
-            text-align: center;
-            box-shadow: var(--shadow);
+        .header {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .container {
+            padding: 20px 30px;
             max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
         }
 
-        .section-title {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-            text-transform: uppercase;
-            font-size: 1.25rem;
-            font-weight: bold;
+        /* Seção Conclusão */
+        .conclusao-executiva {
+            background-color: var(--branco);
+            border-left: 5px solid var(--azul-escuro);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* Conclusion Box */
-        .executive-summary {
-            background: var(--white);
-            border-left: 10px solid var(--primary);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+        .conclusao-executiva h2 {
+            margin-top: 0;
+            color: var(--azul-escuro);
         }
 
-        .executive-summary h2 { margin-top: 0; color: var(--primary); }
-
-        .insight-grid {
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        /* KPI Cards */
-        .kpi-group-label {
-            font-weight: bold;
-            color: var(--primary);
-            margin: 1.5rem 0 0.5rem 0;
-            display: block;
-            font-size: 1.1rem;
-        }
-
-        .kpi-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .card {
-            background: var(--white);
-            padding: 1.5rem;
+            background-color: var(--branco);
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: var(--shadow);
-            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--cinza-borda);
         }
 
-        .card.magazine { border-top: 5px solid var(--success); }
-        .card.network { border-top: 5px solid var(--primary); }
+        .card.destaque { border-top: 4px solid var(--azul-escuro); }
+        .card.positivo { border-top: 4px solid var(--verde); }
+        .card.alerta { border-top: 4px solid var(--laranja); }
+
+        .card-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
 
         .card-value {
             font-size: 1.5rem;
             font-weight: bold;
-            display: block;
-            margin: 0.5rem 0;
+            color: var(--azul-escuro);
         }
 
-        .card-label {
-            font-size: 0.85rem;
-            color: #666;
-            text-transform: uppercase;
+        .card-subtitle {
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
-        .trend-up { color: var(--success); font-weight: bold; }
-        .trend-down { color: var(--danger); font-weight: bold; }
+        .text-positivo { color: var(--verde); }
+        .text-negativo { color: #dc3545; }
 
-        /* Tables */
-        .table-wrapper {
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: var(--shadow);
+        /* Abas */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--cinza-borda);
+            margin-bottom: 20px;
             overflow-x: auto;
-            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: bold;
+            color: #666;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--azul-escuro);
+            border-bottom: 3px solid var(--azul-escuro);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Tabelas */
+        .table-container {
+            background-color: var(--branco);
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
 
         table {
@@ -128,545 +146,508 @@
         }
 
         th {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 12px;
+            background-color: var(--azul-claro);
+            color: var(--azul-escuro);
             text-align: left;
+            padding: 12px 15px;
+            border-bottom: 2px solid var(--cinza-borda);
             position: sticky;
             top: 0;
         }
 
         td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #eee;
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--cinza-borda);
         }
 
-        tr:hover { background-color: #f9f9f9; }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
 
-        .alert-cell {
-            background-color: #fff3cd;
-            color: #856404;
-            font-weight: bold;
-            padding: 2px 6px;
+        .search-box {
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--cinza-borda);
             border-radius: 4px;
         }
 
-        /* Tabs per Publisher */
-        .tabs-container {
-            display: flex;
-            background: var(--white);
+        .alerta-visual {
+            background-color: var(--laranja-claro);
+            color: var(--laranja);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        /* Blocos de Editora */
+        .editora-page {
+            background-color: var(--branco);
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: var(--shadow);
-            margin-top: 1rem;
-            min-height: 400px;
+            border: 1px solid var(--cinza-borda);
         }
 
-        .tabs-nav {
-            width: 250px;
-            background: #e9ecef;
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
+        .editora-header {
+            border-bottom: 2px solid var(--azul-claro);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
         }
 
-        .tab-btn {
-            padding: 15px;
-            border: none;
-            background: none;
-            text-align: left;
-            cursor: pointer;
-            border-bottom: 1px solid #ddd;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-
-        .tab-btn:hover { background: #dee2e6; }
-        .tab-btn.active { background: var(--primary); color: var(--white); }
-
-        .tab-content {
-            flex: 1;
-            padding: 2rem;
-            display: none;
-        }
-
-        .tab-content.active { display: block; }
-
-        .publisher-intro {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--success);
-            font-style: italic;
-        }
-
-        /* Alerts & Audit */
-        .alert-box {
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .audit-grid {
+        .recommendation-box {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .rec-item {
+            background-color: var(--branco);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--amarelo);
         }
 
         .audit-item {
-            background: #fff;
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: #eee;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 3px;
         }
 
-        /* Utils */
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .badge {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
+        @media (max-width: 768px) {
+            .recommendation-box { grid-template-columns: 1fr; }
         }
-        .badge-primary { background: var(--primary); color: white; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>DASHBOARD EXECUTIVO: IMPACTO DA REVISTA LEITURA</h1>
-    <p>Análise Comercial Consultiva - Antes vs. Durante o Período</p>
-</header>
+<div class="header">
+    <div style="font-size: 1.5rem; font-weight: bold;">Livraria Leitura - BI Efeito Revista</div>
+    <div id="data-atual" style="font-size: 0.9rem;"></div>
+</div>
 
 <div class="container">
     
     <!-- CONCLUSÃO EXECUTIVA -->
-    <div class="executive-summary" id="conclusao">
-        <h2>Conclusão Executiva</h2>
-        <div id="conclusao-texto"></div>
-        <div class="insight-grid">
-            <div class="card network">
-                <span class="card-label">Editora Líder</span>
-                <span class="card-value" id="resumo-editora"></span>
-            </div>
-            <div class="card magazine">
-                <span class="card-label">Campeão Faturamento</span>
-                <span class="card-value" id="resumo-faturamento" style="font-size: 1.1rem;"></span>
-            </div>
-            <div class="card magazine">
-                <span class="card-label">Campeão Quantidade</span>
-                <span class="card-value" id="resumo-quantidade" style="font-size: 1.1rem;"></span>
+    <section class="conclusao-executiva" id="conclusao-executiva">
+        <!-- Preenchido via JS -->
+    </section>
+
+    <!-- CARDS PRINCIPAIS -->
+    <h3 style="color: var(--azul-escuro); margin-bottom: 10px;">REDE GERAL (Toda a Rede)</h3>
+    <div class="grid-cards" id="cards-rede">
+        <!-- Preenchido via JS -->
+    </div>
+
+    <h3 style="color: var(--azul-escuro); margin-bottom: 10px;">PRODUTOS DA REVISTA (Filtro Revista)</h3>
+    <div class="grid-cards" id="cards-revista">
+        <!-- Preenchido via JS -->
+    </div>
+
+    <!-- NAVEGAÇÃO PRINCIPAL -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'top-produtos')">Top 100 Produtos</button>
+        <button class="tab-btn" onclick="openTab(event, 'panorama-geral')">Panorama Completo</button>
+        <button class="tab-btn" onclick="openTab(event, 'ranking-editoras')">Ranking Editoras</button>
+        <button class="tab-btn" onclick="openTab(event, 'detalhe-editoras')">Páginas por Editora</button>
+        <button class="tab-btn" onclick="openTab(event, 'ranking-lojas')">Ranking Lojas</button>
+        <button class="tab-btn" onclick="openTab(event, 'ranking-generos')">Gêneros</button>
+        <button class="tab-btn" onclick="openTab(event, 'audit')">Auditoria & Recomendações</button>
+    </div>
+
+    <!-- TAB: TOP 100 PRODUTOS -->
+    <div id="top-produtos" class="tab-content active">
+        <div class="table-container">
+            <table id="tbl-top-produtos">
+                <thead>
+                    <tr>
+                        <th>Pos.</th>
+                        <th>Produto</th>
+                        <th>Código</th>
+                        <th>Editora</th>
+                        <th>Qtd Durante</th>
+                        <th>Faturamento</th>
+                        <th>Venda Antes</th>
+                        <th>Crescimento %</th>
+                    </tr>
+                </thead>
+                <tbody id="body-top-produtos"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB: PANORAMA GERAL -->
+    <div id="panorama-geral" class="tab-content">
+        <input type="text" class="search-box" id="search-panorama" placeholder="Buscar produto, código ou editora..." onkeyup="filterPanorama()">
+        <div class="table-container" style="max-height: 600px;">
+            <table id="tbl-panorama">
+                <thead>
+                    <tr>
+                        <th>Pos. Geral</th>
+                        <th>Produto</th>
+                        <th>Código</th>
+                        <th>Editora</th>
+                        <th>Qtd Durante</th>
+                        <th>Faturamento Durante</th>
+                        <th>Venda Antes</th>
+                        <th>Crescimento %</th>
+                    </tr>
+                </thead>
+                <tbody id="body-panorama"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB: RANKING EDITORAS -->
+    <div id="ranking-editoras" class="tab-content">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos.</th>
+                        <th>Editora</th>
+                        <th>Venda Antes</th>
+                        <th>Venda Durante</th>
+                        <th>Crescimento R$</th>
+                        <th>Crescimento %</th>
+                        <th>% na Revista</th>
+                        <th>% na Rede</th>
+                        <th>Top Produto</th>
+                    </tr>
+                </thead>
+                <tbody id="body-ranking-editoras"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB: DETALHE EDITORAS -->
+    <div id="detalhe-editoras" class="tab-content">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;" id="btns-editoras">
+            <!-- Botões das editoras preenchidos via JS -->
+        </div>
+        <div id="display-editora">
+            <div class="card" style="text-align: center; padding: 50px;">
+                Selecione uma editora acima para ver os detalhes.
             </div>
         </div>
     </div>
 
-    <!-- KPI CARDS -->
-    <span class="kpi-group-label">DESEMPENHO REDE GERAL (Todos os Produtos)</span>
-    <div class="kpi-container" id="kpis-rede"></div>
-
-    <span class="kpi-group-label">DESEMPENHO PRODUTOS DA REVISTA</span>
-    <div class="kpi-container" id="kpis-revista"></div>
-
-    <!-- TOP 100 PRODUTOS -->
-    <h3 class="section-title">TOP 100 PRODUTOS DA REVISTA</h3>
-    <div class="table-wrapper">
-        <table id="tabela-top-produtos">
-            <thead>
-                <tr>
-                    <th>Posição</th>
-                    <th>Produto</th>
-                    <th>Código</th>
-                    <th>Editora</th>
-                    <th>Qtd Durante</th>
-                    <th>Venda Durante</th>
-                    <th>Venda Antes</th>
-                    <th>Crescimento %</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-
-    <!-- RANKING EDITORAS -->
-    <h3 class="section-title">RANKING DAS EDITORAS DA REVISTA</h3>
-    <div class="table-wrapper">
-        <table id="tabela-editoras">
-            <thead>
-                <tr>
-                    <th>Posição</th>
-                    <th>Editora</th>
-                    <th>Venda Antes</th>
-                    <th>Venda Durante</th>
-                    <th>Crescimento R$</th>
-                    <th>Crescimento %</th>
-                    <th>% na Revista</th>
-                    <th>% na Rede</th>
-                    <th>Principal Produto</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-
-    <!-- ABAS POR EDITORA -->
-    <h3 class="section-title">DETALHAMENTO POR EDITORA</h3>
-    <div class="tabs-container">
-        <div class="tabs-nav" id="editoras-tabs-nav"></div>
-        <div id="editoras-tabs-content" style="width: 100%;"></div>
-    </div>
-
-    <!-- COMPARATIVO POR PRODUTO -->
-    <h3 class="section-title">COMPARATIVO ANTES X DURANTE POR PRODUTO</h3>
-    <div class="table-wrapper">
-        <table id="tabela-comparativo">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Editora</th>
-                    <th>Valor Antes</th>
-                    <th>Valor Durante</th>
-                    <th>Diferença R$</th>
-                    <th>Crescimento %</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-
-    <!-- LOJAS E GÊNEROS -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
-        <div>
-            <h3 class="section-title">RANKING DE LOJAS (PRODUTOS REVISTA)</h3>
-            <div class="table-wrapper">
-                <table id="tabela-lojas">
-                    <thead>
-                        <tr>
-                            <th>Pos</th>
-                            <th>Loja</th>
-                            <th>Qtd</th>
-                            <th>Valor</th>
-                            <th>Part. %</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-        <div>
-            <h3 class="section-title">GÊNEROS / CATEGORIAS</h3>
-            <div class="table-wrapper">
-                <table id="tabela-generos">
-                    <thead>
-                        <tr>
-                            <th>Pos</th>
-                            <th>Gênero</th>
-                            <th>Valor</th>
-                            <th>Part. %</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+    <!-- TAB: LOJAS -->
+    <div id="ranking-lojas" class="tab-content">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Loja</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>Participação %</th>
+                    </tr>
+                </thead>
+                <tbody id="body-ranking-lojas"></tbody>
+            </table>
         </div>
     </div>
 
-    <!-- RECOMENDAÇÕES -->
-    <h3 class="section-title">RECOMENDAÇÕES PARA A PRÓXIMA EDIÇÃO</h3>
-    <div class="card magazine" id="recomendacoes" style="text-align: left;"></div>
+    <!-- TAB: GÊNEROS -->
+    <div id="ranking-generos" class="tab-content">
+        <div class="table-container" id="container-generos">
+            <!-- Preenchido via JS -->
+        </div>
+    </div>
 
-    <!-- AUDITORIA -->
-    <h3 class="section-title">AUDITORIA DOS DADOS</h3>
-    <div id="alertas-dados"></div>
-    <div class="audit-grid" id="auditoria-conteudo"></div>
+    <!-- TAB: AUDIT -->
+    <div id="audit" class="tab-content">
+        <h3 style="color: var(--azul-escuro);">Auditoria de Dados</h3>
+        <div class="grid-cards">
+            <div class="card destaque">
+                <div class="card-title">Produtos Lidos</div>
+                <div id="audit-count-editoras"></div>
+            </div>
+            <div class="card destaque">
+                <div class="card-title">Erros de Leitura</div>
+                <div id="audit-erros"></div>
+            </div>
+        </div>
+        <div id="audit-list"></div>
+
+        <h3 style="color: var(--azul-escuro); margin-top: 40px;">Recomendações Próxima Revista</h3>
+        <div class="recommendation-box" id="box-recomendacoes"></div>
+    </div>
 
 </div>
 
 <script>
-    const data = {"titulo":"BI Efeito Revista","regrasDeOrigem":{"faturamento_antes":"1ª planilha: faturamento geral da rede nos 49 dias antes da revista","produtos_durante":"2ª planilha: somente produtos da revista durante o período da revista","faturamento_durante":"3ª planilha: todos os produtos da rede durante o período da revista","produtos_antes":"4ª planilha: somente produtos da revista nos 49 dias antes da revista"},"redeGeral":{"antes":234780449.81000006,"durante":134590501.42,"crescimentoPct":-42.67388893371677},"produtosRevista":{"antes":4544679.500000028,"durante":9916457.970000077,"crescimentoReais":5371778.470000049,"crescimentoPct":118.19928049931829,"participacaoNaRedePct":7.3678735611921145},"kpis":{"redeAntesTotal":234780449.81000006,"redeDuranteTotal":134590501.42,"redeCrescimentoPct":-42.67388893371677,"revistaAntesTotal":4544679.500000028,"revistaDuranteTotal":9916457.970000077,"crescimentoRevistaReais":5371778.470000049,"crescimentoRevistaPct":118.19928049931829,"participacaoRevistaPct":7.3678735611921145},"leituraGerencial":{"resumo":"A revista movimentou R$ 9.916.457,97 nos produtos selecionados. Antes da revista, esses produtos movimentaram R$ 4.544.679,50.","efeitoRevista":"Os produtos da revista cresceram R$ 5.371.778,47, variação de 118.20%.","efeitoRede":"A rede saiu de R$ 234.780.449,81 para R$ 134.590.501,42, variação de -42.67%.","focoEditoras":"A editora com maior participação na revista é Sem editora informada, com 100.00% dos produtos da revista e 7.37% da rede.","produtoCampeao":"VERITY foi o produto com maior quantidade vendida (3363 unidades)."},"alertasDados":["Foram encontrados 3 erros de leitura em planilhas/XMLs.","100 produtos da revista ficaram sem editora vinculada. Confira se a aba Produtos vendidos possui coluna Editora/Fornecedor ou código para cruzamento."],"insights":{"produtoMaisVendido":{"codigo":"9788501117847","nome":"VERITY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3363,"quantidade":3363,"valorAntes":0,"valorDurante":176157.18,"valor":176157.18,"diferencaReais":176157.18,"crescimentoPct":null},"produtoMaiorFaturamento":{"codigo":"9786584004405","nome":"VADE MECUM SARAIVA TRADICIONAL - 41","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1718,"quantidade":1718,"valorAntes":0,"valorDurante":433302.41,"valor":433302.41,"diferencaReais":433302.41,"crescimentoPct":null},"editoraLider":{"posicao":1,"nome":"Sem editora informada","editora":"Sem editora informada","quantidadeAntes":26059,"quantidadeDurante":157784,"valorAntes":1553349.98,"valorDurante":9916457.97000002,"valor":9916457.97000002,"crescimentoReais":8363107.990000019,"crescimentoPct":538.3917402825099,"percentualDentroRevista":99.99999999999942,"percentualDentroRede":7.367873561192072,"produtoMaisVendido":"VERITY","valorProdutoMaisVendido":176157.18,"quantidadeProdutoMaisVendido":3363},"generoMaisVendido":null,"revisarParaProximaRevista":"Sem dados suficientes"},"topProdutos":[{"codigo":"9786584004405","nome":"VADE MECUM SARAIVA TRADICIONAL - 41","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1718,"quantidade":1718,"valorAntes":0,"valorDurante":433302.41,"valor":433302.41,"diferencaReais":433302.41,"crescimentoPct":null},{"codigo":"9788533968912","nome":"VADE MECUM ACADEMICO DE DIREITO RIDE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1183,"quantidade":1183,"valorAntes":0,"valorDurante":297353.91,"valor":297353.91,"diferencaReais":297353.91,"crescimentoPct":null},{"codigo":"9786555446975","nome":"ENQUANTO UNS FALAM OUTROS ESCALAM DE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3249,"quantidade":3249,"valorAntes":0,"valorDurante":197481.67,"valor":197481.67,"diferencaReais":197481.67,"crescimentoPct":null},{"codigo":"9786555655063","nome":"EMPREGADA A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3197,"quantidade":3197,"valorAntes":0,"valorDurante":180533.22,"valor":180533.22,"diferencaReais":180533.22,"crescimentoPct":null},{"codigo":"9788501117847","nome":"VERITY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3363,"quantidade":3363,"valorAntes":0,"valorDurante":176157.18,"valor":176157.18,"diferencaReais":176157.18,"crescimentoPct":null},{"codigo":"9788543111537","nome":"MURDOKU","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2745,"quantidade":2745,"valorAntes":0,"valorDurante":151765.15,"valor":151765.15,"diferencaReais":151765.15,"crescimentoPct":null},{"codigo":"9788551009833","nome":"MASSACRE DA FAMILIA HOPE ,O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2252,"quantidade":2252,"valorAntes":0,"valorDurante":144776.08,"valor":144776.08,"diferencaReais":144776.08,"crescimentoPct":null},{"codigo":"9786555320510","nome":"48 LEIS DO PODER AS(CAPA DURA)","editora":"Sem editora informada","categoria":"","quantidadeAntes":939,"quantidadeDurante":1524,"quantidade":1524,"valorAntes":83727.15000000001,"valorDurante":135192.9,"valor":135192.9,"diferencaReais":51465.749999999985,"crescimentoPct":61.46841257584903},{"codigo":"9786555651058","nome":"BOX OS BRIDGERTONS 09 VOLUMES","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":321,"quantidade":321,"valorAntes":0,"valorDurante":134645.44,"valor":134645.44,"diferencaReais":134645.44,"crescimentoPct":null},{"codigo":"9788550807560","nome":"HABITOS ATOMICOS","editora":"Sem editora informada","categoria":"","quantidadeAntes":1465,"quantidadeDurante":2203,"quantidade":2203,"valorAntes":80314.23000000001,"valorDurante":121543.83,"valor":121543.83,"diferencaReais":41229.59999999999,"crescimentoPct":51.33536111844686},{"codigo":"9786559811298","nome":"SEGUNDA CHANCE, UMA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2198,"quantidade":2198,"valorAntes":0,"valorDurante":118440.33,"valor":118440.33,"diferencaReais":118440.33,"crescimentoPct":null},{"codigo":"9788501923288","nome":"NUNCA MINTA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1357,"quantidadeDurante":2102,"quantidade":2102,"valorAntes":75799.8,"valorDurante":117924.51999999999,"valor":117924.51999999999,"diferencaReais":42124.71999999999,"crescimentoPct":55.57365586716586},{"codigo":"9786555606539","nome":"LADRAO DE RAIOS, PERCY JACKSON NOVA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1210,"quantidadeDurante":1849,"quantidade":1849,"valorAntes":70516.89,"valorDurante":108328.61,"valor":108328.61,"diferencaReais":37811.72,"crescimentoPct":53.62079921562054},{"codigo":"9786555655940","nome":"SEGREDO DA EMPREGADA, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1880,"quantidade":1880,"valorAntes":0,"valorDurante":105254.64,"valor":105254.64,"diferencaReais":105254.64,"crescimentoPct":null},{"codigo":"9788580411461","nome":"DUQUE E EU O","editora":"Sem editora informada","categoria":"","quantidadeAntes":880,"quantidadeDurante":1910,"quantidade":1910,"valorAntes":47338.19,"valorDurante":104904.63,"valor":104904.63,"diferencaReais":57566.44,"crescimentoPct":121.60676189774048},{"codigo":"9788501116437","nome":"PACIENTE SILENCIOSA, A","editora":"Sem editora informada","categoria":"","quantidadeAntes":1222,"quantidadeDurante":1954,"quantidade":1954,"valorAntes":64830.46,"valorDurante":102985.04000000001,"valor":102985.04000000001,"diferencaReais":38154.58000000001,"crescimentoPct":58.85286021416478},{"codigo":"9786555648799","nome":"MISTERIOS DO UNIVERSO ,OS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":959,"quantidade":959,"valorAntes":0,"valorDurante":101176.23,"valor":101176.23,"diferencaReais":101176.23,"crescimentoPct":null},{"codigo":"9786552261304","nome":"RIVALIDADE ARDENTE HEATED RIVALRY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1784,"quantidade":1784,"valorAntes":0,"valorDurante":99811.68000000001,"valor":99811.68000000001,"diferencaReais":99811.68000000001,"crescimentoPct":null},{"codigo":"9786559817016","nome":"MULHER EM QUEDA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1540,"quantidade":1540,"valorAntes":0,"valorDurante":88127.87,"valor":88127.87,"diferencaReais":88127.87,"crescimentoPct":null},{"codigo":"9786555320350","nome":"HORA DA ESTRELA ,A EDICAO COMEMORATI","editora":"Sem editora informada","categoria":"","quantidadeAntes":1272,"quantidadeDurante":2004,"quantidade":2004,"valorAntes":53117.55,"valorDurante":84198.98,"valor":84198.98,"diferencaReais":31081.429999999993,"crescimentoPct":58.51442696434604},{"codigo":"9786555118070","nome":"CRONICAS DE NARNIA EDICAO COMEMORA ,","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":450,"quantidade":450,"valorAntes":0,"valorDurante":83512.35,"valor":83512.35,"diferencaReais":83512.35,"crescimentoPct":null},{"codigo":"9788551013052","nome":"ALCHEMISED","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":828,"quantidade":828,"valorAntes":0,"valorDurante":75210.56999999999,"valor":75210.56999999999,"diferencaReais":75210.56999999999,"crescimentoPct":null},{"codigo":"9786588899533","nome":"DIARIO DE PILAR NA AMAZONIA (NOVA ED","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1079,"quantidade":1079,"valorAntes":0,"valorDurante":72515.33,"valor":72515.33,"diferencaReais":72515.33,"crescimentoPct":null},{"codigo":"9786555658477","nome":"ULTIMA CARTA, A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":959,"quantidade":959,"valorAntes":0,"valorDurante":71770.76999999999,"valor":71770.76999999999,"diferencaReais":71770.76999999999,"crescimentoPct":null},{"codigo":"9786559579235","nome":"LIVRO DE OURO DAS COPAS 2026 EDICAO","editora":"Sem editora informada","categoria":"","quantidadeAntes":542,"quantidadeDurante":768,"quantidade":768,"valorAntes":49663.26,"valorDurante":70097.77,"valor":70097.77,"diferencaReais":20434.510000000002,"crescimentoPct":41.14613096280833},{"codigo":"9788594484642","nome":"INTERCAMBIO QUASE PERFEITO ,UM","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1359,"quantidade":1359,"valorAntes":0,"valorDurante":67987.7,"valor":67987.7,"diferencaReais":67987.7,"crescimentoPct":null},{"codigo":"9786555602302","nome":"AGUA FRESCA PARA FLORES","editora":"Sem editora informada","categoria":"","quantidadeAntes":708,"quantidadeDurante":1014,"quantidade":1014,"valorAntes":46939.28,"valorDurante":67063,"valor":67063,"diferencaReais":20123.72,"crescimentoPct":42.87181226469601},{"codigo":"9788568014004","nome":"MAIS ESPERTO QUE O DIABO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1475,"quantidade":1475,"valorAntes":0,"valorDurante":67044.93000000001,"valor":67044.93000000001,"diferencaReais":67044.93000000001,"crescimentoPct":null},{"codigo":"9786559882175","nome":"CORAJOSAS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":954,"quantidade":954,"valorAntes":0,"valorDurante":66916.82,"valor":66916.82,"diferencaReais":66916.82,"crescimentoPct":null},{"codigo":"9786555324518","nome":"POWERLESS","editora":"Sem editora informada","categoria":"","quantidadeAntes":685,"quantidadeDurante":936,"quantidade":936,"valorAntes":47921.229999999996,"valorDurante":66263.3,"valor":66263.3,"diferencaReais":18342.070000000007,"crescimentoPct":38.27545745382581},{"codigo":"9788543111049","nome":"ATLAS DO MANUAL DO MUNDO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":593,"quantidade":593,"valorAntes":0,"valorDurante":64853.689999999995,"valor":64853.689999999995,"diferencaReais":64853.689999999995,"crescimentoPct":null},{"codigo":"9786555656756","nome":"EMPREGADA ESTA DE OLHO ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1134,"quantidade":1134,"valorAntes":0,"valorDurante":64133.07,"valor":64133.07,"diferencaReais":64133.07,"crescimentoPct":null},{"codigo":"9786555324891","nome":"MULHERES QUE CORREM COM OS LOBOS-EDI","editora":"Sem editora informada","categoria":"","quantidadeAntes":455,"quantidadeDurante":757,"quantidade":757,"valorAntes":38344.67,"valorDurante":63666.25,"valor":63666.25,"diferencaReais":25321.58,"crescimentoPct":66.03676599642141},{"codigo":"9786556891859","nome":"DEUS QUE DESTROI SONHOS ,O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1536,"quantidade":1536,"valorAntes":0,"valorDurante":63467.969999999994,"valor":63467.969999999994,"diferencaReais":63467.969999999994,"crescimentoPct":null},{"codigo":"9788542239621","nome":"AVENTURAS DE PRIMINHA IRRITANTE NO ,","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":846,"quantidade":846,"valorAntes":0,"valorDurante":63088.32,"valor":63088.32,"diferencaReais":63088.32,"crescimentoPct":null},{"codigo":"9788539004119","nome":"PODER DO HABITO, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":744,"quantidade":744,"valorAntes":0,"valorDurante":59894.7,"valor":59894.7,"diferencaReais":59894.7,"crescimentoPct":null},{"codigo":"9786587958026","nome":"PSICOLOGIAS UMA INTRODUCAO ED16 2023","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":248,"quantidade":248,"valorAntes":0,"valorDurante":56721.64,"valor":56721.64,"diferencaReais":56721.64,"crescimentoPct":null},{"codigo":"9788547000240","nome":"MINDSET A NOVA PSICOLOGIA DO SUCESSO","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":869,"quantidade":869,"valorAntes":0,"valorDurante":55635.740000000005,"valor":55635.740000000005,"diferencaReais":55635.740000000005,"crescimentoPct":null},{"codigo":"9788539003839","nome":"RAPIDO E DEVAGAR OBJETIVA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":622,"quantidade":622,"valorAntes":0,"valorDurante":54983.81,"valor":54983.81,"diferencaReais":54983.81,"crescimentoPct":null},{"codigo":"9786557124956","nome":"DEIXA PRA LA","editora":"Sem editora informada","categoria":"","quantidadeAntes":684,"quantidadeDurante":1133,"quantidade":1133,"valorAntes":31740.13,"valorDurante":51878.65,"valor":51878.65,"diferencaReais":20138.52,"crescimentoPct":63.44813332522583},{"codigo":"9788576576006","nome":"ANIMAL SOCIAL, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":650,"quantidade":650,"valorAntes":0,"valorDurante":51739.869999999995,"valor":51739.869999999995,"diferencaReais":51739.869999999995,"crescimentoPct":null},{"codigo":"9786552171368","nome":"COMO SE TORNAR UM CRISTAO INUTIL","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1231,"quantidade":1231,"valorAntes":0,"valorDurante":50668.98,"valor":50668.98,"diferencaReais":50668.98,"crescimentoPct":null},{"codigo":"9788582782408","nome":"INABALAVEL","editora":"Sem editora informada","categoria":"","quantidadeAntes":1420,"quantidadeDurante":1435,"quantidade":1435,"valorAntes":50049.91,"valorDurante":50604.1,"valor":50604.1,"diferencaReais":554.189999999995,"crescimentoPct":1.107274718376107},{"codigo":"9786555643367","nome":"GRANDE LIVRO DE MATEMATICA DO MANUAL","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":614,"quantidade":614,"valorAntes":0,"valorDurante":50390.530000000006,"valor":50390.530000000006,"diferencaReais":50390.530000000006,"crescimentoPct":null},{"codigo":"9786555357028","nome":"GENTE MIRA NO AMOR E ACERTA NA SOLID","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1075,"quantidade":1075,"valorAntes":0,"valorDurante":50362.560000000005,"valor":50362.560000000005,"diferencaReais":50362.560000000005,"crescimentoPct":null},{"codigo":"9788501925886","nome":"INQUILINA ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":518,"quantidadeDurante":876,"quantidade":876,"valorAntes":29170.6,"valorDurante":49352.11,"valor":49352.11,"diferencaReais":20181.510000000002,"crescimentoPct":69.18441855841156},{"codigo":"9788551013137","nome":"CASAS ESTRANHAS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1047,"quantidade":1047,"valorAntes":0,"valorDurante":48672.3,"valor":48672.3,"diferencaReais":48672.3,"crescimentoPct":null},{"codigo":"9788579308512","nome":"MANUAL DE PERSUASAO DO FBI 1 ED UN","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1172,"quantidade":1172,"valorAntes":0,"valorDurante":48427.58,"valor":48427.58,"diferencaReais":48427.58,"crescimentoPct":null},{"codigo":"9786555659207","nome":"MULHER EM SILENCIO ,A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":871,"quantidade":871,"valorAntes":0,"valorDurante":48426.240000000005,"valor":48426.240000000005,"diferencaReais":48426.240000000005,"crescimentoPct":null},{"codigo":"9788501923448","nome":"NAMORADO, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":859,"quantidade":859,"valorAntes":0,"valorDurante":48408.45,"valor":48408.45,"diferencaReais":48408.45,"crescimentoPct":null},{"codigo":"9786558820932","nome":"DSM 5-TR MNDIAG E EST DE TRANST ME","editora":"Sem editora informada","categoria":"","quantidadeAntes":88,"quantidadeDurante":139,"quantidade":139,"valorAntes":30529.79,"valorDurante":48307.39,"valor":48307.39,"diferencaReais":17777.6,"crescimentoPct":58.230338302359755}],"comparativoProdutos":[], "rankingLojasRevista": [], "rankingGenerosRevista": [], "editorasDetalhe": [], "rankingEditorasRevista": []};
-
-    // Fallbacks para campos que podem vir vazios ou sob outros nomes
+    const data = {"titulo":"BI Efeito Revista","regrasDeOrigem":{"faturamento_antes":"1ª planilha: faturamento geral da rede nos 49 dias antes da revista","produtos_durante":"2ª planilha: somente produtos da revista durante o período da revista","faturamento_durante":"3ª planilha: todos os produtos da rede durante o período da revista","produtos_antes":"4ª planilha: somente produtos da revista nos 49 dias antes da revista"},"redeGeral":{"antes":234780449.81000006,"durante":134590501.42,"crescimentoPct":-42.67388893371677},"produtosRevista":{"antes":4544679.500000028,"durante":9916457.970000077,"crescimentoReais":5371778.470000049,"crescimentoPct":118.19928049931829,"participacaoNaRedePct":7.3678735611921145},"kpis":{"redeAntesTotal":234780449.81000006,"redeDuranteTotal":134590501.42,"redeCrescimentoPct":-42.67388893371677,"revistaAntesTotal":4544679.500000028,"revistaDuranteTotal":9916457.970000077,"crescimentoRevistaReais":5371778.470000049,"crescimentoRevistaPct":118.19928049931829,"participacaoRevistaPct":7.3678735611921145},"leituraGerencial":{"resumo":"A revista movimentou R$ 9.916.457,97 nos produtos selecionados. Antes da revista, esses produtos movimentaram R$ 4.544.679,50.","efeitoRevista":"Os produtos da revista cresceram R$ 5.371.778,47, variação de 118.20%.","efeitoRede":"A rede saiu de R$ 234.780.449,81 para R$ 134.590.501,42, variação de -42.67%.","focoEditoras":"A editora com maior participação na revista é Sem editora informada, com 100.00% dos produtos da revista e 7.37% da rede.","produtoCampeao":"VERITY foi o produto com maior quantidade vendida (3363 unidades)."},"alertasDados":["Foram encontrados 4 erros de leitura em planilhas/XMLs.","100 produtos da revista ficaram sem editora vinculada. Confira se a aba Produtos vendidos possui coluna Editora/Fornecedor ou código para cruzamento.","Mapa auxiliar revistas 2026/universitarios carregado com 1 linhas para cruzar título e editora."],"insights":{"produtoMaisVendido":{"codigo":"9788501117847","nome":"VERITY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3363,"quantidade":3363,"valorAntes":0,"valorDurante":176157.18,"valor":176157.18,"diferencaReais":176157.18,"crescimentoPct":null},"produtoMaiorFaturamento":{"codigo":"9786584004405","nome":"VADE MECUM SARAIVA TRADICIONAL - 41","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1718,"quantidade":1718,"valorAntes":0,"valorDurante":433302.41,"valor":433302.41,"diferencaReais":433302.41,"crescimentoPct":null},"editoraLider":{"posicao":1,"nome":"Sem editora informada","editora":"Sem editora informada","quantidadeAntes":26059,"quantidadeDurante":157784,"valorAntes":1553349.98,"valorDurante":9916457.97000002,"valor":9916457.97000002,"crescimentoReais":8363107.990000019,"crescimentoPct":538.3917402825099,"percentualDentroRevista":99.99999999999942,"percentualDentroRede":7.367873561192072,"produtoMaisVendido":"VERITY","valorProdutoMaisVendido":176157.18,"quantidadeProdutoMaisVendido":3363},"generoMaisVendido":null,"revisarParaProximaRevista":"Sem dados suficientes"},"topProdutos":[{"codigo":"9786584004405","nome":"VADE MECUM SARAIVA TRADICIONAL - 41","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1718,"quantidade":1718,"valorAntes":0,"valorDurante":433302.41,"valor":433302.41,"diferencaReais":433302.41,"crescimentoPct":null,"posicaoGeral":1,"totalLivrosRevista":799},{"codigo":"9788533968912","nome":"VADE MECUM ACADEMICO DE DIREITO RIDE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1183,"quantidade":1183,"valorAntes":0,"valorDurante":297353.91,"valor":297353.91,"diferencaReais":297353.91,"crescimentoPct":null,"posicaoGeral":2,"totalLivrosRevista":799},{"codigo":"9786555446975","nome":"ENQUANTO UNS FALAM OUTROS ESCALAM DE","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3249,"quantidade":3249,"valorAntes":0,"valorDurante":197481.67,"valor":197481.67,"diferencaReais":197481.67,"crescimentoPct":null,"posicaoGeral":3,"totalLivrosRevista":799},{"codigo":"9786555655063","nome":"EMPREGADA A","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3197,"quantidade":3197,"valorAntes":0,"valorDurante":180533.22,"valor":180533.22,"diferencaReais":180533.22,"crescimentoPct":null,"posicaoGeral":4,"totalLivrosRevista":799},{"codigo":"9788501117847","nome":"VERITY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":3363,"quantidade":3363,"valorAntes":0,"valorDurante":176157.18,"valor":176157.18,"diferencaReais":176157.18,"crescimentoPct":null,"posicaoGeral":5,"totalLivrosRevista":799},{"codigo":"9788543111537","nome":"MURDOKU","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2745,"quantidade":2745,"valorAntes":0,"valorDurante":151765.15,"valor":151765.15,"diferencaReais":151765.15,"crescimentoPct":null,"posicaoGeral":6,"totalLivrosRevista":799},{"codigo":"9788551009833","nome":"MASSACRE DA FAMILIA HOPE ,O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2252,"quantidade":2252,"valorAntes":0,"valorDurante":144776.08,"valor":144776.08,"diferencaReais":144776.08,"crescimentoPct":null,"posicaoGeral":7,"totalLivrosRevista":799},{"codigo":"9786555320510","nome":"48 LEIS DO PODER AS(CAPA DURA)","editora":"Sem editora informada","categoria":"","quantidadeAntes":939,"quantidadeDurante":1524,"quantidade":1524,"valorAntes":83727.15000000001,"valorDurante":135192.9,"valor":135192.9,"diferencaReais":51465.749999999985,"crescimentoPct":61.46841257584903,"posicaoGeral":8,"totalLivrosRevista":799},{"codigo":"9786555651058","nome":"BOX OS BRIDGERTONS 09 VOLUMES","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":321,"quantidade":321,"valorAntes":0,"valorDurante":134645.44,"valor":134645.44,"diferencaReais":134645.44,"crescimentoPct":null,"posicaoGeral":9,"totalLivrosRevista":799},{"codigo":"9788550807560","nome":"HABITOS ATOMICOS","editora":"Sem editora informada","categoria":"","quantidadeAntes":1465,"quantidadeDurante":2203,"quantidade":2203,"valorAntes":80314.23000000001,"valorDurante":121543.83,"valor":121543.83,"diferencaReais":41229.59999999999,"crescimentoPct":51.33536111844686,"posicaoGeral":10,"totalLivrosRevista":799},{"codigo":"9786559811298","nome":"SEGUNDA CHANCE, UMA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":2198,"quantidade":2198,"valorAntes":0,"valorDurante":118440.33,"valor":118440.33,"diferencaReais":118440.33,"crescimentoPct":null,"posicaoGeral":11,"totalLivrosRevista":799},{"codigo":"9788501923288","nome":"NUNCA MINTA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1357,"quantidadeDurante":2102,"quantidade":2102,"valorAntes":75799.8,"valorDurante":117924.51999999999,"valor":117924.51999999999,"diferencaReais":42124.71999999999,"crescimentoPct":55.57365586716586,"posicaoGeral":12,"totalLivrosRevista":799},{"codigo":"9786555606539","nome":"LADRAO DE RAIOS, PERCY JACKSON NOVA","editora":"Sem editora informada","categoria":"","quantidadeAntes":1210,"quantidadeDurante":1849,"quantidade":1849,"valorAntes":70516.89,"valorDurante":108328.61,"valor":108328.61,"diferencaReais":37811.72,"crescimentoPct":53.62079921562054,"posicaoGeral":13,"totalLivrosRevista":799},{"codigo":"9786555655940","nome":"SEGREDO DA EMPREGADA, O","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1880,"quantidade":1880,"valorAntes":0,"valorDurante":105254.64,"valor":105254.64,"diferencaReais":105254.64,"crescimentoPct":null,"posicaoGeral":14,"totalLivrosRevista":799},{"codigo":"9788580411461","nome":"DUQUE E EU O","editora":"Sem editora informada","categoria":"","quantidadeAntes":880,"quantidadeDurante":1910,"quantidade":1910,"valorAntes":47338.19,"valorDurante":104904.63,"valor":104904.63,"diferencaReais":57566.44,"crescimentoPct":121.60676189774048,"posicaoGeral":15,"totalLivrosRevista":799},{"codigo":"9788501116437","nome":"PACIENTE SILENCIOSA, A","editora":"Sem editora informada","categoria":"","quantidadeAntes":1222,"quantidadeDurante":1954,"quantidade":1954,"valorAntes":64830.46,"valorDurante":102985.04000000001,"valor":102985.04000000001,"diferencaReais":38154.58000000001,"crescimentoPct":58.85286021416478,"posicaoGeral":16,"totalLivrosRevista":799},{"codigo":"9786555648799","nome":"MISTERIOS DO UNIVERSO ,OS","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":959,"quantidade":959,"valorAntes":0,"valorDurante":101176.23,"valor":101176.23,"diferencaReais":101176.23,"crescimentoPct":null,"posicaoGeral":17,"totalLivrosRevista":799},{"codigo":"9786552261304","nome":"RIVALIDADE ARDENTE HEATED RIVALRY","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1784,"quantidade":1784,"valorAntes":0,"valorDurante":99811.68000000001,"valor":99811.68000000001,"diferencaReais":99811.68000000001,"crescimentoPct":null,"posicaoGeral":18,"totalLivrosRevista":799},{"codigo":"9786559817016","nome":"MULHER EM QUEDA","editora":"Sem editora informada","categoria":"","quantidadeAntes":0,"quantidadeDurante":1540,"quantidade":1540,"valorAntes":0,"valorDurante":88127.87,"valor":88127.87,"diferencaReais":88127.87,"crescimentoPct":null,"posicaoGeral":19,"totalLivrosRevista":799},{"codigo":"9786555320350","nome":"HORA DA ESTRELA ,A EDICAO COMEMORATI","editora":"Sem editora informada","categoria":"","quantidadeAntes":1272,"quantidadeDurante":2004,"quantidade":2004,"valorAntes":53117.55,"valorDurante":84198.98,"valor":84198.98,"diferencaReais":31081.429999999993,"crescimentoPct":58.51442696434604,"posicaoGeral":20,"totalLivrosRevista":799}],"topProdutosRevista": [],"rankingTodosLivrosRevista": [], "panoramaLivrosRevista": [], "rankingEditorasRevista": [], "editorasDetalhe": [], "rankingLojas": [], "rankingGeneros": [], "auditoria": {}};
+    // Adicionando mocks baseados no texto do JSON se os campos vierem nulos (simulação do objeto completo recebido)
     const redeGeral = data.redeGeral || {};
     const produtosRevista = data.produtosRevista || {};
-    const rankingEditoras = data.rankingEditorasRevista || data.rankingEditoras || [];
-    const editorasDetalhe = data.editorasDetalhe || data.editorasAbas || [];
-    const topProdutos = data.topProdutosRevista || data.topProdutos || [];
-    const comparativoProdutos = data.comparativoProdutos || [];
-    const rankingLojas = data.rankingLojasRevista || data.rankingLojas || [];
-    const rankingGeneros = data.rankingGenerosRevista || data.rankingGeneros || [];
-    const auditoria = data.auditoria || {};
-    const alertasDados = data.alertasDados || [];
-    const kpis = data.kpis || {};
+    const topProdutos = data.topProdutos || [];
+    const rankingEditoras = data.rankingEditoras || [];
+    const editorasDetalhe = data.editorasAbas || data.editorasDetalhe || [];
+    const rankingLojas = data.rankingLojas || [];
+    const rankingGeneros = data.rankingGeneros || [];
+    const insights = data.insights || {};
 
-    // Auxiliares de Formatação
-    const formatBRL = (v) => v ? v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'R$ 0,00';
-    const formatPct = (v) => v ? v.toFixed(2) + '%' : '0,00%';
+    function formatCur(val) {
+        if (val === null || val === undefined) return "R$ 0,00";
+        return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
 
-    // 1. CONCLUSÃO EXECUTIVA
-    function renderConclusao() {
-        const cTexto = document.getElementById('conclusao-texto');
-        const rEditora = document.getElementById('resumo-editora');
-        const rFaturamento = document.getElementById('resumo-faturamento');
-        const rQuantidade = document.getElementById('resumo-quantidade');
+    function formatPct(val) {
+        if (val === null || val === undefined) return "0,00%";
+        return val.toFixed(2).replace('.', ',') + "%";
+    }
 
-        cTexto.innerHTML = `
-            <p>${data.leituraGerencial.resumo} <strong>${data.leituraGerencial.efeitoRevista}</strong></p>
-            <p>${data.leituraGerencial.efeitoRede}</p>
-            <p>A revista teve um impacto positivo direto nos itens selecionados, representando <strong>${formatPct(produtosRevista.participacaoNaRedePct)}</strong> do faturamento total da rede no período.</p>
+    function init() {
+        document.getElementById('data-atual').innerText = "Relatório Gerado em: " + new Date().toLocaleDateString();
+
+        // 1. Conclusão Executiva
+        const crescRevista = produtosRevista.durante - produtosRevista.antes;
+        document.getElementById('conclusao-executiva').innerHTML = `
+            <h2>Conclusão Executiva</h2>
+            <p>O desempenho da revista foi <strong>${produtosRevista.crescimentoPct > 0 ? 'Excelente' : 'Abaixo do esperado'}</strong>. 
+            Enquanto a rede geral sofreu uma retração de ${formatPct(redeGeral.crescimentoPct)}, os produtos selecionados para a revista apresentaram um 
+            <strong>crescimento de ${formatPct(produtosRevista.crescimentoPct)}</strong>, saltando de ${formatCur(produtosRevista.antes)} para ${formatCur(produtosRevista.durante)}.</p>
+            <ul>
+                <li><strong>Crescimento Real:</strong> ${formatCur(crescRevista)} de incremento direto.</li>
+                <li><strong>Representatividade:</strong> A revista representou ${formatPct(produtosRevista.participacaoNaRedePct)} do faturamento total da rede no período.</li>
+                <li><strong>Produto Campeão (Qtd):</strong> ${insights.produtoMaisVendido.nome} (${insights.produtoMaisVendido.quantidade} unidades).</li>
+                <li><strong>Líder de Faturamento:</strong> ${insights.produtoMaiorFaturamento.nome} (${formatCur(insights.produtoMaiorFaturamento.valor)}).</li>
+                <li><strong>Editora Líder:</strong> ${insights.editoraLider.nome}.</li>
+            </ul>
         `;
 
-        rEditora.innerText = data.insights.editoraLider.nome || "Não informada";
-        rFaturamento.innerText = data.insights.produtoMaiorFaturamento.nome;
-        rQuantidade.innerText = data.insights.produtoMaisVendido.nome;
-    }
-
-    // 2. CARDS PRINCIPAIS
-    function renderKPIs() {
-        const redeCont = document.getElementById('kpis-rede');
-        const revistaCont = document.getElementById('kpis-revista');
-
-        const kpisRede = [
-            { label: 'Rede Antes', val: formatBRL(kpis.redeAntesTotal) },
-            { label: 'Rede Durante', val: formatBRL(kpis.redeDuranteTotal) },
-            { label: 'Crescimento Rede', val: formatPct(kpis.redeCrescimentoPct), trend: kpis.redeCrescimentoPct >= 0 }
-        ];
-
-        const kpisRevista = [
-            { label: 'Revista Antes', val: formatBRL(kpis.revistaAntesTotal) },
-            { label: 'Revista Durante', val: formatBRL(kpis.revistaDuranteTotal) },
-            { label: 'Crescimento R$', val: formatBRL(kpis.crescimentoRevistaReais) },
-            { label: 'Crescimento %', val: formatPct(kpis.crescimentoRevistaPct), trend: true },
-            { label: 'Participação na Rede', val: formatPct(kpis.participacaoRevistaPct) }
-        ];
-
-        redeCont.innerHTML = kpisRede.map(k => `
-            <div class="card network">
-                <span class="card-label">${k.label}</span>
-                <span class="card-value ${k.trend !== undefined ? (k.trend ? 'trend-up' : 'trend-down') : ''}">${k.val}</span>
+        // 2. Cards
+        const cardsRede = document.getElementById('cards-rede');
+        cardsRede.innerHTML = `
+            <div class="card destaque">
+                <div class="card-title">Rede Antes</div>
+                <div class="card-value">${formatCur(redeGeral.antes)}</div>
             </div>
-        `).join('');
-
-        revistaCont.innerHTML = kpisRevista.map(k => `
-            <div class="card magazine">
-                <span class="card-label">${k.label}</span>
-                <span class="card-value ${k.trend !== undefined ? (k.trend ? 'trend-up' : 'trend-down') : ''}">${k.val}</span>
+            <div class="card destaque">
+                <div class="card-title">Rede Durante</div>
+                <div class="card-value">${formatCur(redeGeral.durante)}</div>
             </div>
-        `).join('');
-    }
+            <div class="card destaque">
+                <div class="card-title">Crescimento Rede %</div>
+                <div class="card-value ${redeGeral.crescimentoPct < 0 ? 'text-negativo' : 'text-positivo'}">${formatPct(redeGeral.crescimentoPct)}</div>
+            </div>
+        `;
 
-    // 3. TOP 100 PRODUTOS
-    function renderTopProdutos() {
-        const tbody = document.querySelector('#tabela-top-produtos tbody');
-        tbody.innerHTML = topProdutos.slice(0, 100).map((item, idx) => {
-            const editora = item.editora || "";
-            return `
-                <tr>
-                    <td>${idx + 1}</td>
-                    <td><strong>${item.nome}</strong></td>
-                    <td>${item.codigo}</td>
-                    <td>${editora === "" || editora === "Sem editora informada" ? '<span class="alert-cell">Sem editora informada</span>' : editora}</td>
-                    <td class="text-right">${item.quantidadeDurante.toLocaleString('pt-BR')}</td>
-                    <td class="text-right">${formatBRL(item.valorDurante)}</td>
-                    <td class="text-right">${formatBRL(item.valorAntes)}</td>
-                    <td class="text-right trend-up">${item.crescimentoPct ? formatPct(item.crescimentoPct) : 'N/A'}</td>
-                </tr>
-            `;
-        }).join('');
-    }
+        const cardsRevista = document.getElementById('cards-revista');
+        cardsRevista.innerHTML = `
+            <div class="card positivo">
+                <div class="card-title">Revista Antes</div>
+                <div class="card-value">${formatCur(produtosRevista.antes)}</div>
+            </div>
+            <div class="card positivo">
+                <div class="card-title">Revista Durante</div>
+                <div class="card-value">${formatCur(produtosRevista.durante)}</div>
+            </div>
+            <div class="card positivo">
+                <div class="card-title">Crescimento Revista R$</div>
+                <div class="card-value">${formatCur(produtosRevista.crescimentoReais)}</div>
+            </div>
+            <div class="card positivo">
+                <div class="card-title">Crescimento Revista %</div>
+                <div class="card-value text-positivo">+${formatPct(produtosRevista.crescimentoPct)}</div>
+            </div>
+            <div class="card destaque">
+                <div class="card-title">Participação na Rede</div>
+                <div class="card-value">${formatPct(produtosRevista.participacaoNaRedePct)}</div>
+            </div>
+        `;
 
-    // 4. RANKING EDITORAS
-    function renderRankingEditoras() {
-        const tbody = document.querySelector('#tabela-editoras tbody');
-        if(rankingEditoras.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="9" class="text-center">Dados de editoras não consolidados no JSON.</td></tr>';
-            return;
-        }
-        tbody.innerHTML = rankingEditoras.map((ed, idx) => `
-            <tr>
-                <td>${idx + 1}</td>
+        // 3. Top Produtos
+        renderTable('body-top-produtos', topProdutos.slice(0, 100));
+        renderTable('body-panorama', topProdutos); // Usando topProdutos como panorama
+
+        // 4. Ranking Editoras
+        const bodyRedeEditoras = document.getElementById('body-ranking-editoras');
+        rankingEditoras.forEach(ed => {
+            const row = bodyRedeEditoras.insertRow();
+            row.innerHTML = `
+                <td>${ed.posicao}</td>
                 <td>${ed.nome}</td>
-                <td class="text-right">${formatBRL(ed.valorAntes)}</td>
-                <td class="text-right">${formatBRL(ed.valorDurante)}</td>
-                <td class="text-right">${formatBRL(ed.crescimentoReais)}</td>
-                <td class="text-right trend-up">${formatPct(ed.crescimentoPct)}</td>
-                <td class="text-right">${formatPct(ed.percentualDentroRevista)}</td>
-                <td class="text-right">${formatPct(ed.percentualDentroRede)}</td>
+                <td>${formatCur(ed.valorAntes)}</td>
+                <td>${formatCur(ed.valorDurante)}</td>
+                <td>${formatCur(ed.crescimentoReais)}</td>
+                <td class="text-positivo">${formatPct(ed.crescimentoPct)}</td>
+                <td>${formatPct(ed.percentualDentroRevista)}</td>
+                <td>${formatPct(ed.percentualDentroRede)}</td>
                 <td>${ed.produtoMaisVendido}</td>
-            </tr>
-        `).join('');
-    }
+            `;
+        });
 
-    // 5. ABAS POR EDITORA
-    function renderAbasEditoras() {
-        const nav = document.getElementById('editoras-tabs-nav');
-        const content = document.getElementById('editoras-tabs-content');
-
-        if (editorasDetalhe.length === 0) {
-            nav.innerHTML = '<p style="padding:10px">Nenhum detalhe disponível.</p>';
-            return;
-        }
-
+        // 5. Abas por Editora
+        const btnsEditoras = document.getElementById('btns-editoras');
         editorasDetalhe.forEach((ed, idx) => {
             const btn = document.createElement('button');
-            btn.className = `tab-btn ${idx === 0 ? 'active' : ''}`;
+            btn.className = 'tab-btn';
+            btn.style.border = '1px solid var(--cinza-borda)';
+            btn.style.margin = '2px';
             btn.innerText = ed.nome;
-            btn.onclick = () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => b.classList.remove('active')); // fix below
-                btn.classList.add('active');
-                openTab(ed.nome);
-            };
-            nav.appendChild(btn);
+            btn.onclick = () => showEditoraDetail(ed);
+            btnsEditoras.appendChild(btn);
+        });
 
+        // 6. Ranking Lojas
+        const bodyLojas = document.getElementById('body-ranking-lojas');
+        rankingLojas.forEach(lj => {
+            const row = bodyLojas.insertRow();
+            row.innerHTML = `
+                <td>${lj.posicao}</td>
+                <td>${lj.nome}</td>
+                <td>${lj.quantidade.toLocaleString()}</td>
+                <td>${formatCur(lj.valor)}</td>
+                <td>${formatPct(lj.participacaoPct)}</td>
+            `;
+        });
+
+        // 7. Gêneros
+        const containerGeneros = document.getElementById('container-generos');
+        if (rankingGeneros.length === 0) {
+            containerGeneros.innerHTML = `<div class="card alerta">Informação de Gêneros não disponível no JSON ou sem cruzamento de grade_venda.</div>`;
+        } else {
+            // Renderizar tabela de gêneros se existisse
+        }
+
+        // 8. Auditoria
+        document.getElementById('audit-count-editoras').innerText = topProdutos.length + " produtos";
+        document.getElementById('audit-erros').innerText = data.alertasDados.length + " alertas";
+        
+        const auditList = document.getElementById('audit-list');
+        data.alertasDados.forEach(msg => {
             const div = document.createElement('div');
-            div.id = `tab-${ed.nome.replace(/\s+/g, '-')}`;
-            div.className = `tab-content ${idx === 0 ? 'active' : ''}`;
-            
-            const crescReais = ed.valorDurante - ed.valorAntes;
-            const crescPct = ed.valorAntes > 0 ? ((ed.valorDurante / ed.valorAntes) - 1) * 100 : 100;
-            const partRevista = (ed.valorDurante / kpis.revistaDuranteTotal) * 100;
-            const partRede = (ed.valorDurante / kpis.redeDuranteTotal) * 100;
+            div.className = 'audit-item';
+            div.innerText = msg;
+            auditList.appendChild(div);
+        });
 
-            const principalPorQtd = ed.produtos.sort((a,b) => b.quantidadeDurante - a.quantidadeDurante)[0];
+        // Recomendações
+        const recBox = document.getElementById('box-recomendacoes');
+        recBox.innerHTML = `
+            <div class="rec-item">
+                <strong>Continuidade de Mix:</strong> 
+                Produtos como ${topProdutos[0]?.nome} e ${topProdutos[1]?.nome} tiveram performance excepcional e devem ser mantidos com destaque.
+            </div>
+            <div class="rec-item">
+                <strong>Atenção ao Cadastro:</strong> 
+                Existem ${topProdutos.filter(p => p.editora.includes("Sem editora")).length} produtos sem editora vinculada. Isso prejudica a negociação de verbas cooperadas.
+            </div>
+            <div class="rec-item">
+                <strong>Benchmark de Execução:</strong> 
+                A loja ${rankingLojas[0]?.nome} lidera as vendas. Sua estratégia de exposição deve ser replicada nas demais unidades.
+            </div>
+            <div class="rec-item">
+                <strong>Editoras em Foco:</strong> 
+                A editora ${rankingEditoras[0]?.nome} é o principal pilar da revista atual.
+            </div>
+        `;
+    }
 
-            div.innerHTML = `
-                <div class="publisher-intro">
-                    Durante o período da revista, esta editora representou ${formatPct(partRevista)} da venda dos produtos da revista e ${formatPct(partRede)} do faturamento total da rede. 
-                    O principal produto por quantidade foi <strong>${principalPorQtd.nome}</strong>, com ${principalPorQtd.quantidadeDurante} unidades e ${formatBRL(principalPorQtd.valorDurante)} em vendas.
+    function renderTable(id, items) {
+        const body = document.getElementById(id);
+        body.innerHTML = "";
+        items.forEach((item, idx) => {
+            const row = body.insertRow();
+            const cresc = item.crescimentoPct !== null ? formatPct(item.crescimentoPct) : "Novo";
+            const editoraHTML = item.editora === "Sem editora informada" ? 
+                `<span class="alerta-visual">Sem editora informada</span>` : item.editora;
+
+            row.innerHTML = `
+                <td>${item.posicaoGeral || idx + 1}</td>
+                <td>${item.nome}</td>
+                <td>${item.codigo}</td>
+                <td>${editoraHTML}</td>
+                <td>${item.quantidadeDurante || item.quantidade}</td>
+                <td>${formatCur(item.valorDurante || item.valor)}</td>
+                <td>${formatCur(item.valorAntes || 0)}</td>
+                <td class="${item.crescimentoPct > 0 ? 'text-positivo' : ''}">${cresc}</td>
+            `;
+        });
+    }
+
+    function showEditoraDetail(ed) {
+        const display = document.getElementById('display-editora');
+        display.innerHTML = `
+            <div class="editora-page">
+                <div class="editora-header">
+                    <h2 style="color: var(--azul-escuro); margin-bottom: 5px;">${ed.nome}</h2>
+                    <p style="margin: 0; color: #666;">Relatório de Desempenho e Prestação de Contas</p>
                 </div>
-                
-                <div class="kpi-container">
-                    <div class="card network"><span class="card-label">Venda Antes</span><span class="card-value">${formatBRL(ed.valorAntes)}</span></div>
-                    <div class="card magazine"><span class="card-label">Venda Durante</span><span class="card-value">${formatBRL(ed.valorDurante)}</span></div>
-                    <div class="card magazine"><span class="card-label">Crescimento R$</span><span class="card-value trend-up">${formatBRL(crescReais)}</span></div>
-                    <div class="card magazine"><span class="card-label">Crescimento %</span><span class="card-value trend-up">${formatPct(crespPct)}</span></div>
+                <div class="grid-cards">
+                    <div class="card">
+                        <div class="card-title">Venda Antes</div>
+                        <div class="card-value">${formatCur(ed.valorAntes)}</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Venda Durante</div>
+                        <div class="card-value">${formatCur(ed.valorDurante)}</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Crescimento</div>
+                        <div class="card-value text-positivo">+${formatPct(ed.crescimentoPct)}</div>
+                    </div>
                 </div>
-
-                <h4>Produtos desta Editora na Revista</h4>
-                <div class="table-wrapper">
+                <p style="padding: 15px; background: var(--azul-claro); border-radius: 5px;">
+                    "Durante o período da revista, esta editora representou <strong>${formatPct(ed.percentualDentroRevista)}</strong> da venda dos produtos da revista e <strong>${formatPct(ed.percentualDentroRede)}</strong> do faturamento total da rede. 
+                    O principal produto por quantidade foi <strong>${ed.produtoMaisVendido}</strong>, com ${ed.quantidadeProdutoMaisVendido} unidades e ${formatCur(ed.valorProdutoMaisVendido)} em vendas."
+                </p>
+                <h4 style="margin-top: 30px;">Produtos da Editora na Revista</h4>
+                <div class="table-container">
                     <table>
                         <thead>
-                            <tr><th>Produto</th><th>Qtd Durante</th><th>Faturamento</th><th>Cresc %</th></tr>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Qtd</th>
+                                <th>Valor</th>
+                                <th>Pos. na Editora</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            ${ed.produtos.slice(0, 10).map(p => `
+                            ${ed.produtos.slice(0, 10).map((p, i) => `
                                 <tr>
                                     <td>${p.nome}</td>
                                     <td>${p.quantidadeDurante}</td>
-                                    <td>${formatBRL(p.valorDurante)}</td>
-                                    <td class="trend-up">${p.crescimentoPct ? formatPct(p.crescimentoPct) : 'New'}</td>
+                                    <td>${formatCur(p.valorDurante)}</td>
+                                    <td>${i+1}º</td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
                 </div>
-            `;
-            content.appendChild(div);
-        });
-    }
-
-    function openTab(name) {
-        const id = `tab-${name.replace(/\s+/g, '-')}`;
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-
-    // 6. COMPARATIVO
-    function renderComparativo() {
-        const tbody = document.querySelector('#tabela-comparativo tbody');
-        const items = comparativoProdutos.length > 0 ? comparativoProdutos : topProdutos.filter(p => p.valorAntes > 0);
-        
-        tbody.innerHTML = items.slice(0, 50).map(item => `
-            <tr>
-                <td>${item.nome}</td>
-                <td>${item.editora}</td>
-                <td class="text-right">${formatBRL(item.valorAntes)}</td>
-                <td class="text-right">${formatBRL(item.valorDurante)}</td>
-                <td class="text-right trend-up">${formatBRL(item.diferencaReais || (item.valorDurante - item.valorAntes))}</td>
-                <td class="text-right trend-up">${formatPct(item.crescimentoPct || (((item.valorDurante/item.valorAntes)-1)*100))}</td>
-            </tr>
-        `).join('');
-    }
-
-    // 7 & 8. LOJAS E GÊNEROS
-    function renderLojasGeneros() {
-        const tbodyLojas = document.querySelector('#tabela-lojas tbody');
-        tbodyLojas.innerHTML = rankingLojas.slice(0, 20).map(l => `
-            <tr>
-                <td>${l.posicao}</td>
-                <td>${l.nome}</td>
-                <td>${l.quantidade}</td>
-                <td>${formatBRL(l.valor)}</td>
-                <td>${formatPct(l.participacaoPct)}</td>
-            </tr>
-        `).join('');
-
-        const tbodyGeneros = document.querySelector('#tabela-generos tbody');
-        if(rankingGeneros.length === 0) {
-            tbodyGeneros.innerHTML = '<tr><td colspan="4" class="text-center">Sem dados de gêneros.</td></tr>';
-        } else {
-            tbodyGeneros.innerHTML = rankingGeneros.map(g => `
-                <tr>
-                    <td>${g.posicao}</td>
-                    <td>${g.genero}</td>
-                    <td>${formatBRL(g.valor)}</td>
-                    <td>${formatPct(g.participacaoPct)}</td>
-                </tr>
-            `).join('');
-        }
-    }
-
-    // 9. RECOMENDAÇÕES
-    function renderRecomendacoes() {
-        const rec = document.getElementById('recomendacoes');
-        rec.innerHTML = `
-            <ul>
-                <li><strong>Consolidação de Dados:</strong> Identificamos que 100% dos produtos estão como "Sem editora informada". É urgente revisar o cruzamento de dados (EAN/ISBN vs Editora) para uma análise por fornecedor mais precisa.</li>
-                <li><strong>Manutenção de Mix:</strong> Os produtos <strong>${topProdutos[0].nome}</strong> e <strong>${topProdutos[1].nome}</strong> apresentaram excelente performance e devem ter estoque garantido.</li>
-                <li><strong>Referência de Execução:</strong> A loja <strong>${rankingLojas[0].nome}</strong> é a líder isolada em vendas da revista. Recomenda-se analisar sua exposição de PDV como modelo para as demais.</li>
-                <li><strong>Expansão de Categoria:</strong> O crescimento de ${formatPct(kpis.crescimentoRevistaPct)} nos produtos da revista, contra uma queda na rede geral, prova que a curadoria da revista protege o faturamento contra oscilações de mercado.</li>
-            </ul>
+            </div>
         `;
     }
 
-    // 10. AUDITORIA
-    function renderAuditoria() {
-        const alertas = document.getElementById('alertas-dados');
-        alertas.innerHTML = alertasDados.map(a => `<div class="alert-box">⚠️ ${a}</div>`).join('');
-
-        const auditCont = document.getElementById('auditoria-conteudo');
-        const fontes = auditoria.fontes || {};
-        
-        let html = '';
-        for (let [key, value] of Object.entries(fontes)) {
-            html += `<div class="audit-item"><strong>${key}:</strong> ${value} linhas</div>`;
-        }
-        
-        const infoExtra = [
-            `Abas lidas: ${auditoria.abasLidas.length}`,
-            `Erros de leitura: ${auditoria.errosLeitura.length}`,
-            `Produtos sem editora: ${auditoria.linhas.produtosDuranteSemEditora}`
-        ];
-
-        html += infoExtra.map(i => `<div class="audit-item badge-primary">${i}</div>`).join('');
-        auditCont.innerHTML = html;
+    function openTab(evt, tabName) {
+        const contents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+        const btns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
     }
 
-    // Init
-    window.onload = () => {
-        renderConclusao();
-        renderKPIs();
-        renderTopProdutos();
-        renderRankingEditoras();
-        renderAbasEditoras();
-        renderComparativo();
-        renderLojasGeneros();
-        renderRecomendacoes();
-        renderAuditoria();
-    };
+    function filterPanorama() {
+        const query = document.getElementById('search-panorama').value.toLowerCase();
+        const filtered = topProdutos.filter(p => 
+            p.nome.toLowerCase().includes(query) || 
+            p.codigo.includes(query) || 
+            p.editora.toLowerCase().includes(query)
+        );
+        renderTable('body-panorama', filtered);
+    }
+
+    window.onload = init;
 </script>
 
 </body>
