@@ -6,14 +6,13 @@
     <title>BI Efeito Revista</title>
     <style>
         :root {
-            --primary-blue: #003580;
-            --primary-green: #009b3a;
-            --primary-yellow: #fedd00;
-            --accent-orange: #ff8c00;
-            --bg-gray: #f4f7f9;
+            --azul-copa: #003399;
+            --verde-copa: #009a44;
+            --amarelo-copa: #ffdf00;
+            --laranja-detalhe: #ff8c00;
+            --bg-body: #f4f7f6;
             --text-dark: #333;
-            --card-white: #ffffff;
-            --border-light: #e0e6ed;
+            --white: #ffffff;
         }
 
         * {
@@ -24,223 +23,189 @@
         }
 
         body {
-            background-color: var(--bg-gray);
+            background-color: var(--bg-body);
             color: var(--text-dark);
-            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--azul-copa), var(--verde-copa));
+            color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--amarelo-copa);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .container {
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-left: 8px solid var(--primary-green);
-            padding-left: 15px;
-            background: var(--card-white);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        header h1 {
-            color: var(--primary-blue);
-            font-size: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .kpi-container {
+        /* KPI Cards */
+        .kpi-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .kpi-card {
-            background: var(--card-white);
+            background: var(--white);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--primary-blue);
-            transition: transform 0.3s;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-5px);
+            border-left: 5px solid var(--laranja-detalhe);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
         .kpi-card h3 {
-            font-size: 13px;
-            color: #666;
+            font-size: 12px;
+            color: #777;
             text-transform: uppercase;
             margin-bottom: 10px;
         }
 
         .kpi-card .value {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: bold;
-            color: var(--primary-blue);
+            color: var(--azul-copa);
         }
 
-        .kpi-card .sub-value {
+        .kpi-card .pct {
             font-size: 14px;
             margin-top: 5px;
+            font-weight: 600;
         }
 
-        .kpi-card.positive { border-bottom-color: var(--primary-green); }
-        .kpi-card.negative { border-bottom-color: var(--accent-orange); }
+        .positive { color: var(--verde-copa); }
+        .negative { color: #d9534f; }
 
+        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: repeat(12, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 1024px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
         }
 
         .card {
-            background: var(--card-white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 20px;
+            overflow: hidden;
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid var(--primary-yellow);
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        @media (max-width: 992px) {
+            .col-4, .col-6, .col-8 { grid-column: span 12; }
+        }
+
+        .card-header {
+            border-bottom: 2px solid var(--amarelo-copa);
+            margin-bottom: 15px;
             padding-bottom: 10px;
-        }
-
-        .insights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .insight-box {
-            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
-        }
-
-        .insight-box label {
-            display: block;
-            font-size: 12px;
-            color: #777;
-            margin-bottom: 5px;
-        }
-
-        .insight-box .val {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--primary-blue);
-        }
-
-        /* Chart Styles */
-        .pie-container {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 16px;
+            color: var(--azul-copa);
+            text-transform: uppercase;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        table th {
+            text-align: left;
+            background: #f9f9f9;
+            padding: 10px;
+            color: var(--azul-copa);
+            border-bottom: 1px solid #eee;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        table tr:hover {
+            background: #fcfcfc;
+        }
+
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Pizza Chart baseada em conic-gradient */
+        .market-share-container {
+            display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            height: 100%;
         }
 
         .pie-chart {
-            width: 220px;
-            height: 220px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             margin-bottom: 20px;
-            border: 5px solid #fff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         .legend {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
+            font-size: 11px;
             width: 100%;
-            font-size: 12px;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 8px;
         }
 
-        .dot {
+        .color-box {
             width: 12px;
             height: 12px;
+            margin-right: 5px;
             border-radius: 2px;
         }
 
-        /* Table Styles */
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th {
-            background-color: #f8fafc;
-            text-align: left;
-            padding: 12px;
-            font-size: 13px;
-            color: #444;
-            border-bottom: 2px solid var(--border-light);
-        }
-
-        td {
-            padding: 12px;
-            font-size: 13px;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        tr:hover { background-color: #f9fcff; }
-
-        .badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .badge-green { background: #e6f4ea; color: var(--primary-green); }
-        .badge-blue { background: #e0eefd; color: var(--primary-blue); }
-
+        /* Audit and Footer */
         .audit-section {
-            background: #2d3436;
-            color: #dfe6e9;
+            background: #333;
+            color: #ccc;
             padding: 30px;
-            border-radius: 12px;
             margin-top: 40px;
-            font-size: 13px;
-        }
-
-        .audit-section h2 {
-            color: var(--primary-yellow);
-            margin-bottom: 15px;
-            font-size: 18px;
+            border-radius: 10px 10px 0 0;
+            font-size: 12px;
         }
 
         .audit-grid {
@@ -249,274 +214,322 @@
             gap: 20px;
         }
 
+        .audit-section h4 {
+            color: var(--amarelo-copa);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
         .audit-list {
             list-style: none;
-            max-height: 200px;
-            overflow-y: auto;
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 5px;
         }
 
         .audit-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 2px;
         }
 
-        .percentage-up { color: var(--primary-green); font-weight: bold; }
-        .percentage-down { color: var(--accent-orange); font-weight: bold; }
-
+        .badge-orange {
+            background: var(--laranja-detalhe);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>BI Efeito Revista</h1>
+    <div id="app">
+        <header class="header">
+            <div>
+                <h1 id="main-title">BI Efeito Revista</h1>
+                <p style="font-size: 0.8em; opacity: 0.8;">Dashboard de Performance Comercial</p>
+            </div>
             <div style="text-align: right">
-                <p style="font-size: 12px; color: #666;">Relatório Executivo de Performance</p>
-                <p id="current-date" style="font-weight: bold; color: var(--primary-blue);"></p>
+                <div id="top-audit-info"></div>
             </div>
         </header>
 
-        <!-- KPIs -->
-        <div class="kpi-container" id="kpi-row">
-            <!-- Dynamically populated -->
-        </div>
+        <div class="container">
+            <!-- KPIs -->
+            <div class="kpi-wrapper" id="kpi-container"></div>
 
-        <!-- Insights Principais -->
-        <div class="insights-grid">
-            <div class="card">
-                <div class="card-title">Resumo Executivo</div>
-                <div id="exec-summary"></div>
-            </div>
-            <div class="card">
-                <div class="card-title">Destaques</div>
-                <div id="highlights"></div>
-            </div>
-        </div>
+            <div class="dashboard-grid">
+                
+                <!-- Top 5 Editoras -->
+                <div class="card col-8">
+                    <div class="card-header">
+                        <h2>Editoras em Destaque (Maiores por Valor)</h2>
+                    </div>
+                    <table id="table-top-editoras">
+                        <thead>
+                            <tr>
+                                <th>Editora</th>
+                                <th>Qtd</th>
+                                <th>Valor Total</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
 
-        <div class="dashboard-grid">
-            <!-- Ranking de Editoras & Gêneros -->
-            <div class="card">
-                <div class="card-title">Performance por Editora & Gênero</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h4 style="margin-bottom: 10px; font-size: 14px;">Top 10 Editoras</h4>
-                        <table id="table-editoras">
+                <!-- Market Share Pizza -->
+                <div class="card col-4">
+                    <div class="card-header">
+                        <h2>Market Share de Editoras</h2>
+                    </div>
+                    <div class="market-share-container">
+                        <div id="pizza-chart" class="pie-chart"></div>
+                        <div id="pizza-legend" class="legend"></div>
+                    </div>
+                </div>
+
+                <!-- Lojas -->
+                <div class="card col-6">
+                    <div class="card-header">
+                        <h2>Ranking de Lojas</h2>
+                    </div>
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table id="table-lojas">
                             <thead>
-                                <tr><th>Editora</th><th>Valor (R$)</th></tr>
+                                <tr>
+                                    <th>Loja</th>
+                                    <th>Qtd</th>
+                                    <th>Valor</th>
+                                </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
-                    <div>
-                        <h4 style="margin-bottom: 10px; font-size: 14px;">Ranking Gêneros</h4>
+                </div>
+
+                <!-- Gêneros -->
+                <div class="card col-6">
+                    <div class="card-header">
+                        <h2>Ranking de Gêneros</h2>
+                    </div>
+                    <div style="max-height: 400px; overflow-y: auto;">
                         <table id="table-generos">
                             <thead>
-                                <tr><th>Gênero</th><th>Efeito (%)</th></tr>
+                                <tr>
+                                    <th>Gênero</th>
+                                    <th>Valor Atual</th>
+                                    <th>Var %</th>
+                                </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
                 </div>
+
+                <!-- Produtos e Comparativo -->
+                <div class="card col-12">
+                    <div class="card-header">
+                        <h2>Ranking de Produtos</h2>
+                    </div>
+                    <div id="ranking-produtos-container"></div>
+                </div>
+
+                <div class="card col-12">
+                    <div class="card-header">
+                        <h2>Comparativo Antes x Durante por Produto</h2>
+                    </div>
+                    <div id="comparativo-produtos-container"></div>
+                </div>
+
             </div>
 
-            <!-- Gráfico Pizza Editoras -->
-            <div class="card">
-                <div class="card-title">Market Share Editoras (Top 5)</div>
-                <div class="pie-container">
-                    <div id="pie-chart" class="pie-chart"></div>
-                    <div id="pie-legend" class="legend"></div>
+            <!-- Auditoria -->
+            <section class="audit-section">
+                <div class="audit-grid">
+                    <div>
+                        <h4>Fontes de Dados</h4>
+                        <ul class="audit-list" id="audit-fontes"></ul>
+                    </div>
+                    <div>
+                        <h4>Arquivos Processados</h4>
+                        <ul class="audit-list" id="audit-arquivos"></ul>
+                    </div>
+                    <div>
+                        <h4>Abas Identificadas</h4>
+                        <ul class="audit-list" id="audit-abas"></ul>
+                    </div>
+                    <div>
+                        <h4>Resumo de Linhas</h4>
+                        <ul class="audit-list" id="audit-linhas"></ul>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Comparativo de Produtos -->
-        <div class="card">
-            <div class="card-title">Comparativo Antes x Durante por Produto</div>
-            <div class="table-wrapper">
-                <table id="table-comparativo">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Produto / Localidade</th>
-                            <th>Qtd Antes</th>
-                            <th>Valor Antes</th>
-                            <th>Qtd Durante</th>
-                            <th>Valor Durante</th>
-                            <th>Cresc. Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Ranking Lojas -->
-        <div class="card">
-            <div class="card-title">Performance por Loja</div>
-            <div class="table-wrapper">
-                <table id="table-lojas">
-                    <thead>
-                        <tr><th>Loja</th><th>Quantidade</th><th>Valor Total</th></tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Auditoria -->
-        <div class="audit-section">
-            <h2><span style="color: var(--accent-orange)">●</span> Auditoria de Leitura</h2>
-            <div class="audit-grid">
-                <div>
-                    <strong>Arquivos Processados:</strong>
-                    <ul class="audit-list" id="audit-files"></ul>
-                </div>
-                <div>
-                    <strong>Abas Lidas:</strong>
-                    <ul class="audit-list" id="audit-tabs"></ul>
-                </div>
-                <div>
-                    <strong>Métricas de Processamento:</strong>
-                    <div id="audit-stats" style="margin-top:10px; line-height: 1.6;"></div>
-                </div>
-            </div>
+            </section>
         </div>
     </div>
 
     <script>
-        const data = {"titulo":"BI Efeito Revista","kpis":{"redeAntesTotal":1005354.74,"redeDuranteTotal":419590.98,"redeCrescimentoPct":-58.26438536511003,"revistaAntesTotal":692240.05,"revistaDuranteTotal":1182474.96,"participacaoRevistaPct":281.81610577043386},"insights":{"produtoMaisVendido":{"nome":"AL/Maceio - Maceio","quantidade":1112248.07,"valor":1121126.72,"codigo":"25"},"generoMaisVendido":{"nome":"L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":8235747.7,"valorAntes":12065712.3,"aumentoValorPct":73.02},"revisarParaProximaRevista":"LIVROS QUADRINHOS / REVISTAS"},"topProdutos":[{"nome":"AL/Maceio - Maceio","quantidade":1112248.07,"valor":1121126.72,"codigo":"25"}],"rankingLojas":[{"nome":"SP/Jundiai - Maxi Shopping","quantidade":35157,"valor":1182474.96}],"rankingEditoras":[{"nome":"GRUPO RECORD","quantidade":0,"valor":2334145.6},{"nome":"GRUPO ARQUEIRO","quantidade":0,"valor":1621477.26},{"nome":"GRUPO INTRINSECA","quantidade":0,"valor":1286569.43},{"nome":"GRUPO SEXTANTE","quantidade":0,"valor":1013349.25},{"nome":"GRUPO HARPER COLLINS","quantidade":0,"valor":939927.95},{"nome":"GRUPO COMPANHIA DAS LETRAS","quantidade":0,"valor":902655.28},{"nome":"GRUPO GEN","quantidade":0,"valor":847129.2},{"nome":"GRUPO ROCCO","quantidade":0,"valor":637351.94},{"nome":"21","quantidade":0,"valor":573859.53},{"nome":"GRUPO PLANETA DE LIVROS BRASIL","quantidade":0,"valor":481486.84},{"nome":"GRUPO GENTE","quantidade":0,"valor":478735.92},{"nome":"GRUPO RIDEEL","quantidade":0,"valor":359007.61},{"nome":"GRUPO EDIOURO","quantidade":0,"valor":325895.51},{"nome":"GRUPO A","quantidade":0,"valor":322608.3},{"nome":"GRUPO ALTA BOOKS","quantidade":0,"valor":285189.85},{"nome":"GRUPO HAPPY BOOKS","quantidade":0,"valor":260569.25},{"nome":"GRUPO CITADEL","quantidade":0,"valor":253206.58},{"nome":"GRUPO UNIVERSO DOS LIVROS","quantidade":0,"valor":238347.59},{"nome":"GRUPO GLOBO","quantidade":0,"valor":233544.28},{"nome":"GRUPO ONLINE","quantidade":0,"valor":198088.5},{"nome":"GRUPO BLU","quantidade":0,"valor":196289.66},{"nome":"GRUPO MUNDO CRISTAO","quantidade":0,"valor":194729.08},{"nome":"GRUPO MAQUINARIA","quantidade":0,"valor":162366.75},{"nome":"GRUPO FARO EDITORIAL","quantidade":0,"valor":156333.91},{"nome":"GRUPO AUTENTICA","quantidade":0,"valor":137682.52},{"nome":"GRUPO ALEPH","quantidade":0,"valor":119769.79},{"nome":"GRUPO FOCO","quantidade":0,"valor":91803.27},{"nome":"GRUPO VOZES","quantidade":0,"valor":86655.28},{"nome":"GRUPO JBC","quantidade":0,"valor":78886.05},{"nome":"GRUPO PENSAMENTO","quantidade":0,"valor":73023.64},{"nome":"GRUPO PUBLICACOES PAO DIARIO","quantidade":0,"valor":72630.82},{"nome":"GRUPO VR","quantidade":0,"valor":68375.29},{"nome":"GRUPO LPM","quantidade":0,"valor":67664.97},{"nome":"GRUPO BOOK ONE","quantidade":0,"valor":66072.51},{"nome":"GRUPO SENAC","quantidade":0,"valor":58170.26},{"nome":"GRUPO BELLO","quantidade":0,"valor":47848.19},{"nome":"GRUPO DEVIR","quantidade":0,"valor":21972.9},{"nome":"GRUPO PANDA BOOKS","quantidade":0,"valor":17637.66},{"nome":"GRUPO FOSFORO CULTURAL","quantidade":0,"valor":7326.48},{"nome":"GRUPO ASTRAL CULTURAL","quantidade":0,"valor":2163.31},{"nome":"GRUPO SUMMUS","quantidade":0,"valor":1121.2}],"rankingGeneros":[{"nome":"L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":8235747.7,"valorAntes":12065712.3,"aumentoValorPct":73.02},{"nome":"L.TECNICOS/CIENTIFICOS","quantidade":0,"valor":3973390.12,"valorAntes":3896260.46,"aumentoValorPct":207.92},{"nome":"L.JUVENIL","quantidade":0,"valor":2378100.77,"valorAntes":2720490,"aumentoValorPct":149.66},{"nome":"23","quantidade":0,"valor":702327.84,"valorAntes":0,"aumentoValorPct":0},{"nome":"LIVROS QUADRINHOS / REVISTAS","quantidade":0,"valor":160571.1,"valorAntes":185984.56,"aumentoValorPct":145.34}],"comparativoProdutos":[{"nome":"AL/Maceio - Maceio","quantidade":1112248.07,"valor":1121126.72,"codigo":"25","valorAntes":0,"quantidadeAntes":0,"aumentoValorPct":100,"aumentoQtdPct":100}],"auditoria":{"totalLinhasRecebidas":4187,"fontes":{"lista_produtos":8,"produtos_antes":8,"produtos_durante":8,"faturamento_durante":7,"faturamento_antes":7,"google_sheet_sem_meta":91,"grade_venda":3841,"comparativo_produtos":217},"abasLidas":["lista_produtos::Totalizadores","lista_produtos::Vendas por cliente","lista_produtos::Vendas por data","lista_produtos::Vendas por editora","lista_produtos::Vendas por vendedor","lista_produtos::Vendas por categoria","lista_produtos::NFs","lista_produtos::Produtos vendidos","produtos_antes::Totalizadores","produtos_antes::Vendas por cliente","produtos_antes::Vendas por data","produtos_antes::Vendas por editora","produtos_antes::Vendas por vendedor","produtos_antes::Vendas por categoria","produtos_antes::NFs","produtos_antes::Produtos vendidos","produtos_durante::Totalizadores","produtos_durante::Vendas por cliente","produtos_durante::Vendas por data","produtos_durante::Vendas por editora","produtos_durante::Vendas por vendedor","produtos_durante::Vendas por categoria","produtos_durante::NFs","produtos_durante::Produtos vendidos","faturamento_durante::Totalizadores","faturamento_durante::Vendas por cliente","faturamento_durante::Vendas por data","faturamento_durante::Vendas por editora","faturamento_durante::Vendas por vendedor","faturamento_durante::Vendas por categoria","faturamento_durante::NFs","faturamento_antes::Totalizadores","faturamento_antes::Vendas por cliente","faturamento_antes::Vendas por data","faturamento_antes::Vendas por editora","faturamento_antes::Vendas por vendedor","faturamento_antes::Vendas por categoria","faturamento_antes::NFs","google_sheet_sem_meta::","grade_venda::Loja","grade_venda::Categoria","grade_venda::Estado","grade_venda::Editor","comparativo_produtos::Loja","comparativo_produtos::Categoria","comparativo_produtos::editora","comparativo_produtos::Online","comparativo_produtos::Estado1"],"arquivos":["Planilha Google 1","Planilha Google 2","Planilha Google 3","Planilha Google 4","Planilha Google 5","GRADE DE VENDA- todos os produtos .xml","Comparativo-produtos revista antes e depois do periodo da revista.xml"],"linhas":{"produtosAntes":1,"produtosDurante":1,"lojasRevista":1,"lojasAntes":1,"redeAntes":1,"redeDurante":1,"editoras":41,"generos":5}}};
+        const data = {"titulo":"BI Efeito Revista","kpis":{"redeAntesTotal":133050413.46999995,"redeDuranteTotal":9727265.520000001,"redeCrescimentoPct":-92.68903773666717,"revistaAntesTotal":129898267.07000005,"revistaDuranteTotal":232088914.72999993,"participacaoRevistaPct":2385.9625734776887},"insights":{"produtoMaisVendido":null,"generoMaisVendido":{"nome":"050000 - MATERIAL ESCOLAR","quantidade":0,"valor":93115999.74,"valorAntes":0,"aumentoValorPct":0},"revisarParaProximaRevista":"990000 - MIGRACAO"},"topProdutos":[],"rankingLojas":[{"nome":"SP/Campinas - Parque D.Pedro","quantidade":207043,"valor":7370873.72},{"nome":"MG/BH - Delrey","quantidade":260449,"valor":5989022.25},{"nome":"MG/BH - Av.Parana","quantidade":279183,"valor":5819633.44},{"nome":"MG/BH - BH Shopping","quantidade":239112,"valor":5632827.07},{"nome":"MG/BH - Minas Shopping D+","quantidade":274091,"valor":5223204.45},{"nome":"MG/BH - Boulevard BH","quantidade":168819,"valor":4737820.87},{"nome":"PB/JP - Manaira Shopping","quantidade":175698,"valor":4319063.84},{"nome":"BA/Salvador - Salvador Shopping","quantidade":151928,"valor":4170424.17},{"nome":"MG/BH - Estacao BH","quantidade":211989,"valor":4072113.53},{"nome":"MG/Uberlandia - Center Shop","quantidade":147814,"valor":3723351.1},{"nome":"RS/POA - Barra Sul","quantidade":126383,"valor":3585250.55},{"nome":"CE/Fortaleza - Fortaleza Iguatemi","quantidade":151437,"valor":3483870.3},{"nome":"MG/Contagem - Itau Power","quantidade":167516,"valor":3404763.27},{"nome":"AM/Manaus - Amazonas Shop","quantidade":135260,"valor":3385298.96},{"nome":"MA/Sao Luis - Da Ilha","quantidade":115181,"valor":3367185.67},{"nome":"GO/Goiania - Goiania Shopping","quantidade":98573,"valor":3157684.85},{"nome":"MG/BH - Patio Savassi","quantidade":107323,"valor":3038119.69},{"nome":"CE/Fortaleza - Riomar","quantidade":110508,"valor":2686129.37},{"nome":"PE/Recife - Recife Shopping","quantidade":108299,"valor":2660558.32},{"nome":"SC/Florianopolis - Villa Romana","quantidade":95089,"valor":2633156.31},{"nome":"MG/BH - Shopping Cidade","quantidade":127239,"valor":2539791.76},{"nome":"RJ/Rio - Rio Sul","quantidade":86039,"valor":2459641.58},{"nome":"DF - Park Shopping","quantidade":75647,"valor":2447794.36},{"nome":"RN/Natal - Midway","quantidade":79512,"valor":2418781.97},{"nome":"AL/Maceio - Maceio","quantidade":81537,"valor":2393638.66},{"nome":"PE/Recife - Riomar","quantidade":77479,"valor":2279215.15},{"nome":"DF - Taguatinga","quantidade":78558,"valor":2264261.35},{"nome":"RJ/Rio - New York","quantidade":77192,"valor":2262776.95},{"prefNome":"SP/Sao Paulo - Mooca","quantidade":59437,"valor":2243091.31},{"nome":"MS/Campo Grande - Campo Gde","quantidade":91619,"valor":2239076.4},{"nome":"PI/Teresina - Rio Poty","quantidade":102957,"valor":2238284.69},{"nome":"ES/Vitoria - Shopping Vitoria","quantidade":63941,"valor":2222110.74},{"nome":"RJ/Niteroi - Plaza Niteroi","quantidade":73566,"valor":2159854.77},{"nome":"RJ/Rio - Nova America","quantidade":63301,"valor":2142907.71},{"nome":"MG/Contagem - Shop Contagem","quantidade":97713,"valor":2139981.04},{"nome":"SP/Sorocaba - Iguatemi Esplanada","quantidade":59858,"valor":2130086.57},{"nome":"BA/Salvador - Shopping da Bahia","quantidade":74225,"valor":2108701.07},{"nome":"SP/Sao Paulo - Jardim Sul","quantidade":64293,"valor":2104395.95},{"nome":"RO/Porto Velho - Porto Velho","quantidade":81563,"valor":2009380.84},{"nome":"SP/Sao Paulo - Aricanduva","quantidade":63951,"valor":1947696.71},{"nome":"MT/Cuiaba - Estacao Cuiaba","quantidade":60570,"valor":1927417.58},{"nome":"TO/Palmas - Capim Dourado","quantidade":63599,"valor":1919741.76},{"nome":"leitura.com","quantidade":35417,"valor":1913400.02},{"nome":"MG/Ipatinga - Vale do Aco","quantidade":85420,"valor":1890838.45},{"nome":"MG/GV - Governador Valadares","quantidade":84253,"valor":1825186.51},{"nome":"DF - Conjunto","quantidade":64951,"valor":1799622.9},{"nome":"MG/BH - Barreiro","quantidade":108140,"valor":1772843.69},{"nome":"MG/BH - Diamond BH","quantidade":72089,"valor":1753695.11},{"nome":"SP/Jundiai - Maxi Shopping","quantidade":65000,"valor":1747086.37},{"nome":"PA/Belem - Boulevard","quantidade":51805,"valor":1735241.69},{"nome":"SP/Santo Andre - Gran Plaza","quantidade":66703,"valor":1699758.49},{"nome":"AL/Maceio - Alagoas","quantidade":53215,"valor":1697004.01},{"nome":"SP/Campinas - Galleria","quantidade":37065,"valor":1675131.12},{"nome":"SP/Osasco - Super Osasco","quantidade":55704,"valor":1670930.32},{"nome":"MA/Sao Luis - Sao Luis","quantidade":56641,"valor":1649735.36},{"nome":"MG/Betim - Partage","quantidade":85449,"valor":1623200.95},{"nome":"SP/Sao Paulo - Marketplace SP","quantidade":38368,"valor":1576135.1},{"nome":"ES/Vila Velha - Vila Velha Shopping","quantidade":53850,"valor":1548933.31},{"nome":"SE/Aracaju - Riomar","quantidade":52882,"valor":1523997.74},{"nome":"SP/Santo Andre - Shopping ABC","quantidade":49168,"valor":1502983.4},{"nome":"RJ/Rio - Ouvidor","quantidade":41928,"valor":1468238.31},{"nome":"SP/Sao Paulo - SP Market","quantidade":46221,"valor":1458645.63},{"nome":"PA/Belem - Patio Belem","quantidade":48346,"valor":1450520.79},{"nome":"RJ/Rio - Park Campo Gde","quantidade":51779,"valor":1441315.56},{"nome":"SP/Mogi - Mogi Shopping","quantidade":42398,"valor":1436226},{"nome":"RJ/Rio - Americas","quantidade":59813,"valor":1426079.26},{"nome":"DF - Patio Brasil","quantidade":40147,"valor":1408584.16},{"nome":"RN/Natal - Natal Shopping","quantidade":46526,"valor":1403862.65},{"nome":"SP/Taboao da Serra - Shopping Taboao","quantidade":51632,"valor":1397551.73},{"nome":"MG/BH - R.Espirito Santo","quantidade":70551,"valor":1388237.05},{"nome":"MG/Contagem - Big Shopping","quantidade":82293,"valor":1358111.76},{"nome":"MG/Uberaba - Uberaba Shopping","quantidade":55016,"valor":1341653.53},{"nome":"BA/Salvador - Paralela","quantidade":49933,"valor":1337237.06},{"nome":"SP/Piracicaba - Piracicaba Shopping","quantidade":43066,"valor":1319524.86},{"nome":"SP/SJR - Iguatemi Rio Preto","quantidade":43762,"valor":1310034.92},{"nome":"PB/JP - Mangabeira","quantidade":58739,"valor":1293389.88},{"nome":"SP/Sao Paulo - Itaquera","quantidade":46030,"valor":1282921.43},{"nome":"SP/SBC - Sao Bernardo Plaza","quantidade":46119,"valor":1259219.45},{"nome":"RS/Caxias do Sul - Villagio Caxias","quantidade":40361,"valor":1258269.51},{"nome":"RJ/Volta Redonda - Park Sul","quantidade":50204,"valor":1252868.03},{"nome":"SP/Sao Paulo - Ibirapuera","quantidade":35575,"valor":1251581.31},{"nome":"SP/Guarulhos - Shopping Guarulhos","quantidade":35200,"valor":1238175.47},{"nome":"DF - Terraco","quantidade":43982,"valor":1233188.39},{"nome":"MG/BH - Paragem","quantidade":44695,"valor":1223732.07},{"nome":"PE/Recife - Tacaruna","quantidade":55563,"valor":1221013.16},{"nome":"SP/Sao Paulo - Plaza Sul","quantidade":41717,"valor":1203738.41},{"nome":"SP/SJC - Center Vale","quantidade":46989,"valor":1184006.34},{"nome":"SP/Campinas - Campinas Shopping","quantidade":41786,"valor":1151919.34},{"nome":"PE/Caruaru - Caruaru Shop","quantidade":44460,"valor":1144461.48},{"nome":"CE/Fortaleza - Kennedy","quantidade":54042,"valor":1139694.66},{"nome":"SP/Sao Paulo - Santana Shop","quantidade":33361,"valor":1133714.98},{"nome":"DF - Boulevard","quantidade":33187,"valor":1114121.92},{"nome":"DF - Esplanada JK","quantidade":46207,"valor":1112570.54},{"nome":"PB/Campina Grande - Partage","quantidade":37864,"valor":1101443.97},{"nome":"MG/Uberlandia - Uberlandia Shopping","quantidade":54120,"valor":1101122.07},{"nome":"SP/SJC - Colinas","quantidade":38172,"valor":1099556.99},{"nome":"SP/Sao Paulo - Light","quantidade":29809,"valor":1097690.77},{"nome":"SP/SBC - Metropole","quantidade":38108,"valor":1062676.19},{"nome":"GO/Goiania - Passeio das Aguas","quantidade":34293,"valor":1058156.57},{"nome":"SP/Sao Paulo - Tiete Plaza","quantidade":31089,"valor":1027895.96},{"nome":"MG/JF - Independencia Shopping","quantidade":30329,"valor":996315.71},{"nome":"MG/7 Lagoas - Sete Lagoas","quantidade":53164,"valor":989770.31},{"nome":"SP/Sao Paulo - Interlagos","quantidade":40815,"valor":989483.81},{"nome":"RJ/Rio - Tijuca","quantidade":35387,"valor":975704.67},{"nome":"CE/Fortaleza - Del Paseo","quantidade":51732,"valor":968142.21},{"nome":"RJ/Rio - Via Parque","quantidade":35238,"valor":952706.12},{"nome":"ES/Vila Velha - Praia da Costa","quantidade":31661,"valor":913390.21},{"nome":"SP/Sao Paulo - West Plaza","quantidade":26171,"valor":909194.63},{"nome":"RJ/Rio - Grande Rio","quantidade":35181,"valor":879018.65},{"nome":"SP/Sao Paulo - Metro Tatuape","quantidade":25105,"valor":874478.16},{"nome":"RJ/Rio - Bangu Shopping","quantidade":26816,"valor":839506.02},{"nome":"PA/Belem - Grao","quantidade":25767,"valor":838709.81},{"nome":"GO/Valparaiso de Goias - Valparaiso","quantidade":30822,"valor":770006.91},{"nome":"SP/Taubate - Taubate","quantidade":13428,"valor":698506.22},{"nome":"SP/Indaiatuba - Polo Indaiatuba","quantidade":21298,"valor":687100.89},{"nome":"PA/Ananindeua - Ananindeua Shop","quantidade":24575,"valor":686116.24},{"nome":"PE/Olinda - Olinda","quantidade":30957,"valor":684346.57},{"nome":"SP/Sao Paulo - Tiete Rodoviaria","quantidade":19673,"valor":630379.12},{"nome":"ES/Serra - Mestre Alvaro","quantidade":21309,"valor":629616.32},{"nome":"AP/Macapa - Amapa Garden","quantidade":19734,"valor":624777.23},{"nome":"RJ/Rio - Aeroporto Galeao Domestico","quantidade":19312,"valor":610125.77},{"nome":"RJ/Rio - Rodoviaria Novo Rio","quantidade":18559,"valor":588647.59},{"nome":"RJ/Campos - Boulevard","quantidade":15732,"valor":515820.95},{"nome":"RN/Natal - Partage Norte","quantidade":26193,"valor":501017.72},{"nome":"DF - Plaza Shopping","quantidade":14811,"valor":391708.2},{"nome":"MG/JF - Jardim Norte","quantidade":10293,"valor":350692.14},{"nome":"SP/Guarulhos - Aeroporto Guarulhos","quantidade":5897,"valor":304146.28},{"nome":"RJ/Rio - Aeroporto Galeao Publico","quantidade":13399,"valor":255221.03},{"nome":"MG/Confins - Aeroporto","quantidade":6998,"valor":176607.89}],"rankingEditoras":[{"nome":"TILIBRA(148)","quantidade":0,"valor":44299126.88},{"nome":"GRUPO RECORD","quantidade":0,"valor":31730652.13},{"nome":"GRUPO COMPANHIA DAS LETRAS","quantidade":0,"valor":31191945.79},{"nome":"GRUPO PANINI","quantidade":0,"valor":27839534.27},{"nome":"SERTIC(523)","quantidade":0,"valor":26055259.76},{"nome":"GRUPO INTRINSECA","quantidade":0,"valor":20439796.73},{"nome":"GRUPO HARPER COLLINS","quantidade":0,"valor":18326788.05},{"nome":"GRUPO SEXTANTE","quantidade":0,"valor":17411445.63},{"nome":"GRUPO ARQUEIRO","quantidade":0,"valor":17229753.12},{"nome":"CADERNO INTELIGENTE","quantidade":0,"valor":16283485.7}],"rankingGeneros":[{"nome":"050000 - MATERIAL ESCOLAR","quantidade":0,"valor":93115999.74,"valorAntes":0,"aumentoValorPct":0},{"nome":"010000 - L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":47589971.33,"valorAntes":0,"aumentoValorPct":0},{"nome":"030000 - L.JUVENIL","quantidade":0,"valor":28415061.85,"valorAntes":0,"aumentoValorPct":0},{"nome":"060000 - PAPELARIA","quantidade":0,"valor":19403465.19,"valorAntes":0,"aumentoValorPct":0},{"nome":"020000 - L.TECNICOS/CIENTIFICOS","quantidade":0,"valor":16169361.09,"valorAntes":0,"aumentoValorPct":0},{"nome":"090000 - LIVROS QUADRINHOS / REVISTAS","quantidade":0,"valor":12373296.22,"valorAntes":0,"aumentoValorPct":0},{"nome":"L.LITERATURA/INTERESSE GERAL","quantidade":0,"valor":8235747.7,"valorAntes":6032856.15,"aumentoValorPct":36.51},{"nome":"130000 - GAMES / MIDIAS","quantidade":0,"valor":5409727.9,"valorAntes":0,"aumentoValorPct":0},{"nome":"L.TECNICOS/CIENTIFICOS","quantidade":0,"valor":3973390.12,"valorAntes":1948130.23,"aumentoValorPct":103.96}],"comparativoProdutos":[],"auditoria":{"totalLinhasRecebidas":14752,"fontes":{"produtos_antes":3222,"produtos_durante":3311,"faturamento_durante":1340,"faturamento_antes":2821,"grade_venda":3841,"comparativo_produtos":217},"abasLidas":["produtos_antes::Totalizadores","produtos_antes::Vendas por editora","produtos_antes::Vendas por categoria","produtos_durante::Totalizadores","produtos_durante::Vendas por editora","produtos_durante::Vendas por categoria","faturamento_durante::Totalizadores","faturamento_durante::Vendas por data","faturamento_durante::Vendas por editora","faturamento_durante::Produtos vendidos","faturamento_antes::Totalizadores","faturamento_antes::Vendas por editora","faturamento_antes::Vendas por categoria","grade_venda::Loja","grade_venda::Categoria","grade_venda::Estado","grade_venda::Editor","comparativo_produtos::Loja","comparativo_produtos::Categoria","comparativo_produtos::editora","comparativo_produtos::Online","comparativo_produtos::Estado1"],"arquivos":["Planilha Google 1 - produtos_antes","Planilha Google 2 - produtos_durante","Planilha Google 3 - faturamento_durante","Planilha Google 4 - faturamento_antes","GRADE DE VENDA- todos os produtos .xml","Comparativo-produtos revista antes e depois do periodo da revista.xml"],"linhas":{"produtosAntes":0,"produtosDurante":0,"lojasRevista":129,"lojasAntes":129,"redeAntes":129,"redeDurante":129,"editoras":9735,"generos":20}}};
 
-        const fmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-        const fmtNum = new Intl.NumberFormat('pt-BR');
+        const fmtMoeda = (val) => val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const fmtNum = (val) => Math.round(val).toLocaleString('pt-BR');
+        const fmtPct = (val) => val.toFixed(2) + '%';
 
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+        function init() {
+            renderKPIs();
+            renderTopEditoras();
+            renderPieChart();
+            renderLojas();
+            renderGeneros();
+            renderProdutos();
+            renderComparativo();
+            renderAuditoria();
+        }
 
-        // Populate KPIs
-        const kpiRow = document.getElementById('kpi-row');
-        const kpis = [
-            { label: "Rede Período Anterior", val: data.kpis.redeAntesTotal, type: 'neutral' },
-            { label: "Rede Período Atual", val: data.kpis.redeDuranteTotal, type: data.kpis.redeCrescimentoPct > 0 ? 'positive' : 'negative' },
-            { label: "Crescimento Rede", val: data.kpis.redeCrescimentoPct, suffix: '%', isPct: true },
-            { label: "Revista Antes", val: data.kpis.revistaAntesTotal, type: 'neutral' },
-            { label: "Revista Durante", val: data.kpis.revistaDuranteTotal, type: 'positive' },
-            { label: "Participação Revista", val: data.kpis.participacaoRevistaPct, suffix: '%', isPct: true }
-        ];
+        function renderKPIs() {
+            const container = document.getElementById('kpi-container');
+            const k = data.kpis;
+            const items = [
+                { label: 'Rede Antes (Total)', value: fmtMoeda(k.redeAntesTotal) },
+                { label: 'Rede Durante (Total)', value: fmtMoeda(k.redeDuranteTotal) },
+                { label: 'Crescimento Rede', value: fmtPct(k.redeCrescimentoPct), color: k.redeCrescimentoPct >= 0 ? 'positive' : 'negative' },
+                { label: 'Revista Antes', value: fmtMoeda(k.revistaAntesTotal) },
+                { label: 'Revista Durante', value: fmtMoeda(k.revistaDuranteTotal) },
+                { label: 'Participação Revista', value: fmtPct(k.participacaoRevistaPct), color: 'positive' }
+            ];
 
-        kpis.forEach(k => {
-            const card = document.createElement('div');
-            card.className = `kpi-card ${k.type || ''}`;
-            const displayVal = k.isPct ? k.val.toFixed(2) + k.suffix : fmt.format(k.val);
-            card.innerHTML = `<h3>${k.label}</h3><div class="value">${displayVal}</div>`;
-            kpiRow.appendChild(card);
-        });
+            container.innerHTML = items.map(i => `
+                <div class="kpi-card">
+                    <h3>${i.label}</h3>
+                    <div class="value">${i.value}</div>
+                </div>
+            `).join('');
+        }
 
-        // Insights Summary
-        document.getElementById('exec-summary').innerHTML = `
-            <div class="insight-box" style="margin-bottom:10px">
-                <label>Produto mais vendido (Valor)</label>
-                <div class="val">${data.insights.produtoMaisVendido.nome} (${fmt.format(data.insights.produtoMaisVendido.valor)})</div>
-            </div>
-            <div class="insight-box">
-                <label>Gênero em Destaque</label>
-                <div class="val">${data.insights.generoMaisVendido.nome}</div>
-                <div style="font-size:11px; color: var(--primary-green)">Aumento de ${data.insights.generoMaisVendido.aumentoValorPct}% no período</div>
-            </div>
-        `;
+        function renderTopEditoras() {
+            const tbody = document.querySelector('#table-top-editoras tbody');
+            const ranking = data.rankingEditoras || [];
+            if (ranking.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Sem dados encontrados</td></tr>';
+                return;
+            }
+            tbody.innerHTML = ranking.slice(0, 5).map(e => `
+                <tr>
+                    <td>${e.nome}</td>
+                    <td>${fmtNum(e.quantidade)}</td>
+                    <td style="font-weight:bold">${fmtMoeda(e.valor)}</td>
+                </tr>
+            `).join('');
+        }
 
-        document.getElementById('highlights').innerHTML = `
-             <div class="insight-box" style="margin-bottom:10px">
-                <label>Sugestão de Revisão</label>
-                <div class="val" style="color: var(--accent-orange)">${data.insights.revisarParaProximaRevista}</div>
-            </div>
-            <div class="insight-box">
-                <label>Total de Editoras Mapeadas</label>
-                <div class="val">${data.linhas.editoras} Grupos Editoriais</div>
-            </div>
-        `;
+        function renderPieChart() {
+            const ranking = data.rankingEditoras || [];
+            if (ranking.length === 0) return;
 
-        // Tables
-        const populateTable = (id, list, columns) => {
-            const tbody = document.querySelector(`#${id} tbody`);
-            list.forEach(item => {
-                const tr = document.createElement('tr');
-                columns.forEach(col => {
-                    const td = document.createElement('td');
-                    if (col === 'valor' || col === 'valorAntes' || col === 'redeDuranteTotal') {
-                        td.innerText = fmt.format(item[col] || 0);
-                    } else if (col.includes('Pct')) {
-                        const val = item[col] || 0;
-                        td.innerHTML = `<span class="${val >= 0 ? 'percentage-up' : 'percentage-down'}">${val.toFixed(2)}%</span>`;
-                    } else if (col === 'quantidade') {
-                        td.innerText = fmtNum.format(item[col]);
-                    } else {
-                        td.innerText = item[col];
-                    }
-                    tr.appendChild(td);
-                });
-                tbody.appendChild(tr);
+            const top5 = ranking.slice(0, 5);
+            const totalOutros = ranking.slice(5).reduce((acc, curr) => acc + curr.valor, 0);
+            const totalGeral = ranking.reduce((acc, curr) => acc + curr.valor, 0);
+
+            const colors = ['#003399', '#009a44', '#ffdf00', '#ff8c00', '#2a9d8f', '#999'];
+            let currentPct = 0;
+            const slices = top5.map((e, i) => {
+                const p = (e.valor / totalGeral) * 100;
+                const start = currentPct;
+                currentPct += p;
+                return { name: e.nome, start, end: currentPct, color: colors[i], val: p };
             });
-        };
 
-        populateTable('table-editoras', data.rankingEditoras.slice(0, 10), ['nome', 'valor']);
-        populateTable('table-generos', data.rankingGeneros, ['nome', 'aumentoValorPct']);
-        populateTable('table-lojas', data.rankingLojas, ['nome', 'quantidade', 'valor']);
-        populateTable('table-comparativo', data.comparativoProdutos, ['codigo', 'nome', 'quantidadeAntes', 'valorAntes', 'quantidade', 'valor', 'aumentoValorPct']);
+            // Adiciona outros
+            const outrosPct = (totalOutros / totalGeral) * 100;
+            slices.push({ name: 'OUTROS', start: currentPct, end: 100, color: colors[5], val: outrosPct });
 
-        // Pie Chart
-        const colors = [window.getComputedStyle(document.documentElement).getPropertyValue('--primary-blue'), 
-                        window.getComputedStyle(document.documentElement).getPropertyValue('--primary-green'), 
-                        window.getComputedStyle(document.documentElement).getPropertyValue('--primary-yellow'), 
-                        window.getComputedStyle(document.documentElement).getPropertyValue('--accent-orange'), 
-                        '#6c5ce7', '#b2bec3'];
-        
-        const top5Editoras = data.rankingEditoras.slice(0, 5);
-        const totalVal = data.rankingEditoras.reduce((acc, curr) => acc + curr.valor, 0);
-        let currentPerc = 0;
-        let gradientParts = [];
-        
-        const legend = document.getElementById('pie-legend');
-        top5Editoras.forEach((ed, i) => {
-            const perc = (ed.valor / totalVal) * 100;
-            gradientParts.push(`${colors[i]} ${currentPerc}% ${currentPerc + perc}%`);
-            currentPerc += perc;
+            const gradient = slices.map(s => `${s.color} ${s.start}% ${s.end}%`).join(', ');
+            document.getElementById('pizza-chart').style.background = `conic-gradient(${gradient})`;
 
-            const item = document.createElement('div');
-            item.className = 'legend-item';
-            item.innerHTML = `<div class="dot" style="background:${colors[i]}"></div> <span>${ed.nome} (${perc.toFixed(1)}%)</span>`;
-            legend.appendChild(item);
-        });
-        gradientParts.push(`#eee ${currentPerc}% 100%`);
-        const othersItem = document.createElement('div');
-        othersItem.className = 'legend-item';
-        othersItem.innerHTML = `<div class="dot" style="background:#eee"></div> <span>Outros (${(100 - currentPerc).toFixed(1)}%)</span>`;
-        legend.appendChild(othersItem);
+            document.getElementById('pizza-legend').innerHTML = slices.map(s => `
+                <div class="legend-item">
+                    <div class="color-box" style="background:${s.color}"></div>
+                    <span>${s.name.substring(0, 15)} (${s.val.toFixed(1)}%)</span>
+                </div>
+            `).join('');
+        }
 
-        document.getElementById('pie-chart').style.background = `conic-gradient(${gradientParts.join(', ')})`;
+        function renderLojas() {
+            const tbody = document.querySelector('#table-lojas tbody');
+            const lojas = data.rankingLojas || [];
+            if (lojas.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Sem dados encontrados</td></tr>';
+                return;
+            }
+            tbody.innerHTML = lojas.map(l => `
+                <tr>
+                    <td>${l.nome}</td>
+                    <td>${fmtNum(l.quantidade)}</td>
+                    <td>${fmtMoeda(l.valor)}</td>
+                </tr>
+            `).join('');
+        }
 
-        // Auditoria
-        const auditFiles = document.getElementById('audit-files');
-        data.auditoria.arquivos.forEach(f => {
-            const li = document.createElement('li');
-            li.innerText = f;
-            auditFiles.appendChild(li);
-        });
+        function renderGeneros() {
+            const tbody = document.querySelector('#table-generos tbody');
+            const generos = data.rankingGeneros || [];
+            if (generos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Sem dados encontrados</td></tr>';
+                return;
+            }
+            tbody.innerHTML = generos.map(g => `
+                <tr>
+                    <td>${g.nome}</td>
+                    <td>${fmtMoeda(g.valor)}</td>
+                    <td class="${g.aumentoValorPct >= 0 ? 'positive' : 'negative'}">${fmtPct(g.aumentoValorPct)}</td>
+                </tr>
+            `).join('');
+        }
 
-        const auditTabs = document.getElementById('audit-tabs');
-        data.auditoria.abasLidas.forEach(a => {
-            const li = document.createElement('li');
-            li.innerText = a;
-            auditTabs.appendChild(li);
-        });
+        function renderProdutos() {
+            const container = document.getElementById('ranking-produtos-container');
+            const produtos = data.topProdutos || [];
+            if (produtos.length === 0) {
+                container.innerHTML = '<div class="empty-state">Sem dados encontrados</div>';
+                return;
+            }
+            // Lógica para renderizar se houvesse dados
+        }
 
-        document.getElementById('audit-stats').innerHTML = `
-            Linas Totais Processadas: <strong>${fmtNum.format(data.auditoria.totalLinhasRecebidas)}</strong><br>
-            Grade de Vendas: <strong>${fmtNum.format(data.auditoria.fontes.grade_venda)} registros</strong><br>
-            Editoras Únicas: <strong>${data.linhas.editoras}</strong>
-        `;
+        function renderComparativo() {
+            const container = document.getElementById('comparativo-produtos-container');
+            const comparativo = data.comparativoProdutos || [];
+            if (comparativo.length === 0) {
+                container.innerHTML = '<div class="empty-state">Sem dados encontrados</div>';
+                return;
+            }
+        }
 
+        function renderAuditoria() {
+            const aud = data.auditoria;
+            const fontes = document.getElementById('audit-fontes');
+            const arquivos = document.getElementById('audit-arquivos');
+            const abas = document.getElementById('audit-abas');
+            const linhas = document.getElementById('audit-linhas');
+
+            fontes.innerHTML = Object.entries(aud.fontes).map(([k, v]) => `<li>${k}: <strong>${v}</strong> registros</li>`).join('');
+            arquivos.innerHTML = (aud.arquivos || []).map(a => `<li>${a}</li>`).join('');
+            abas.innerHTML = (aud.abasLidas || []).map(a => `<li>${a}</li>`).join('');
+            
+            // Usando obrigatoriamente data.auditoria.linhas
+            const l = aud.linhas || {};
+            linhas.innerHTML = `
+                <li>Lojas na Revista: <strong>${l.lojasRevista || 0}</strong></li>
+                <li>Lojas Antes: <strong>${l.lojasAntes || 0}</strong></li>
+                <li>Editoras Processadas: <strong>${l.editoras || 0}</strong></li>
+                <li>Gêneros Mapeados: <strong>${l.generos || 0}</strong></li>
+                <li>Total de Linhas: <span class="badge-orange">${aud.totalLinhasRecebidas || 0}</span></li>
+            `;
+
+            document.getElementById('top-audit-info').innerHTML = `
+                <span style="font-weight:bold">${aud.totalLinhasRecebidas}</span> linhas auditadas | 
+                <span style="font-weight:bold">${Object.keys(aud.fontes).length}</span> fontes
+            `;
+        }
+
+        init();
     </script>
 </body>
 </html>
