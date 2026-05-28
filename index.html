@@ -6,515 +6,560 @@
     <title>BI Efeito Revista - Livraria Leitura</title>
     <style>
         :root {
-            --primary: #0d47a1;
-            --secondary: #1a237e;
-            --success: #2e7d32;
-            --danger: #c62828;
-            --warning: #ef6c00;
-            --bg: #f5f7f9;
+            --primary-blue: #003366;
+            --success-green: #2e7d32;
+            --error-red: #c62828;
+            --warning-orange: #ef6c00;
+            --bg-gray: #f4f7f6;
             --white: #ffffff;
-            --text-main: #333333;
-            --text-light: #666666;
-            --border: #e0e0e0;
+            --text-dark: #333333;
+            --border-light: #dddddd;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
         }
 
         header {
-            background-color: var(--secondary);
+            background-color: var(--primary-blue);
             color: var(--white);
             padding: 1.5rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-gray);
+            padding-bottom: 0.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        header h1 { margin: 0; font-size: 1.5rem; letter-spacing: 1px; }
-
-        .container { padding: 2rem; max-width: 1400px; margin: 0 auto; }
-
-        .alert-box {
-            background-color: #fff3e0;
-            border-left: 5px solid var(--warning);
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 4px;
-        }
-
-        .alert-box h3 { margin-top: 0; color: var(--warning); }
-
-        .grid-kpis {
+        .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .card-kpi {
+        .kpi-card {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary);
-        }
-
-        .card-kpi.success { border-top-color: var(--success); }
-        .card-kpi.danger { border-top-color: var(--danger); }
-
-        .card-kpi .label { font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; font-weight: bold; }
-        .card-kpi .value { font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0; color: var(--secondary); }
-        .card-kpi .sub-value { font-size: 0.9rem; font-weight: 600; }
-
-        section {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-blue);
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        section h2 {
-            color: var(--secondary);
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 1rem;
-            margin-top: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .kpi-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
-        .table-container {
-            overflow-x: auto;
-            max-height: 500px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-top: 0.5rem;
         }
+
+        .positive { color: var(--success-green) !important; }
+        .negative { color: var(--error-red) !important; }
+        .warning { color: var(--warning-orange) !important; }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
-        table thead th {
-            background-color: var(--secondary);
+        th {
+            background-color: var(--primary-blue);
             color: var(--white);
+            text-align: left;
             padding: 12px;
             position: sticky;
             top: 0;
-            z-index: 10;
+            font-size: 0.9rem;
         }
 
-        table tbody td {
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.9rem;
         }
 
-        table tbody tr:hover { background-color: #f9f9f9; }
+        tr:hover { background-color: #f9f9f9; }
+
+        .editora-bloco {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: #fff;
+        }
+
+        .editora-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
 
         .badge {
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: bold;
-            color: white;
         }
 
-        .pos { background-color: var(--success); }
-        .neg { background-color: var(--danger); }
-
-        .editora-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .editora-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-
-        .editora-header {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--primary);
+        .alert-box {
+            background-color: #fff3e0;
+            border-left: 5px solid var(--warning-orange);
+            padding: 1rem;
             margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
         }
 
-        .stats-row {
+        .scroll-table {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .flex-row {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
-        .stats-label { color: var(--text-light); }
-        .stats-value { font-weight: 600; }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-light);
-            font-style: italic;
-        }
-
-        .recommendation-list {
-            padding-left: 1.5rem;
-        }
-        .recommendation-list li {
-            margin-bottom: 1rem;
+        .flex-col {
+            flex: 1;
+            min-width: 300px;
         }
 
         @media print {
             .no-print { display: none; }
             body { background: white; }
-            section { box-shadow: none; border: 1px solid #ccc; }
+            .card { box-shadow: none; border: 1px solid #ccc; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>LIVRARIA LEITURA | BI Efeito Revista</h1>
-    <div id="data-periodo">Análise de Impacto de Vendas</div>
+    <div>
+        <h1 style="margin:0;">Livraria Leitura - BI Comercial</h1>
+        <small>Impacto da Revista nas Vendas</small>
+    </div>
+    <div style="text-align:right;">
+        <div id="data-atual">Relatório Executivo</div>
+    </div>
 </header>
 
 <div class="container">
-
+    
     <!-- CONCLUSÃO EXECUTIVA -->
-    <section id="conclusao">
-        <h2>Conclusão Executiva</h2>
-        <div id="resumo-gerencial"></div>
-        <div class="alert-box" id="auditoria-alertas" style="display:none;">
-            <h3>⚠️ Alertas Críticos de Processamento</h3>
-            <ul id="lista-alertas"></ul>
+    <div class="card">
+        <div class="card-title">Conclusão Executiva</div>
+        <div id="conclusao-texto">
+            <!-- Preenchido via JS -->
         </div>
-    </section>
+    </div>
 
-    <!-- KPIs REDE E REVISTA -->
-    <div class="grid-kpis">
-        <div class="card-kpi">
-            <div class="label">Venda Rede (Durante)</div>
-            <div id="rede-venda-durante" class="value">R$ 0,00</div>
-            <div id="rede-crescimento" class="sub-value">--</div>
+    <!-- KPIS GERAIS -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-label">Venda Rede (Durante)</div>
+            <div class="kpi-value" id="kpi-rede-durante">R$ 0,00</div>
         </div>
-        <div class="card-kpi success">
-            <div class="label">Venda Revista (Durante)</div>
-            <div id="revista-venda-durante" class="value">R$ 0,00</div>
-            <div id="revista-crescimento" class="sub-value">--</div>
+        <div class="kpi-card">
+            <div class="kpi-label">Crescimento Rede %</div>
+            <div class="kpi-value" id="kpi-rede-crescimento">0,00%</div>
         </div>
-        <div class="card-kpi">
-            <div class="label">Participação da Revista</div>
-            <div id="participacao-revista" class="value">0,00%</div>
-            <div class="sub-value">do faturamento total</div>
+        <div class="kpi-card">
+            <div class="kpi-label">Venda Revista (Durante)</div>
+            <div class="kpi-value" id="kpi-revista-durante">R$ 0,00</div>
         </div>
-        <div class="card-kpi">
-            <div class="label">Crescimento Revista (R$)</div>
-            <div id="revista-crescimento-reais" class="value">R$ 0,00</div>
-            <div class="sub-value">vs período anterior</div>
+        <div class="kpi-card">
+            <div class="kpi-label">Participação Revista</div>
+            <div class="kpi-value" id="kpi-revista-part">0,00%</div>
+        </div>
+    </div>
+
+    <!-- IMPACTO PRODUTOS DA REVISTA -->
+    <div class="card">
+        <div class="card-title">Impacto Real dos Produtos da Revista</div>
+        <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 0;">
+            <div class="kpi-card" style="border-left-color: var(--success-green);">
+                <div class="kpi-label">Venda Antes</div>
+                <div id="impacto-antes" class="kpi-value">R$ 0,00</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: var(--success-green);">
+                <div class="kpi-label">Venda Durante</div>
+                <div id="impacto-durante" class="kpi-value">R$ 0,00</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: var(--success-green);">
+                <div class="kpi-label">Crescimento Nominal</div>
+                <div id="impacto-reais" class="kpi-value">R$ 0,00</div>
+            </div>
+            <div class="kpi-card" style="border-left-color: var(--success-green);">
+                <div class="kpi-label">Crescimento Percentual</div>
+                <div id="impacto-pct" class="kpi-value">0,00%</div>
+            </div>
         </div>
     </div>
 
     <!-- CAMPEÕES -->
-    <div class="grid-kpis">
-        <div class="card-kpi">
-            <div class="label">🏆 Produto Campeão (Qtd)</div>
-            <div id="campeao-qtd" class="value" style="font-size: 1.1rem; height: 3rem; display: flex; align-items: center;">-</div>
+    <div class="flex-row">
+        <div class="card flex-col">
+            <div class="card-title">Produto Campeão (Quantidade)</div>
+            <div id="campeao-qtd" style="font-weight: bold; font-size: 1.1rem; color: var(--primary-blue);">N/A</div>
+            <div id="campeao-qtd-val" style="margin-top: 5px;">-</div>
         </div>
-        <div class="card-kpi">
-            <div class="label">💰 Produto Campeão (R$)</div>
-            <div id="campeao-val" class="value" style="font-size: 1.1rem; height: 3rem; display: flex; align-items: center;">-</div>
-        </div>
-        <div class="card-kpi">
-            <div class="label">📚 Editora Líder</div>
-            <div id="editora-lider" class="value" style="font-size: 1.1rem; height: 3rem; display: flex; align-items: center;">-</div>
-        </div>
-        <div class="card-kpi">
-            <div class="label">🎭 Gênero Principal</div>
-            <div id="genero-lider" class="value" style="font-size: 1.1rem; height: 3rem; display: flex; align-items: center;">-</div>
+        <div class="card flex-col">
+            <div class="card-title">Produto Campeão (Faturamento)</div>
+            <div id="campeao-fat" style="font-weight: bold; font-size: 1.1rem; color: var(--primary-blue);">N/A</div>
+            <div id="campeao-fat-val" style="margin-top: 5px;">-</div>
         </div>
     </div>
 
-    <!-- RANKING EDITORAS -->
-    <section>
-        <h2>Ranking de Editoras da Revista</h2>
-        <div class="table-container">
-            <table id="table-editoras">
+    <!-- PANORAMA COMPLETO DOS LIVROS DA REVISTA -->
+    <div class="card">
+        <div class="card-title">Panorama: Todos os Livros da Revista (Grade Oficial)</div>
+        <div class="scroll-table">
+            <table id="tabela-panorama">
                 <thead>
                     <tr>
-                        <th>Editora</th>
-                        <th>Venda Durante (R$)</th>
-                        <th>Venda Antes (R$)</th>
-                        <th>Crescimento %</th>
-                        <th>Part. na Revista</th>
-                        <th>Part. na Rede</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- ABAS/BLOCOS POR EDITORA -->
-    <section>
-        <h2>Prestação de Contas Individual por Editora</h2>
-        <div id="editoras-detalhe" class="editora-grid"></div>
-    </section>
-
-    <!-- TOP 100 PRODUTOS REVISTA -->
-    <section>
-        <h2>Top 100 Produtos da Revista</h2>
-        <div class="table-container">
-            <table id="table-top-produtos">
-                <thead>
-                    <tr>
-                        <th>Pos.</th>
-                        <th>Produto</th>
-                        <th>Editora</th>
-                        <th>Qtd Venda</th>
-                        <th>Faturamento (R$)</th>
-                        <th>Crescimento %</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- PANORAMA TODOS LIVROS -->
-    <section>
-        <h2>Panorama de Colocação (Todos os Livros da Revista)</h2>
-        <p><small>Baseado exclusivamente na grade de vendas comparativo revista.</small></p>
-        <div class="table-container">
-            <table id="table-panorama">
-                <thead>
-                    <tr>
+                        <th>Posição</th>
                         <th>Produto</th>
                         <th>Editora</th>
                         <th>Venda Antes</th>
                         <th>Venda Durante</th>
-                        <th>Variação R$</th>
-                        <th>Variação %</th>
+                        <th>Var. R$</th>
+                        <th>Var. %</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="corpo-panorama"></tbody>
             </table>
         </div>
-    </section>
+    </div>
 
-    <!-- GÊNEROS E LOJAS -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-        <section>
-            <h2>Participação por Gênero</h2>
-            <div class="table-container">
-                <table id="table-generos">
-                    <thead>
-                        <tr>
-                            <th>Gênero</th>
-                            <th>Faturamento</th>
-                            <th>Part. %</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
-        <section>
-            <h2>Ranking de Lojas (Venda Revista)</h2>
-            <div class="table-container">
-                <table id="table-lojas">
-                    <thead>
-                        <tr>
-                            <th>Loja</th>
-                            <th>Faturamento Revista</th>
-                            <th>Part. %</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </section>
+    <!-- TOP 100 PRODUTOS -->
+    <div class="card">
+        <div class="card-title">Top 100 Produtos da Revista (Ranking Geral)</div>
+        <div class="scroll-table">
+            <table id="tabela-top-produtos">
+                <thead>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>ISBN</th>
+                        <th>Produto</th>
+                        <th>Editora</th>
+                        <th>Qtd Venda</th>
+                        <th>Faturamento</th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-top-produtos"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- RANKING EDITORAS -->
+    <div class="card">
+        <div class="card-title">Ranking de Editoras na Revista</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Editora</th>
+                    <th>Venda Antes</th>
+                    <th>Venda Durante</th>
+                    <th>Crescimento R$</th>
+                    <th>% na Revista</th>
+                    <th>% na Rede</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-ranking-editoras"></tbody>
+        </table>
+    </div>
+
+    <!-- DETALHAMENTO POR EDITORA -->
+    <div class="card">
+        <div class="card-title">Prestação de Contas Individual por Editora</div>
+        <div id="blocos-editoras"></div>
+    </div>
+
+    <!-- GÊNEROS E CATEGORIAS -->
+    <div class="card">
+        <div class="card-title">Participação por Gênero / Categoria</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Gênero</th>
+                    <th>Qtd Vendida</th>
+                    <th>Faturamento</th>
+                    <th>% Part. Revista</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-generos"></tbody>
+        </table>
+    </div>
+
+    <!-- RANKING DE LOJAS -->
+    <div class="card">
+        <div class="card-title">Ranking completo de lojas que venderam produtos da revista</div>
+        <div class="scroll-table">
+            <table id="tabela-lojas">
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Loja</th>
+                        <th>Qtd Vendida</th>
+                        <th>Faturamento</th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-lojas"></tbody>
+            </table>
+        </div>
     </div>
 
     <!-- RECOMENDAÇÕES -->
-    <section>
-        <h2>Recomendações para Próxima Revista</h2>
-        <ul class="recommendation-list">
-            <li><strong>Saneamento de Dados:</strong> Corrigir os caminhos das planilhas de origem. Ocorreram 14 erros de leitura que impediram a análise completa.</li>
-            <li><strong>Foco em Curadoria:</strong> Identificar os gêneros que apresentaram crescimento real e reduzir o espaço de categorias estagnadas.</li>
-            <li><strong>Ações de Loja:</strong> Lojas com baixa performance na revista devem receber treinamento de exposição e abordagem focada nos produtos do catálogo.</li>
-            <li><strong>Negociação com Editoras:</strong> Utilizar o crescimento em % das editoras de destaque para negociar melhores margens ou verbas de marketing adicionais.</li>
+    <div class="card">
+        <div class="card-title">Recomendações Estratégicas</div>
+        <ul id="lista-recomendacoes">
+            <li>Revisar a precificação dos itens com baixo crescimento nominal.</li>
+            <li>Intensificar exposição dos títulos "Campeões" em ilhas centrais.</li>
+            <li>Analisar ruptura de estoque em lojas que figuram na base do ranking.</li>
+            <li>Corrigir metadados de editoras e gêneros não identificados na grade.</li>
         </ul>
-    </section>
+    </div>
 
     <!-- AUDITORIA -->
-    <section style="background: #fafafa; border: 1px solid #ddd;">
-        <h2>Auditoria dos Dados e Erros</h2>
-        <div class="table-container">
-            <table id="table-auditoria" style="font-size: 0.8rem;">
+    <div class="card" style="border-top: 4px solid var(--error-red);">
+        <div class="card-title">Auditoria de Dados e Erros de Leitura</div>
+        <div id="alertas-container"></div>
+        <div class="scroll-table">
+            <table style="font-size: 0.8rem;">
                 <thead>
                     <tr>
-                        <th>Fonte</th>
                         <th>Arquivo</th>
                         <th>Aba</th>
-                        <th>Status / Erro</th>
+                        <th>Status do Erro</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="corpo-auditoria"></tbody>
             </table>
         </div>
-    </section>
+    </div>
 
 </div>
 
 <script>
-    const data = {"titulo":"BI Efeito Revista","regrasDeOrigem":{"produtos_durante":"Planilha faturamento_durante a revista produtos: somente produtos/livros da revista durante o período.","produtos_antes":"Planilha faturamento_produtos antes da revista: somente produtos/livros da revista antes do período.","rede_durante":"Planilha mais_vendido-total-durante a revista: vendas gerais durante o período, usada para participação na rede.","rede_antes":"Planilha mais_vendido-antesdarevita-produtos: vendas gerais antes do período, usada para comparação da rede.","catalogo_revista":"Planilha grade de vendas- comparativo revista: fonte oficial dos livros da revista, editoras e gêneros.","catalogo_total":"Planilha grade de vendas- comparativo total: grade auxiliar."},"redeGeral":{"antes":0,"durante":0,"crescimentoPct":null},"produtosRevista":{"antes":0,"durante":0,"crescimentoReais":0,"crescimentoPct":null,"participacaoNaRedePct":null,"quantidadeAntes":0,"quantidadeDurante":0},"kpis":{"redeAntesTotal":0,"redeDuranteTotal":0,"redeCrescimentoPct":null,"revistaAntesTotal":0,"revistaDuranteTotal":0,"crescimentoRevistaReais":0,"crescimentoRevistaPct":null,"participacaoRevistaPct":null},"leituraGerencial":{"resumo":"A revista deve ser analisada somente pelo catálogo da grade de vendas comparativo revista. Foram identificados 0 livros no panorama da revista.","efeitoRevista":"Os produtos da revista movimentaram R$ 0,00 durante o período.","efeitoRede":"A rede geral movimentou R$ 0,00 durante o período.","focoEditoras":"Sem editora líder identificada.","produtoCampeao":"Sem produto campeão identificado."},"alertasDados":["Foram encontrados 14 erros de leitura em planilhas.","A planilha grade de vendas- comparativo revista não trouxe linhas. O panorama pode ter usado fallback dos produtos vendidos.","Gênero/categoria não foi identificado. Confira a coluna de gênero na grade de vendas."],"insights":{"produtoMaisVendido":null,"produtoMaiorFaturamento":null,"editoraLider":null,"generoMaisVendido":null},"topProdutos":[],"topProdutosRevista":[],"rankingTodosLivrosRevista":[],"panoramaLivrosRevista":[],"comparativoProdutos":[],"rankingEditorasRevista":[],"editorasDetalhe":[],"editorasAbas":[],"rankingLojasRevista":[],"rankingGenerosRevista":[],"auditoria":{"totalLinhasRecebidas":14,"fontes":["produtos_durante","produtos_antes","rede_antes","rede_durante","catalogo_revista","catalogo_total"],"abasLidas":["faturamento_durante a revista produtos :: Totalizadores","faturamento_durante a revista produtos :: Vendas por cliente","faturamento_durante a revista produtos :: Vendas por editora","faturamento_durante a revista produtos :: Vendas por categoria","faturamento_durante a revista produtos :: Produtos vendidos","faturamento_produtos antes da revista :: Totalizadores","faturamento_produtos antes da revista :: Vendas por cliente","faturamento_produtos antes da revista :: Vendas por editora","faturamento_produtos antes da revista :: Vendas por categoria","faturamento_produtos antes da revista :: Produtos vendidos","mais_vendido-antesdarevita-produtos :: Produtos vendidos","mais_vendido-total-durante a revista :: Produtos vendidos","grade de vendas- comparativo revista :: Página1","grade de vendas- comparativo total :: Página1"],"errosLeitura":[{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"rede_antes","arquivo":"mais_vendido-antesdarevita-produtos","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"rede_durante","arquivo":"mais_vendido-total-durante a revista","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Página1","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Página1","erro":"The resource you are requesting could not be found"}],"abasVazias":[],"linhas":{"catalogoRevista":0,"catalogoTotal":0,"livrosPanoramaRevista":0,"livrosComEditora":0,"livrosSemEditora":0,"produtosDurante":0,"produtosAntes":0,"redeDurante":0,"redeAntes":0}}};
-    function formatCurrency(value) {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value || 0);
-    }
+    const data = {"titulo":"BI Efeito Revista","regrasDeOrigem":{"produtos_durante":"Planilha faturamento_durante a revista produtos: somente produtos/livros da revista durante o período.","produtos_antes":"Planilha faturamento_produtos antes da revista: somente produtos/livros da revista antes do período.","rede_durante":"Planilha mais_vendido-total-durante a revista: vendas gerais durante o período, usada para participação na rede.","rede_antes":"Planilha mais_vendido-antesdarevita-produtos: vendas gerais antes do período, usada para comparação da rede.","catalogo_revista":"Planilha grade de vendas- comparativo revista: fonte oficial dos livros da revista, editoras e gêneros.","catalogo_total":"Planilha grade de vendas- comparativo total: grade auxiliar."},"redeGeral":{"antes":0,"durante":0,"crescimentoPct":null},"produtosRevista":{"antes":0,"durante":0,"crescimentoReais":0,"crescimentoPct":null,"participacaoNaRedePct":null,"quantidadeAntes":0,"quantidadeDurante":0},"kpis":{"redeAntesTotal":0,"redeDuranteTotal":0,"redeCrescimentoPct":null,"revistaAntesTotal":0,"revistaDuranteTotal":0,"crescimentoRevistaReais":0,"crescimentoRevistaPct":null,"participacaoRevistaPct":null},"leituraGerencial":{"resumo":"A revista deve ser analisada somente pelo catálogo da grade de vendas comparativo revista. Foram identificados 0 livros no panorama da revista.","efeitoRevista":"Os produtos da revista movimentaram R$ 0,00 durante o período.","efeitoRede":"A rede geral movimentou R$ 0,00 durante o período.","focoEditoras":"Sem editora líder identificada.","produtoCampeao":"Sem produto campeão identificado."},"alertasDados":["Foram encontrados 22 erros de leitura em planilhas.","A planilha grade de vendas- comparativo revista não trouxe linhas. O panorama pode ter usado fallback dos produtos vendidos.","Gênero/categoria não foi identificado. Confira a coluna de gênero na grade de vendas."],"insights":{"produtoMaisVendido":null,"produtoMaiorFaturamento":null,"editoraLider":null,"generoMaisVendido":null},"topProdutos":[],"topProdutosRevista":[],"rankingTodosLivrosRevista":[],"panoramaLivrosRevista":[],"comparativoProdutos":[],"rankingEditorasRevista":[],"editorasDetalhe":[],"editorasAbas":[],"rankingLojasRevista":[],"todasLojasRevista":[],"rankingLojas":[],"rankingGenerosRevista":[],"auditoria":{"totalLinhasRecebidas":22,"fontes":["produtos_durante","produtos_antes","rede_antes","rede_durante","catalogo_revista","catalogo_total"],"abasLidas":["faturamento_durante a revista produtos :: Totalizadores","faturamento_durante a revista produtos :: Vendas por cliente","faturamento_durante a revista produtos :: Vendas por editora","faturamento_durante a revista produtos :: Vendas por categoria","faturamento_durante a revista produtos :: Produtos vendidos","faturamento_produtos antes da revista :: Totalizadores","faturamento_produtos antes da revista :: Vendas por cliente","faturamento_produtos antes da revista :: Vendas por editora","faturamento_produtos antes da revista :: Vendas por categoria","faturamento_produtos antes da revista :: Produtos vendidos","mais_vendido-antesdarevita-produtos :: Produtos vendidos","mais_vendido-total-durante a revista :: Produtos vendidos","grade de vendas- comparativo revista :: Totalizadores","grade de vendas- comparativo revista :: Vendas por cliente","grade de vendas- comparativo revista :: Vendas por editora","grade de vendas- comparativo revista :: Vendas por categoria","grade de vendas- comparativo revista :: Produtos vendidos","grade de vendas- comparativo total :: Totalizadores","grade de vendas- comparativo total :: Vendas por cliente","grade de vendas- comparativo total :: Vendas por editora","grade de vendas- comparativo total :: Vendas por categoria","grade de vendas- comparativo total :: Produtos vendidos"],"errosLeitura":[{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_durante","arquivo":"faturamento_durante a revista produtos","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"produtos_antes","arquivo":"faturamento_produtos antes da revista","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"rede_antes","arquivo":"mais_vendido-antesdarevita-produtos","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"rede_durante","arquivo":"mais_vendido-total-durante a revista","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_revista","arquivo":"grade de vendas- comparativo revista","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Totalizadores","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Vendas por cliente","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Vendas por editora","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Vendas por categoria","erro":"The resource you are requesting could not be found"},{"fonte":"catalogo_total","arquivo":"grade de vendas- comparativo total","aba":"Produtos vendidos","erro":"The resource you are requesting could not be found"}],"abasVazias":[],"linhas":{"catalogoRevista":0,"catalogoTotal":0,"livrosPanoramaRevista":0,"livrosComEditora":0,"livrosSemEditora":0,"produtosDurante":0,"produtosAntes":0,"redeDurante":0,"redeAntes":0,"lojasRevista":0}}};
+    const formatCur = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v || 0);
+    const formatPct = (v) => (v ? v.toFixed(2) : "0,00") + "%";
 
-    function formatPct(value) {
-        if (value === null || value === undefined) return '0,00%';
-        return value.toFixed(2).replace('.', ',') + '%';
-    }
-
-    function render() {
-        // Conclusão
-        document.getElementById('resumo-gerencial').innerHTML = `<p>${data.leituraGerencial.resumo}</p>
-            <p><strong>Impacto Financeiro:</strong> ${data.leituraGerencial.efeitoRevista}</p>
-            <p>${data.leituraGerencial.efeitoRede}</p>`;
-
-        // Alertas
-        if (data.alertasDados.length > 0) {
-            const alertBox = document.getElementById('auditoria-alertas');
-            const lista = document.getElementById('lista-alertas');
-            alertBox.style.display = 'block';
-            data.alertasDados.forEach(msg => {
-                const li = document.createElement('li');
-                li.innerText = msg;
-                lista.appendChild(li);
-            });
-        }
+    function init() {
+        // Resumo
+        document.getElementById('conclusao-texto').innerHTML = `
+            <p>${data.leituraGerencial.resumo}</p>
+            <p><strong>Resultado Principal:</strong> ${data.leituraGerencial.efeitoRevista}</p>
+            <p><strong>Desempenho da Rede:</strong> ${data.leituraGerencial.efeitoRede}</p>
+        `;
 
         // KPIs
-        document.getElementById('rede-venda-durante').innerText = formatCurrency(data.kpis.redeDuranteTotal);
-        const redeCresc = document.getElementById('rede-crescimento');
-        redeCresc.innerText = formatPct(data.kpis.redeCrescimentoPct) + ' crescimento';
-        redeCresc.className = 'sub-value ' + (data.kpis.redeCrescimentoPct >= 0 ? 'success' : 'danger');
+        document.getElementById('kpi-rede-durante').textContent = formatCur(data.kpis.redeDuranteTotal);
+        document.getElementById('kpi-rede-crescimento').textContent = formatPct(data.kpis.redeCrescimentoPct);
+        document.getElementById('kpi-revista-durante').textContent = formatCur(data.kpis.revistaDuranteTotal);
+        document.getElementById('kpi-revista-part').textContent = formatPct(data.kpis.participacaoRevistaPct);
 
-        document.getElementById('revista-venda-durante').innerText = formatCurrency(data.kpis.revistaDuranteTotal);
-        const revCresc = document.getElementById('revista-crescimento');
-        revCresc.innerText = formatPct(data.kpis.crescimentoRevistaPct) + ' crescimento';
-        revCresc.className = 'sub-value ' + (data.kpis.crescimentoRevistaPct >= 0 ? 'success' : 'danger');
-
-        document.getElementById('participacao-revista').innerText = formatPct(data.kpis.participacaoRevistaPct);
-        document.getElementById('revista-crescimento-reais').innerText = formatCurrency(data.kpis.crescimentoRevistaReais);
+        // Impacto
+        document.getElementById('impacto-antes').textContent = formatCur(data.produtosRevista.antes);
+        document.getElementById('impacto-durante').textContent = formatCur(data.produtosRevista.durante);
+        document.getElementById('impacto-reais').textContent = formatCur(data.produtosRevista.crescimentoReais);
+        document.getElementById('impacto-pct').textContent = formatPct(data.produtosRevista.crescimentoPct);
 
         // Campeões
-        document.getElementById('campeao-qtd').innerText = data.insights.produtoMaisVendido || "N/A";
-        document.getElementById('campeao-val').innerText = data.insights.produtoMaiorFaturamento || "N/A";
-        document.getElementById('editora-lider').innerText = data.insights.editoraLider || "N/A";
-        document.getElementById('genero-lider').innerText = data.insights.generoMaisVendido || "N/A";
+        if(data.insights.produtoMaisVendido) {
+            document.getElementById('campeao-qtd').textContent = data.insights.produtoMaisVendido.nome;
+            document.getElementById('campeao-qtd-val').textContent = data.insights.produtoMaisVendido.quantidade + " un.";
+        }
+        if(data.insights.produtoMaiorFaturamento) {
+            document.getElementById('campeao-fat').textContent = data.insights.produtoMaiorFaturamento.nome;
+            document.getElementById('campeao-fat-val').textContent = formatCur(data.insights.produtoMaiorFaturamento.faturamento);
+        }
 
-        // Tabelas
-        renderTable('table-editoras', data.rankingEditorasRevista, (item) => `
-            <td>${item.editora}</td>
-            <td>${formatCurrency(item.vendaDurante)}</td>
-            <td>${formatCurrency(item.vendaAntes)}</td>
-            <td><span class="badge ${item.crescimentoPct >= 0 ? 'pos' : 'neg'}">${formatPct(item.crescimentoPct)}</span></td>
-            <td>${formatPct(item.participacaoRevista)}</td>
-            <td>${formatPct(item.participacaoRede)}</td>
-        `);
-
-        renderTable('table-top-produtos', data.topProdutosRevista, (item, index) => `
-            <td>${index + 1}</td>
-            <td>${item.produto}</td>
-            <td>${item.editora}</td>
-            <td>${item.quantidade}</td>
-            <td>${formatCurrency(item.faturamento)}</td>
-            <td><span class="badge ${item.crescimentoPct >= 0 ? 'pos' : 'neg'}">${formatPct(item.crescimentoPct)}</span></td>
-        `);
-
-        renderTable('table-panorama', data.rankingTodosLivrosRevista, (item) => `
-            <td>${item.produto}</td>
-            <td>${item.editora}</td>
-            <td>${formatCurrency(item.vendaAntes)}</td>
-            <td>${formatCurrency(item.vendaDurante)}</td>
-            <td>${formatCurrency(item.variacaoReais)}</td>
-            <td><span class="badge ${item.variacaoPct >= 0 ? 'pos' : 'neg'}">${formatPct(item.variacaoPct)}</span></td>
-        `);
-
-        renderTable('table-generos', data.rankingGenerosRevista, (item) => `
-            <td>${item.genero}</td>
-            <td>${formatCurrency(item.faturamento)}</td>
-            <td>${formatPct(item.participacao)}</td>
-        `);
-
-        renderTable('table-lojas', data.rankingLojasRevista, (item) => `
-            <td>${item.loja}</td>
-            <td>${formatCurrency(item.faturamento)}</td>
-            <td>${formatPct(item.participacao)}</td>
-        `);
-
-        renderTable('table-auditoria', data.auditoria.errosLeitura, (item) => `
-            <td>${item.fonte}</td>
-            <td>${item.arquivo}</td>
-            <td>${item.aba}</td>
-            <td style="color:var(--danger)">${item.erro}</td>
-        `);
-
-        // Detalhe Editoras
-        const containerEditoras = document.getElementById('editoras-detalhe');
-        if (data.editorasDetalhe.length === 0) {
-            containerEditoras.innerHTML = '<div class="empty-state">Nenhum detalhamento de editora disponível.</div>';
+        // Panorama (data.rankingTodosLivrosRevista)
+        const corpoPanorama = document.getElementById('corpo-panorama');
+        if (data.rankingTodosLivrosRevista.length === 0) {
+            corpoPanorama.innerHTML = '<tr><td colspan="7" style="text-align:center;">Nenhum livro identificado na grade oficial.</td></tr>';
         } else {
-            data.editorasDetalhe.forEach(ed => {
-                const card = document.createElement('div');
-                card.className = 'editora-card';
-                card.innerHTML = `
-                    <div class="editora-header">${ed.nome}</div>
-                    <div class="stats-row"><span class="stats-label">Venda Antes:</span><span class="stats-value">${formatCurrency(ed.vendaAntes)}</span></div>
-                    <div class="stats-row"><span class="stats-label">Venda Durante:</span><span class="stats-value">${formatCurrency(ed.vendaDurante)}</span></div>
-                    <div class="stats-row"><span class="stats-label">Crescimento R$:</span><span class="stats-value">${formatCurrency(ed.crescimentoReais)}</span></div>
-                    <div class="stats-row"><span class="stats-label">Crescimento %:</span><span class="stats-value ${ed.crescimentoPct >= 0 ? 'success' : 'danger'}">${formatPct(ed.crescimentoPct)}</span></div>
-                    <div class="stats-row"><span class="stats-label">Part. na Revista:</span><span class="stats-value">${formatPct(ed.participacaoRevista)}</span></div>
-                    <div class="stats-row"><span class="stats-label">Part. na Rede:</span><span class="stats-value">${formatPct(ed.participacaoRede)}</span></div>
-                    <div style="margin-top:1rem; font-size:0.8rem; border-top:1px solid #eee; padding-top:0.5rem;">
-                        <strong>Campeão Qtd:</strong> ${ed.produtoMaisVendido || '-'}<br>
-                        <strong>Top Ranking:</strong> #${ed.rankingTop || '-'}
-                    </div>
+            data.rankingTodosLivrosRevista.forEach((livro, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${livro.produto || livro.nome}</td>
+                    <td>${livro.editora}</td>
+                    <td>${formatCur(livro.vendaAntes)}</td>
+                    <td>${formatCur(livro.vendaDurante)}</td>
+                    <td class="${livro.crescimentoReais >= 0 ? 'positive' : 'negative'}">${formatCur(livro.crescimentoReais)}</td>
+                    <td class="${livro.crescimentoPct >= 0 ? 'positive' : 'negative'}">${formatPct(livro.crescimentoPct)}</td>
                 `;
-                containerEditoras.appendChild(card);
+                corpoPanorama.appendChild(tr);
             });
         }
-    }
 
-    function renderTable(id, list, rowFn) {
-        const tbody = document.querySelector(`#${id} tbody`);
-        if (!list || list.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" class="empty-state">Sem dados para exibir</td></tr>`;
-            return;
+        // Top 100 Produtos (data.topProdutosRevista)
+        const corpoTop = document.getElementById('corpo-top-produtos');
+        if (data.topProdutosRevista.length === 0) {
+            corpoTop.innerHTML = '<tr><td colspan="6" style="text-align:center;">Dados de vendas de produtos não disponíveis.</td></tr>';
+        } else {
+            data.topProdutosRevista.forEach((prod, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${prod.isbn || '-'}</td>
+                    <td>${prod.produto}</td>
+                    <td>${prod.editora || 'N/I'}</td>
+                    <td>${prod.quantidade}</td>
+                    <td>${formatCur(prod.faturamento)}</td>
+                `;
+                corpoTop.appendChild(tr);
+            });
         }
-        tbody.innerHTML = list.map((item, index) => `<tr>${rowFn(item, index)}</tr>`).join('');
+
+        // Editoras (data.rankingEditorasRevista)
+        const corpoEd = document.getElementById('corpo-ranking-editoras');
+        if (data.rankingEditorasRevista.length === 0) {
+            corpoEd.innerHTML = '<tr><td colspan="7" style="text-align:center;">Ranking de editoras não disponível.</td></tr>';
+        } else {
+            data.rankingEditorasRevista.forEach((ed, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td><strong>${ed.editora}</strong></td>
+                    <td>${formatCur(ed.vendaAntes)}</td>
+                    <td>${formatCur(ed.vendaDurante)}</td>
+                    <td class="${ed.crescimentoReais >= 0 ? 'positive' : 'negative'}">${formatCur(ed.crescimentoReais)}</td>
+                    <td>${formatPct(ed.participacaoRevistaPct)}</td>
+                    <td>${formatPct(ed.participacaoRedePct)}</td>
+                `;
+                corpoEd.appendChild(tr);
+            });
+        }
+
+        // Blocos Detalhe Editora
+        const containerEd = document.getElementById('blocos-editoras');
+        if (data.editorasDetalhe.length === 0) {
+            containerEd.innerHTML = '<p style="text-align:center;">Sem detalhamento individual disponível.</p>';
+        } else {
+            data.editorasDetalhe.forEach(ed => {
+                const div = document.createElement('div');
+                div.className = 'editora-bloco';
+                div.innerHTML = `
+                    <h3 style="color:var(--primary-blue); margin-top:0;">${ed.editora}</h3>
+                    <div class="editora-header">
+                        <div><small>Venda Antes</small><br><strong>${formatCur(ed.vendaAntes)}</strong></div>
+                        <div><small>Venda Durante</small><br><strong>${formatCur(ed.vendaDurante)}</strong></div>
+                        <div><small>Crescimento</small><br><strong class="${ed.crescimentoReais >= 0 ? 'positive' : 'negative'}">${formatPct(ed.crescimentoPct)}</strong></div>
+                        <div><small>Part. Revista</small><br><strong>${formatPct(ed.participacaoRevistaPct)}</strong></div>
+                        <div><small>Part. Rede</small><br><strong>${formatPct(ed.participacaoRedePct)}</strong></div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <strong>Melhor Produto (Qtd):</strong> ${ed.produtoMaisVendido || 'N/A'}<br>
+                        <strong>Melhor Produto (Fat):</strong> ${ed.produtoMaiorFaturamento || 'N/A'}
+                    </div>
+                `;
+                containerEd.appendChild(div);
+            });
+        }
+
+        // Gêneros
+        const corpoGen = document.getElementById('corpo-generos');
+        if (data.rankingGenerosRevista.length === 0) {
+            corpoGen.innerHTML = '<tr><td colspan="4" style="text-align:center;">Sem dados por categoria.</td></tr>';
+        } else {
+            data.rankingGenerosRevista.forEach(gen => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${gen.genero}</td>
+                    <td>${gen.quantidade}</td>
+                    <td>${formatCur(gen.faturamento)}</td>
+                    <td>${formatPct(gen.participacaoPct)}</td>
+                `;
+                corpoGen.appendChild(tr);
+            });
+        }
+
+        // Lojas - REGRA OBRIGATÓRIA: SEM SLICE
+        const corpoLojas = document.getElementById('corpo-lojas');
+        const listaLojas = data.todasLojasRevista || data.rankingLojasRevista || data.rankingLojas || [];
+        
+        if (listaLojas.length === 0) {
+            corpoLojas.innerHTML = '<tr><td colspan="4" style="text-align:center;">Nenhuma loja com registro de vendas nesta competência.</td></tr>';
+        } else {
+            listaLojas.forEach((loja, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${loja.loja || loja.nome}</td>
+                    <td>${loja.quantidade || 0}</td>
+                    <td>${formatCur(loja.faturamento || loja.vendaDurante)}</td>
+                `;
+                corpoLojas.appendChild(tr);
+            });
+        }
+
+        // Auditoria
+        const containerAlertas = document.getElementById('alertas-container');
+        data.alertasDados.forEach(alerta => {
+            const div = document.createElement('div');
+            div.className = 'alert-box';
+            div.textContent = alerta;
+            containerAlertas.appendChild(div);
+        });
+
+        const corpoAudit = document.getElementById('corpo-auditoria');
+        data.auditoria.errosLeitura.forEach(erro => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${erro.arquivo}</td>
+                <td>${erro.aba}</td>
+                <td class="negative">${erro.erro}</td>
+            `;
+            corpoAudit.appendChild(tr);
+        });
     }
 
-    // Inicializar
-    window.onload = render;
+    window.onload = init;
 </script>
 
 </body>
